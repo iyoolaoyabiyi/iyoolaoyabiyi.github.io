@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>oio :: Oyabiyi Iyola O</title>
+
+  <link rel="stylesheet" href="styles/globals.css">
+</head>
+<body>
+  <main class="terminal">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="buttons">
+          <div class="btn red"></div>
+          <div class="btn yellow"></div>
+          <div class="btn green"></div>
+        </div>
+        <p><span data-type="username">user</span>@IyosPC: <span data-type="path">~</span></p>
+        <button class="btn">GUI</button>
+      </div>
+      <div class="terminal-body" id="terminal">
+        <div id="terminalHistory"></div>
+        <div class="terminal-command" id="masterCommand">
+          <div class="line" id="commandLine">
+            <p class="prompt"><span data-type="username">user</span>@IyosPC:<span data-type="path">~</span>$</p>
+            <input class="input" type="text" id="commandInput" autofocus />
+          </div>
+          <div class="response" id="responseLine">
+            <p class="response-text"></p>
+            <input id="responseInput" type="text" class="input" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="./js/script.js"></script>
+</body>
+</html>
