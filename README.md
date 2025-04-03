@@ -1,17 +1,41 @@
-# Who Am I?
-My name is Iyọ̀ and I'm a web developer based in Nigeria.
+# 👋 Hi, I'm Iyo – Web & Software Developer
 
-## Background & Evolution
-I started my web development journey with vanilla **HTML**, **CSS**, and **JavaScript**. 
-Over time, I expanded into WordPress development and gained proficiency in additional technologies like, **SQL**, **SASS**, **NodeJS**, **MongoDB** and frameworks and libraries like **Express**, **ReactJS** and **Bootstrap**.
-While I started as a front-end developer, I'm now transitioning toward backend and full-stack roles.
+I'm a self-taught developer with a strong passion for building clean, accessible, and impactful digital products. I work primarily with modern web technologies — blending creativity and logic to craft smooth, user-centered interfaces and solid backend systems.
 
-## Technical Profile: 
-My tech stack includes both modern and legacy technologies. While I'm skilled with contemporary tools like React and NodeJS, I have a preference for legacy frameworks like Angular due to their stability. I continue to work effectively with Bootstrap, vanilla JavaScript, PHP, and WordPress. I'm particularly focused on mastering JavaScript as I believe it's crucial for my development goals.
+I enjoy solving real-world problems through code and constantly learning new technologies. My journey has taken me from static web pages to dynamic apps, component libraries, backend APIs, and cloud integration — and I’m still exploring.
 
-## Communication & Writing: 
-My approach to communication is influenced by my background in writing and poetry. I use note taking applications for composing longer messages, and rely on thesaurus and dictionary tools to maintain precision in my writing. I value professional, friendly, and concise communication in all interactions.
+---
 
-## Personal Values: 
-I describe myself as creative, resourceful, and focused. My family serves as a strong source of motivation, and I maintain a careful balance between my professional ambitions and personal life. These values guide both my career choices and personal development goals.
+### 🛠️ Tech Stack & Tools
 
+**Frontend**
+- React, Next.js, TypeScript
+- Tailwind CSS, Shadcn/UI, Framer Motion
+- Vite, Redux Toolkit
+
+**Backend**
+- Node.js, Express, MongoDB, SQL (MySQL, SQLite)
+- REST APIs, basic auth, and server-side rendering
+- Learning NestJS and cloud-first backend architecture
+
+**Other Tools**
+- Git & GitHub, Figma, Postman, VS Code, Netlify, Vercel
+
+---
+
+### 🚧 Current Focus
+
+- Deepening my understanding of full-stack architecture  
+- Building reusable UI blocks and design systems  
+- Hands-on learning of AWS, backend patterns, and system design  
+- Collaborating with other devs on real-world projects  
+- Documenting everything and writing cleaner, more expressive code
+
+---
+
+### 📬 Let's Connect
+
+- GitHub: [@iyoola](https://github.com/iyoola)
+- Email: iyooyabiyi@gmail.com
+
+---
