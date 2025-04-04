@@ -70,16 +70,19 @@ p {
   display: flex;
   align-items: center;
 }
+.line .prompt, .response .prompt {
+  margin-right: 0.5rem;
+}
 
 .response {
-  display: none;
   color: white;
   gap: 5px;
 }
 
 .prompt {
+  display: flex;
+  gap: 0;
   color: #33ff00;
-  margin-right: 0.5rem;
 }
 
 .input {
@@ -90,4 +93,8 @@ p {
   outline: none;
   font-family: inherit;
   font-size: 1em;
+}
+
+.hide {
+  display: none;
 }/*# sourceMappingURL=globals.css.map */

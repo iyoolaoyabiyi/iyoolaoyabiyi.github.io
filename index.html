@@ -16,18 +16,31 @@
           <div class="btn yellow"></div>
           <div class="btn green"></div>
         </div>
-        <p><span data-type="username">user</span>@IyosPC: <span data-type="path">~</span></p>
+        <p class="prompt">
+          <span data-type="username">user</span>
+          @
+          <span data-type="hostname">IyosWebServer</span>
+          : 
+          <span data-type="path">~</span>
+        </p>
         <button class="btn">GUI</button>
       </div>
       <div class="terminal-body" id="terminal">
         <div id="terminalHistory"></div>
         <div class="terminal-command" id="masterCommand">
           <div class="line" id="commandLine">
-            <p class="prompt"><span data-type="username">user</span>@IyosPC:<span data-type="path">~</span>$</p>
+            <p class="prompt">
+              <span data-type="username">user</span>
+              @
+              <span data-type="hostname">IyosWebServer</span>
+              :
+              <span data-type="path">~</span>
+              $
+            </p>
             <input class="input" type="text" id="commandInput" autofocus />
           </div>
-          <div class="response" id="responseLine">
-            <p class="response-text"></p>
+          <div class="response hide" id="responseLine">
+            <p class="response-text" id="responseText"></p>
             <input id="responseInput" type="text" class="input" />
           </div>
         </div>
