@@ -12,5 +12,5 @@ closeBtn.addEventListener('click', () => {
   dialog.close();
   commandLineInput.focus();
 });
-dialog.showModal();
+// dialog.showModal();
 

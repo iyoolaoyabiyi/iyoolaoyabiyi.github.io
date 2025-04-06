@@ -80,7 +80,7 @@ function processCommand(e) {
         }
       }
     }
-    
+
     // Deactivate commandLine
     commandLineInput.disabled = true;
     commandLineInput.removeAttribute('autofocus')
@@ -98,4 +98,4 @@ function processCommand(e) {
 
 terminal.addEventListener('click', () => commandLineInput.focus(), true);
 commandLineInput.addEventListener('keydown', processCommand);
-commandLineInput.focus();
+// commandLineInput.focus();
