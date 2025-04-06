@@ -18,13 +18,17 @@ p {
   cursor: pointer;
 }
 
-.terminal-window {
-  max-width: 800px;
-  margin: 50px auto;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+// Terminal
+.terminal {
+    .terminal-window {
+    max-width: 800px;
+    margin: 50px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  }
 }
+
 
 .terminal-header {
   background-color: #2e2e2e;
@@ -90,6 +94,29 @@ p {
   font-size: 1em;
 }
 
-.hide {
+// Modal
+dialog {
+  border: none;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(2px);
+  }
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+  }
+}
+
+.hidden {
   display: none;
 }

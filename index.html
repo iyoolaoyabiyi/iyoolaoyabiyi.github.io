@@ -26,7 +26,6 @@
         <button class="btn">GUI</button>
       </div>
       <div class="terminal-body" id="terminal">
-        <div id="terminalHistory"></div>
         <div class="terminal-command" id="masterCommand">
           <div class="line" id="commandLine">
             <p class="prompt">
@@ -37,16 +36,24 @@
               <span data-type="path">~</span>
               $
             </p>
-            <input class="input" type="text" id="commandInput" autofocus />
-          </div>
-          <div class="response hide" id="responseLine">
-            <p class="response-text" id="responseText"></p>
-            <input id="responseInput" type="text" class="input" />
+            <input class="input" type="text" autofocus />
           </div>
         </div>
       </div>
     </div>
+    <dialog id="welcomeModal">
+      <button class="modal-close" id="closeModal">X</button>
+      <h2>Welcome to my website!</h2>
+      <p>I'm Iyo,</p>
+      <p>Please note the this is a terminal based version of my website. If you're only here to check out my portfolio,</p>
+      <button style="cursor: pointer">Use the GUI version of my website</button>
+      <p>If you're up for a terminal based fun,</p>
+      <button style='cursor: pointer'>Click here </button> for a list of available commands.
+
+      Have fun!
+    </dialog>
   </main>
   <script src="./js/script.js"></script>
+  <script src="./js/terminal.js"></script>
 </body>
 </html>
