@@ -5,7 +5,7 @@
   min-height: 100dvh;
 }
 .gui .gui-header {
-  width: clamp(800px, 800px, 100%);
+  width: clamp(0%, 100%, 800px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,4 +55,11 @@
 .gui .gui-header button:focus {
   outline: none;
   box-shadow: 0 0 0 2px #00ffff;
+}
+
+@media (max-width: 800px) {
+  .gui .gui-header {
+    border-radius: 0;
+    margin: 0;
+  }
 }/*# sourceMappingURL=gui.css.map */

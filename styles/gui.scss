@@ -7,7 +7,7 @@
   position: relative;
   min-height: 100dvh;
   .gui-header {
-    width: clamp(800px, 800px, 100%);
+    width: clamp(0%, 100%, 800px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -60,6 +60,15 @@
         outline: none;
         box-shadow: 0 0 0 2px $light-tint;
       }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .gui {
+     .gui-header {
+      border-radius: 0;
+      margin: 0;
     }
   }
 }
