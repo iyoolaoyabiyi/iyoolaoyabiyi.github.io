@@ -55,14 +55,15 @@
   .buttons {
     display: flex;
     gap: 6px;
-    .btn {
+    button {
       width: 12px;
       height: 12px;
+      border: none;
       border-radius: 50%;
       background-color: $background;
     }
-    .btn.red { background-color: #ff5f56; }
-    .btn.yellow { background-color: #ffbd2e; }
-    .btn.green { background-color: #27c93f; }
+    .red { background-color: #ff5f56; }
+    .yellow { background-color: #ffbd2e; }
+    .green { background-color: #27c93f; }
   }
 }

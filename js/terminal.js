@@ -40,46 +40,50 @@ function buildCommandLine() {
   return commandLine;
 }
 
-function processCommand(e) {
+function executeCommand(command, args, commandObj) {
+  switch (command) {
+    case 'echo':
+      return commandObj.execute(args);
+      break;
+    case 'clear':
+      return commandObj.execute(() => {
+        terminalCommand.innerHTML = '';
+      });
+      break;
+    case 'list':
+      return commandObj.execute();
+      break;
+    case 'goto':
+      return commandObj.execute('', args);
+      break;
+    case 'open':
+      return commandObj.execute(args[0]);
+      break;
+    case 'exit':
+      return commandObj.execute();
+      break;
+  }
+}
+
+function processPrompt(e) {
   let commandLine = document.getElementById('commandLine');
   let commandLineInput = commandLine.querySelector('input');
   if (e.key === 'Enter') {
-    const command = commandLineInput.value.trim();
-    if (command !== '') {
+    const prompt = commandLineInput.value.trim();
+    if (prompt !== '') {
       // Check if command is valid
-      const [ commandName, ...args ] = command.split(' ');
-      let cmd = null;
+      const [ commandName, ...args ] = prompt.split(' ');
+      let commandObj = null;
       let response = '';
       for (let command in commands) {
         if (commandName === command) {
-          cmd = commands[command];
-          switch (command) {
-            case 'echo':
-              response = cmd.execute(args);
-              break;
-            case 'clear':
-              response = cmd.execute(() => {
-                terminalCommand.innerHTML = '';
-              });
-              break;
-            case 'ls':
-              response = cmd.execute();
-              break;
-            case 'cd':
-              response = cmd.execute('', args);
-              break;
-            case 'cat':
-              response = cmd.execute(args[0]);
-              break;
-            case 'exit':
-              response = cmd.execute();
-              break;
-          }
+          commandObj = commands[command];
+          response = executeCommand(command, args, commandObj);
           if (command !== 'clear') {
             const responseLine = buildResponseLine(response);
               appendResponseLine(responseLine);
             // Check if command is a query
-            if (cmd.isQuery) {
+            if (commandObj.isQuery) {
               responseLine.querySelector('input').focus();
               break;
             } else {
@@ -91,7 +95,7 @@ function processCommand(e) {
         }
       }
       // If command is not valid, add error message
-      if (!cmd) {
+      if (!commandObj) {
         appendResponseLine(buildResponseLine(`Command not found: ${commandName}`));
       }
     }
@@ -99,7 +103,7 @@ function processCommand(e) {
     // Deactivate commandLine
     commandLineInput.disabled = true;
     commandLineInput.removeAttribute('autofocus')
-    commandLineInput.removeEventListener('keydown', processCommand);
+    commandLineInput.removeEventListener('keydown', processPrompt);
     commandLine.id = '';
     // Append new commandLine
     commandLine = buildCommandLine();
@@ -107,12 +111,12 @@ function processCommand(e) {
     commandLineInput.disabled = false;
     terminalCommand.append(commandLine);
     commandLineInput.focus();
-    commandLineInput.addEventListener('keydown', processCommand);
+    commandLineInput.addEventListener('keydown', processPrompt);
   }
 }
 
 terminal.addEventListener('click', () => commandLineInput.focus(), true);
-commandLineInput.addEventListener('keydown', processCommand);
+commandLineInput.addEventListener('keydown', processPrompt);
 // commandLineInput.focus();
 
 openGuiBtn.addEventListener('click', () => {

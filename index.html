@@ -10,13 +10,14 @@
   <link rel="stylesheet" href="styles/gui.css">
 </head>
 <body>
+  <!-- Terminal -->
   <div class="terminal">
     <div class="terminal-window">
       <div class="terminal-header">
         <div class="buttons">
-          <div class="btn red"></div>
-          <div class="btn yellow"></div>
-          <div class="btn green"></div>
+          <button class="red"></button>
+          <button class="yellow"></button>
+          <button class="green"></button>
         </div>
         <p class="prompt">
           <span data-type="username">user</span>
@@ -43,33 +44,36 @@
         </div>
       </div>
     </div>
-    <dialog id="welcomeModal">
-      <button class="modal-close" id="closeModal">X</button>
-      <h2>Welcome to my website!</h2>
-      <p>I'm Iyo,</p>
-      <p>Please note the this is a terminal based version of my website. If you're only here to check out my portfolio,</p>
-      <button style="cursor: pointer">Use the GUI version of my website</button>
-      <p>If you're up for a terminal based fun,</p>
-      <button style='cursor: pointer'>Click here </button> 
-      <p>for a list of available commands.</p>
-      Have fun!
-    </dialog>
   </div>
+  <!-- GUI -->
   <div class="gui hidden">
     <header class="gui-header">
-      <h1>IOO</h1>
-      <nav>
+      <nav class="desktop-nav">
+        <h1>IOO</h1>
         <ul>
           <li><a href="#portfolio">My Portfolio</a></li>
           <li><a href="#contact">Contact Me</a></li>
         </ul>
+        <div>
+          <button class="btn">Hire me</button>
+          <button class="btn" id="openTerminalBtn">Use Terminal</button>
+        </div>
       </nav>
-      <div>
-        <button>Hire me</button>
-        <button id="openTerminalBtn">Use Terminal</button>
-      </div>
+      
     </header>
   </div>
+  <!-- Modals -->
+  <dialog id="welcomeModal">
+    <button class="modal-close" id="closeModal">X</button>
+    <h2>Welcome to my website!</h2>
+    <p>I'm Iyo,</p>
+    <p>Please note the this is a terminal based version of my website. If you're only here to check out my portfolio,</p>
+    <button style="cursor: pointer">Use the GUI version of my website</button>
+    <p>If you're up for a terminal based fun,</p>
+    <button style='cursor: pointer'>Click here </button> 
+    <p>for a list of available commands.</p>
+    Have fun!
+  </dialog>
   <script src="./js/terminal.js"></script>
   <script src="./js/commands.js"></script>
   <script src="./js/script.js"></script>

@@ -15,7 +15,24 @@ p {
 }
 
 .btn {
+  background-color: #33ff00;
+  color: #001010;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
   cursor: pointer;
+}
+.btn:hover {
+  background-color: #00ffff;
+  color: #001010;
+}
+.btn:active {
+  background-color: #005f5f;
+  color: #33ff00;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #00ffff;
 }
 
 dialog {

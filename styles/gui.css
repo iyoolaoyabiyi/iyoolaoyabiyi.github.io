@@ -5,11 +5,7 @@
   min-height: 100dvh;
 }
 .gui .gui-header {
-  width: clamp(0%, 100%, 800px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 4rem;
+  width: clamp(100px, 100%, 800px);
   margin: 1rem auto;
   padding: 1rem 2rem;
   background-color: #333333;
@@ -17,13 +13,18 @@
   border: 1px solid #005f5f;
   border-radius: 10px;
 }
-.gui .gui-header h1 {
+.gui .gui-header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4rem;
+}
+.gui .gui-header nav h1 {
   margin: 0;
   color: #33ff00;
 }
 .gui .gui-header nav ul {
   display: flex;
-  flex-flow: row;
   list-style: none;
   gap: 1rem;
   padding: 0;
@@ -36,30 +37,19 @@
 .gui .gui-header nav ul li a:hover {
   text-decoration: underline;
 }
-.gui .gui-header button {
-  background-color: #33ff00;
-  color: #001010;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.gui .gui-header button:hover {
-  background-color: #00ffff;
-  color: #001010;
-}
-.gui .gui-header button:active {
-  background-color: #005f5f;
-  color: #33ff00;
-}
-.gui .gui-header button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #00ffff;
-}
 
 @media (max-width: 800px) {
   .gui .gui-header {
     border-radius: 0;
     margin: 0;
+  }
+}
+@media (max-width: 600px) {
+  .gui .gui-header {
+    border-radius: 0;
+    margin: 0;
+  }
+  .gui .gui-header nav {
+    flex-flow: column nowrap;
   }
 }/*# sourceMappingURL=gui.css.map */

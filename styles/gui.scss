@@ -7,25 +7,24 @@
   position: relative;
   min-height: 100dvh;
   .gui-header {
-    width: clamp(0%, 100%, 800px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 4rem;
+    width: clamp(100px, 100%, 800px);
     margin: 1rem auto;
     padding: 1rem 2rem;
     background-color: $dark-grey;
     color: $background;
     border: 1px solid $dark-tint;
     border-radius: 10px;
-    h1 {
-      margin: 0;
-      color: $terminal-text;
-    }
     nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 4rem;
+      h1 {
+        margin: 0;
+        color: $terminal-text;
+      }
       ul {
         display: flex;
-         flex-flow: row;
         list-style: none;
         gap: 1rem;
         padding: 0;
@@ -41,26 +40,6 @@
         }
       }
     }
-    button {
-      background-color: $terminal-text;
-      color: $foreground;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      &:hover {
-        background-color: $light-tint;
-        color: $foreground;
-      }
-      &:active {
-        background-color: $dark-tint;
-        color: $terminal-text;
-      }
-      &:focus {
-        outline: none;
-        box-shadow: 0 0 0 2px $light-tint;
-      }
-    }
   }
 }
 
@@ -69,6 +48,18 @@
      .gui-header {
       border-radius: 0;
       margin: 0;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .gui {
+     .gui-header {
+      border-radius: 0;
+      margin: 0;
+      nav {
+        flex-flow: column nowrap;
+      }
     }
   }
 }

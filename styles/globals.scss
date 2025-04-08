@@ -17,7 +17,24 @@ p {
 }
 
 .btn {
+  background-color: $terminal-text;
+  color: $foreground;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
   cursor: pointer;
+  &:hover {
+    background-color: $light-tint;
+    color: $foreground;
+  }
+  &:active {
+    background-color: $dark-tint;
+    color: $terminal-text;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px $light-tint;
+  }
 }
 
 // Modal

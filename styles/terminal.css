@@ -54,18 +54,19 @@
   display: flex;
   gap: 6px;
 }
-.terminal .buttons .btn {
+.terminal .buttons button {
   width: 12px;
   height: 12px;
+  border: none;
   border-radius: 50%;
   background-color: #eeffff;
 }
-.terminal .buttons .btn.red {
+.terminal .buttons .red {
   background-color: #ff5f56;
 }
-.terminal .buttons .btn.yellow {
+.terminal .buttons .yellow {
   background-color: #ffbd2e;
 }
-.terminal .buttons .btn.green {
+.terminal .buttons .green {
   background-color: #27c93f;
 }/*# sourceMappingURL=terminal.css.map */
