@@ -1,0 +1,65 @@
+@import "variables";
+
+// GUI
+.gui {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100dvh;
+  .gui-header {
+    width: clamp(800px, 800px, 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+    margin: 1rem auto;
+    padding: 1rem 2rem;
+    background-color: $dark-grey;
+    color: $background;
+    border: 1px solid $dark-tint;
+    border-radius: 10px;
+    h1 {
+      margin: 0;
+      color: $terminal-text;
+    }
+    nav {
+      ul {
+        display: flex;
+         flex-flow: row;
+        list-style: none;
+        gap: 1rem;
+        padding: 0;
+        margin: 0;
+        li {
+          a {
+            color: $background;
+            text-decoration: none;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+    button {
+      background-color: $terminal-text;
+      color: $foreground;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: $light-tint;
+        color: $foreground;
+      }
+      &:active {
+        background-color: $dark-tint;
+        color: $terminal-text;
+      }
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px $light-tint;
+      }
+    }
+  }
+}

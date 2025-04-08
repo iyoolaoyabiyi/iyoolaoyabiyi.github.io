@@ -3,10 +3,10 @@
 }
 
 body {
-  background-color: #525252;
+  background-color: #eeffff;
   margin: 0;
   font-family: monospace;
-  color: #33ff00;
+  color: #001010;
 }
 
 p {
@@ -16,79 +16,6 @@ p {
 
 .btn {
   cursor: pointer;
-}
-
-.terminal {
-  padding: 10px;
-}
-.terminal .terminal-window {
-  max-width: 800px;
-  margin: 50px auto;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-}
-.terminal .terminal-header {
-  background-color: #2e2e2e;
-  padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: #ccc;
-}
-.terminal .terminal-body {
-  background-color: #000000;
-  background-image: linear-gradient(135deg, #1c1c1c, #000000, #1c1c1c);
-  padding: 1rem;
-  height: 400px;
-  max-height: 400px;
-  overflow-y: scroll;
-  color: #33ff00;
-  cursor: text;
-}
-.terminal .line, .terminal .response {
-  display: flex;
-  align-items: center;
-}
-.terminal .response {
-  color: white;
-  gap: 5px;
-}
-.terminal .prompt {
-  display: flex;
-  gap: 0;
-  color: #33ff00;
-  margin-right: 0.5rem;
-}
-.terminal .input {
-  flex: 1;
-  color: white;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-family: inherit;
-  font-size: 1em;
-  min-width: 0;
-}
-
-.buttons {
-  display: flex;
-  gap: 6px;
-}
-.buttons .btn {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: gray;
-}
-.buttons .btn.red {
-  background-color: #ff5f56;
-}
-.buttons .btn.yellow {
-  background-color: #ffbd2e;
-}
-.buttons .btn.green {
-  background-color: #27c93f;
 }
 
 dialog {
@@ -115,5 +42,5 @@ dialog .modal-close {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }/*# sourceMappingURL=globals.css.map */

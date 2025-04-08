@@ -1,0 +1,71 @@
+.terminal {
+  padding: 10px;
+  display: flex;
+}
+.terminal .terminal-window {
+  width: clamp(800px, 800px, 100%);
+  margin: 50px auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+.terminal .terminal-header {
+  background-color: #333333;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.terminal .terminal-body {
+  background-color: #001010;
+  background-image: linear-gradient(135deg, #1c1c1c, #000000, #1c1c1c);
+  padding: 1rem;
+  height: 400px;
+  max-height: 400px;
+  overflow-y: scroll;
+  color: #001010;
+  cursor: text;
+}
+.terminal .line, .terminal .response {
+  display: flex;
+  align-items: start;
+}
+.terminal .response {
+  color: #eeffff;
+  gap: 5px;
+}
+.terminal .prompt {
+  display: flex;
+  gap: 0;
+  color: #33ff00;
+  margin-right: 0.5rem;
+}
+.terminal .input {
+  flex: 1;
+  color: #eeffff;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 1em;
+  min-width: 50px;
+}
+.terminal .buttons {
+  display: flex;
+  gap: 6px;
+}
+.terminal .buttons .btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #eeffff;
+}
+.terminal .buttons .btn.red {
+  background-color: #ff5f56;
+}
+.terminal .buttons .btn.yellow {
+  background-color: #ffbd2e;
+}
+.terminal .buttons .btn.green {
+  background-color: #27c93f;
+}/*# sourceMappingURL=terminal.css.map */

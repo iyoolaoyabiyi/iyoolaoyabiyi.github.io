@@ -6,9 +6,11 @@
   <title>oio :: Oyabiyi Iyola O</title>
 
   <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/terminal.css">
+  <link rel="stylesheet" href="styles/gui.css">
 </head>
 <body>
-  <main class="terminal">
+  <div class="terminal">
     <div class="terminal-window">
       <div class="terminal-header">
         <div class="buttons">
@@ -23,7 +25,7 @@
           : 
           <span data-type="path">~</span>
         </p>
-        <button class="btn">GUI</button>
+        <button class="btn" id="openGuiBtn">GUI</button>
       </div>
       <div class="terminal-body" id="terminal">
         <div class="terminal-command" id="masterCommand">
@@ -48,12 +50,28 @@
       <p>Please note the this is a terminal based version of my website. If you're only here to check out my portfolio,</p>
       <button style="cursor: pointer">Use the GUI version of my website</button>
       <p>If you're up for a terminal based fun,</p>
-      <button style='cursor: pointer'>Click here </button> for a list of available commands.
-
+      <button style='cursor: pointer'>Click here </button> 
+      <p>for a list of available commands.</p>
       Have fun!
     </dialog>
-  </main>
-  <script src="./js/script.js"></script>
+  </div>
+  <div class="gui hidden">
+    <header class="gui-header">
+      <h1>IOO</h1>
+      <nav>
+        <ul>
+          <li><a href="#portfolio">My Portfolio</a></li>
+          <li><a href="#contact">Contact Me</a></li>
+        </ul>
+      </nav>
+      <div>
+        <button>Hire me</button>
+        <button id="openTerminalBtn">Use Terminal</button>
+      </div>
+    </header>
+  </div>
   <script src="./js/terminal.js"></script>
+  <script src="./js/commands.js"></script>
+  <script src="./js/script.js"></script>
 </body>
 </html>

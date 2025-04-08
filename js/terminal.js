@@ -3,23 +3,10 @@ const terminal = document.getElementById('terminal');
 const terminalCommand = document.getElementById('masterCommand');
 let commandLine = document.getElementById('commandLine');
 const commandLineInput = commandLine.querySelector('input');
-
-// Terminal Functionality
-const commands = [
-  {
-    name: 'ls', 
-    description: 'List directory contents', 
-    isQuery: false
-  },
-  {name: 'cd', description: 'Change directory', isQuery: false},
-  {name: 'cat', description: 'Concatenate files and print on the standard output', isQuery: false},
-  {name: 'echo', description: 'Display a line of text', isQuery: false},
-  {name: 'clear', description: 'Clear the terminal screen', isQuery: false},
-  {name: 'exit', description: 'Exit the terminal', isQuery: true}
-];
+const openGuiBtn = document.getElementById('openGuiBtn');
 
 function buildResponseLine(responseText) {
-  responseLine = document.createElement('div');
+  const responseLine = document.createElement('div');
   responseLine.classList.add('response');
   responseLine.id = 'responseLine';
   responseLine.innerHTML =`
@@ -27,6 +14,12 @@ function buildResponseLine(responseText) {
     <input id="responseInput" type="text" class="input" />
   `;
   return responseLine;
+}
+
+function appendResponseLine(responseLine) {
+  terminalCommand.append(responseLine);
+  // Scroll to bottom of terminal
+  terminal.scrollTop = terminal.scrollHeight;
 }
 
 function buildCommandLine() {
@@ -48,36 +41,58 @@ function buildCommandLine() {
 }
 
 function processCommand(e) {
-  // Get command line input value
   let commandLine = document.getElementById('commandLine');
   let commandLineInput = commandLine.querySelector('input');
-  const command = commandLineInput.value.trim();
   if (e.key === 'Enter') {
-    // Check if command is empty
+    const command = commandLineInput.value.trim();
     if (command !== '') {
       // Check if command is valid
       const [ commandName, ...args ] = command.split(' ');
-      for (let i = 0; i < commands.length; i++) {
-        const cmd = commands[i];
-        if (cmd.name === commandName) {
-          // Add response to terminal
-          const responseLine = buildResponseLine(`Your command is ${command}`);
-          terminalCommand.append(responseLine);
-          // Check if command is a query
-          if (cmd.isQuery) {
-            responseLine.querySelector('input').focus();
-            break;
-          } else {
-            // Add response to terminal
-            responseLine.querySelector('input').disabled = true;
-            break;
+      let cmd = null;
+      let response = '';
+      for (let command in commands) {
+        if (commandName === command) {
+          cmd = commands[command];
+          switch (command) {
+            case 'echo':
+              response = cmd.execute(args);
+              break;
+            case 'clear':
+              response = cmd.execute(() => {
+                terminalCommand.innerHTML = '';
+              });
+              break;
+            case 'ls':
+              response = cmd.execute();
+              break;
+            case 'cd':
+              response = cmd.execute('', args);
+              break;
+            case 'cat':
+              response = cmd.execute(args[0]);
+              break;
+            case 'exit':
+              response = cmd.execute();
+              break;
           }
-        } else {
-          // Add response to terminal
-          const responseLine = buildResponseLine(`Command not found: ${commandName}`);
-          terminalCommand.append(responseLine);
-          break;
+          if (command !== 'clear') {
+            const responseLine = buildResponseLine(response);
+              appendResponseLine(responseLine);
+            // Check if command is a query
+            if (cmd.isQuery) {
+              responseLine.querySelector('input').focus();
+              break;
+            } else {
+              // Add response to terminal
+              responseLine.querySelector('input').disabled = true;
+              break;
+            }
+          }
         }
+      }
+      // If command is not valid, add error message
+      if (!cmd) {
+        appendResponseLine(buildResponseLine(`Command not found: ${commandName}`));
       }
     }
 
@@ -99,3 +114,8 @@ function processCommand(e) {
 terminal.addEventListener('click', () => commandLineInput.focus(), true);
 commandLineInput.addEventListener('keydown', processCommand);
 // commandLineInput.focus();
+
+openGuiBtn.addEventListener('click', () => {
+  document.querySelector('.terminal').classList.add("hidden");
+  document.querySelector('.gui').classList.remove("hidden");
+});
