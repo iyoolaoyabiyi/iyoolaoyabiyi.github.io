@@ -108,7 +108,7 @@ function executeCommand(command, args, commandObj) {
     case 'goto':
       return commandObj.execute(terminal, args);
     case 'open':
-      return commandObj.execute(args[0]);
+      return commandObj.execute(terminal, args);
     case 'exit':
       return commandObj.execute();
   }

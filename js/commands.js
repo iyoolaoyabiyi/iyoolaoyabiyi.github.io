@@ -1,8 +1,8 @@
 const commands = {
-  getDirObj: function(current, path, fileSystem) {
+  getPathObj: function(current, path, fileSystem) {
     let segments = [];
     let pathStack = [];
-    let dirObj = fileSystem['~'];
+    let pathObj = fileSystem['~'];
     let clearedPath = '';
 
     if (path.startsWith('~')) segments = path.split('/');
@@ -18,17 +18,17 @@ const commands = {
     }
     clearedPath = pathStack.join('/');
     for (let i = 1; i < pathStack.length; i++) {
-      if (dirObj.content && dirObj.content[pathStack[i]]) {
-        dirObj = dirObj.content[pathStack[i]]
+      if (pathObj.content && pathObj.content[pathStack[i]]) {
+        pathObj = pathObj.content[pathStack[i]]
       } else {
         return {
-          dirObj: null,
+          pathObj: null,
           clearedPath: clearedPath
         };
       }
     }
     return {
-      dirObj: dirObj,
+      pathObj: pathObj,
       clearedPath: clearedPath
     };
   },
@@ -57,11 +57,11 @@ const commands = {
     execute: function(terminal, args) {
       let path = args[0];
       if (!path) path = terminal.currentPath;
-      const { dirObj, clearedPath } = commands.getDirObj(terminal.currentPath, path, FILESYSTEM);
+      const { pathObj, clearedPath } = commands.getPathObj(terminal.currentPath, path, FILESYSTEM);
       
-      if (!dirObj) return `${clearedPath} does not exist`;
-      if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
-      return Object.keys(dirObj.content).join(' ');
+      if (!pathObj) return `${clearedPath} does not exist`;
+      if (pathObj.type !== 'directory') return `${clearedPath} is not a directory`;
+      return Object.keys(pathObj.content).join(' ');
     }
   },
   goto: {
@@ -72,9 +72,10 @@ const commands = {
       if (args.length === 0) return 'No directory specified';
 
       const path = args[0];
-      const { dirObj, clearedPath} = commands.getDirObj(terminal.currentPath, path, FILESYSTEM);
+      const { pathObj, clearedPath} = commands.getPathObj(terminal.currentPath, path, FILESYSTEM);
       
-      if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
+      if (!pathObj) return `${clearedPath} does not exist`;
+      if (pathObj.type !== 'directory') return `${clearedPath} is not a directory`;
       terminal.currentPath = clearedPath;
       setTerminalOptions(terminal);
       return `Changed directory to ${terminal.currentPath}`;
@@ -84,9 +85,15 @@ const commands = {
     name: 'open',
     description: 'opens files and print on the standard output',
     isQuery: false,
-    execute: function(filePath) {
+    execute: function(terminal, args) {
       // Logic to read file
-      return `Contents of ${filePath}`;
+      if (args.length === 0) return 'No file specified';
+      const path = args[0];
+      const { pathObj, clearedPath} = commands.getPathObj(terminal.currentPath, path, FILESYSTEM);
+      
+      if (!pathObj) return `${clearedPath} does not exist`;
+      if (pathObj.type === 'directory') return `${clearedPath} is not a file`;
+      return pathObj.content;
     }
   },
   exit: {
