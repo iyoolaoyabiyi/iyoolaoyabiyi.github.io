@@ -4,7 +4,8 @@ const commands = {
     description: 'Display a line of text',
     isQuery: false,
     execute: function(args) {
-      return args.join(' ');
+      const cleanedArgs = args.map(item => item.replace(/^['"]+|['"]+$/g, ''));
+      return cleanedArgs.join(' ');
     }
   },
   clear: {
@@ -13,6 +14,7 @@ const commands = {
     isQuery: false,
     execute: function(clearFunction) {
       clearFunction();
+      return null; // No output needed
     }
   },
   list: {
@@ -20,7 +22,22 @@ const commands = {
     description: 'List directory contents',
     isQuery: false,
     execute: function(path) {
-      return 'pages\nblog';
+      if (!path) {
+        const fileList = Object.keys(FILESYSTEM['~'].content);
+        return fileList.join(' ');
+      }
+      const directories = path.split('/');
+      const directory = directories[directories.length - 1];
+      // Logic to list contents of the directory
+      const content = FILESYSTEM['~'].content[directory];
+      if (content && content.type === 'directory') {
+        const fileList = Object.keys(content.content);
+        return fileList.join(' ');
+      } else if (content && content.type === 'file') {
+        return `${directory} is a file`;
+      } else {
+        return `${path} not found`;
+      }
     }
   },
   goto: {

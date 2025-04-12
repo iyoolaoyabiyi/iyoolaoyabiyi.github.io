@@ -5,12 +5,29 @@ let commandLine = document.getElementById('commandLine');
 const commandLineInput = commandLine.querySelector('input');
 const openGuiBtn = document.getElementById('openGuiBtn');
 
+let currentPath = '~';
+let user = 'user';
+let hostname = 'IyosWebServer';
+let needResponse = false;
+
+function focusOnLine() {
+  if (needResponse) {
+    const responseLine = document.getElementById('responseLine');
+    const responseInput = responseLine.querySelector('input');
+    responseInput.focus();
+  } else {
+    const commandLine = document.getElementById('commandLine');
+    const commandLineInput = commandLine.querySelector('input');
+    commandLineInput.focus();
+  }
+}
+
 function buildResponseLine(responseText) {
   const responseLine = document.createElement('div');
   responseLine.classList.add('response');
-  responseLine.id = 'responseLine';
+  // responseLine.id = 'responseLine';
   responseLine.innerHTML =`
-    <p class="response-text" id="responseText">${responseText}</p>
+    <p class="response-text">${responseText}</p>
     <input id="responseInput" type="text" class="input" />
   `;
   return responseLine;
@@ -28,11 +45,11 @@ function buildCommandLine() {
   commandLine.id = 'commandLine';
   commandLine.innerHTML = `
     <p class="prompt">
-      <span data-type="username">user</span>
+      <span data-type="username">${user}</span>
       @
-      <span data-type="hostname">IyosWebServer</span>
+      <span data-type="hostname">${hostname}</span>
       :
-      <span data-type="path">~</span>
+      <span data-type="path">${currentPath}</span>
       $
     </p>
     <input class="input" type="text" />
@@ -40,33 +57,47 @@ function buildCommandLine() {
   return commandLine;
 }
 
+function appendCommandLine() {
+  let commandLine = document.getElementById('commandLine');
+  let commandLineInput = null;
+  if (commandLine) {
+    commandLineInput = commandLine.querySelector('input');
+    // Deactivate commandLine
+    commandLineInput.disabled = true;
+    commandLineInput.removeAttribute('autofocus')
+    commandLineInput.removeEventListener('keydown', processPrompt);
+    commandLine.id = '';
+  }
+  // Append new commandLine
+  commandLine = buildCommandLine();
+  commandLineInput = commandLine.querySelector('input');
+  commandLineInput.disabled = false;
+  terminalCommand.append(commandLine);
+  commandLineInput.focus();
+  commandLineInput.addEventListener('keydown', processPrompt);
+}
+
 function executeCommand(command, args, commandObj) {
   switch (command) {
-    case 'echo':
+    case commands.echo.name:
       return commandObj.execute(args);
-      break;
     case 'clear':
       return commandObj.execute(() => {
         terminalCommand.innerHTML = '';
       });
-      break;
     case 'list':
-      return commandObj.execute();
-      break;
+      return commandObj.execute(args[0]);
     case 'goto':
       return commandObj.execute('', args);
-      break;
     case 'open':
       return commandObj.execute(args[0]);
-      break;
     case 'exit':
       return commandObj.execute();
-      break;
   }
 }
 
 function processPrompt(e) {
-  let commandLine = document.getElementById('commandLine');
+  const commandLine = document.getElementById('commandLine');
   let commandLineInput = commandLine.querySelector('input');
   if (e.key === 'Enter') {
     const prompt = commandLineInput.value.trim();
@@ -87,7 +118,6 @@ function processPrompt(e) {
               responseLine.querySelector('input').focus();
               break;
             } else {
-              // Add response to terminal
               responseLine.querySelector('input').disabled = true;
               break;
             }
@@ -99,23 +129,11 @@ function processPrompt(e) {
         appendResponseLine(buildResponseLine(`Command not found: ${commandName}`));
       }
     }
-
-    // Deactivate commandLine
-    commandLineInput.disabled = true;
-    commandLineInput.removeAttribute('autofocus')
-    commandLineInput.removeEventListener('keydown', processPrompt);
-    commandLine.id = '';
-    // Append new commandLine
-    commandLine = buildCommandLine();
-    commandLineInput = commandLine.querySelector('input');
-    commandLineInput.disabled = false;
-    terminalCommand.append(commandLine);
-    commandLineInput.focus();
-    commandLineInput.addEventListener('keydown', processPrompt);
+    appendCommandLine();
   }
 }
 
-terminal.addEventListener('click', () => commandLineInput.focus(), true);
+terminal.addEventListener('click', focusOnLine);
 commandLineInput.addEventListener('keydown', processPrompt);
 // commandLineInput.focus();
 
