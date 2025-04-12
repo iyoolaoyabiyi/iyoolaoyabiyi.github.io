@@ -1,3 +1,49 @@
+const portfolio = {
+  categories: {
+    type: 'directory',
+    name: 'categories',
+    content: {
+      'personal': {
+          type: 'directory',
+          name: 'personal',
+          content: {
+            'static calculator': {
+              type: 'file',
+              name: 'static calculator',
+              content: `This is my calculator`
+            }
+          }
+        },
+        'freeCodeCamp': {
+          type: 'directory',
+          name: 'freeCodeCamp',
+          content: {
+            'portfolio-2': {
+              type: 'file',
+              name: 'portfolio-2',
+              content: `This is my portfolio 2`
+            }
+          }
+        }
+      }
+    },
+    'portfolio-1': {
+      type: 'file',
+      name: 'portfolio-1',
+      content: `This is my portfolio 1`
+  },
+  'portfolio-2': {
+    type: 'file',
+    name: 'portfolio-2',
+    content: `This is my portfolio 2`
+  },
+  'portfolio-3': {
+    type: 'file',
+    name: 'portfolio-3',
+    content: `This is my portfolio 3`
+  }
+}
+
 const posts = {
   'first-blog-post': { 
     type: 'file',
@@ -22,9 +68,9 @@ const FILESYSTEM = {
     name: '~',
     content: {
       portfolio: {
-        type: 'file',
+        type: 'directory',
         name: 'portfolio',
-        content: `This is my portfolio`,
+        content: portfolio
       },
       contact: {
         type: 'file',

@@ -1,4 +1,31 @@
 const commands = {
+  getDirObj: function(current, path, fileSystem) {
+    let segments = [];
+    let pathStack = [];
+    let dirObj = fileSystem['~'];
+
+    if (path.startsWith('~')) segments = path.split('/');
+    else if (path.startsWith('/')) {
+      segments = path.split('/');
+      segments[0] = '~';
+    } else segments = current.split('/').concat(path.split('/'));
+    // Resolve final directory path
+    for (let part of segments) {
+      if (part === '' || part === '.') continue;
+      if (part === '..') pathStack.pop();
+      else pathStack.push(part);
+    }
+    for (let i = 1; i < pathStack.length; i++) {
+      if (dirObj.content && dirObj.content[pathStack[i]]) {
+        return {
+          dirObj: dirObj.content[pathStack[i]],
+          pathStack: pathStack
+        };
+      } else {
+        return `No such directory: ${path}`;
+      }
+    }
+  },
   echo: {
     name: 'echo',
     description: 'Display a line of text',
@@ -44,13 +71,16 @@ const commands = {
     name: 'goto',
     description: 'Change directory',
     isQuery: false,
-    execute: function(currentPath, args) {
-      if (args.length === 0) {
-        return 'No directory specified';
-      }
-      const newPath = args[0];
-      // Logic to change directory
-      return `Changed directory to ${newPath}`;
+    execute: function(terminal, args) {
+      if (args.length === 0) return 'No directory specified';
+
+      const path = args[0];
+      const { dirObj, pathStack} = commands.getDirObj(terminal.currentPath, path, FILESYSTEM);
+      
+      if (dirObj.type !== 'directory') return `${path} is not a directory`;
+      terminal.currentPath = pathStack.join('/');
+      setTerminalOptions(terminal);
+      return `Changed directory to ${terminal.currentPath}`;
     }
   },
   open: {

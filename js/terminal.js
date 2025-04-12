@@ -1,14 +1,32 @@
 // Terminal DOM
-const terminal = document.getElementById('terminal');
+const terminalScreen = document.getElementById('terminal');
 const terminalCommand = document.getElementById('masterCommand');
 let commandLine = document.getElementById('commandLine');
 const commandLineInput = commandLine.querySelector('input');
 const openGuiBtn = document.getElementById('openGuiBtn');
+const userName = document.querySelectorAll('[data-type="username"]');
+const hostName = document.querySelectorAll('[data-type="hostname"]');
+const pathName = document.querySelectorAll('[data-type="path"]');
 
-let currentPath = '~';
-let user = 'user';
-let hostname = 'IyosWebServer';
+const terminal ={
+  user: 'guest',
+  hostname: 'IyosWebServer',
+  currentPath: '~',
+}
+
 let needResponse = false;
+
+function setTerminalOptions(options) {
+  userName.forEach(el => {
+    el.textContent = options.user;
+  });
+  hostName.forEach(el => {
+    el.textContent = options.hostname;
+  });
+  pathName.forEach(el => {
+    el.textContent = options.currentPath;
+  });
+}
 
 function focusOnLine() {
   if (needResponse) {
@@ -36,7 +54,7 @@ function buildResponseLine(responseText) {
 function appendResponseLine(responseLine) {
   terminalCommand.append(responseLine);
   // Scroll to bottom of terminal
-  terminal.scrollTop = terminal.scrollHeight;
+  terminalScreen.scrollTop = terminalScreen.scrollHeight;
 }
 
 function buildCommandLine() {
@@ -45,11 +63,11 @@ function buildCommandLine() {
   commandLine.id = 'commandLine';
   commandLine.innerHTML = `
     <p class="prompt">
-      <span data-type="username">${user}</span>
+      <span data-type="username">${terminal.user}</span>
       @
-      <span data-type="hostname">${hostname}</span>
+      <span data-type="hostname">${terminal.hostname}</span>
       :
-      <span data-type="path">${currentPath}</span>
+      <span data-type="path">${terminal.currentPath}</span>
       $
     </p>
     <input class="input" type="text" />
@@ -88,7 +106,7 @@ function executeCommand(command, args, commandObj) {
     case 'list':
       return commandObj.execute(args[0]);
     case 'goto':
-      return commandObj.execute('', args);
+      return commandObj.execute(terminal, args);
     case 'open':
       return commandObj.execute(args[0]);
     case 'exit':
@@ -133,10 +151,11 @@ function processPrompt(e) {
   }
 }
 
-terminal.addEventListener('click', focusOnLine);
+setTerminalOptions(terminal)
+
+terminalScreen.addEventListener('click', focusOnLine);
 commandLineInput.addEventListener('keydown', processPrompt);
 // commandLineInput.focus();
-
 openGuiBtn.addEventListener('click', () => {
   document.querySelector('.terminal').classList.add("hidden");
   document.querySelector('.gui').classList.remove("hidden");
