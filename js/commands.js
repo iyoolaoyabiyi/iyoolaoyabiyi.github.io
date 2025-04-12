@@ -3,6 +3,7 @@ const commands = {
     let segments = [];
     let pathStack = [];
     let dirObj = fileSystem['~'];
+    let clearedPath = '';
 
     if (path.startsWith('~')) segments = path.split('/');
     else if (path.startsWith('/')) {
@@ -15,16 +16,21 @@ const commands = {
       if (part === '..') pathStack.pop();
       else pathStack.push(part);
     }
+    clearedPath = pathStack.join('/');
     for (let i = 1; i < pathStack.length; i++) {
       if (dirObj.content && dirObj.content[pathStack[i]]) {
-        return {
-          dirObj: dirObj.content[pathStack[i]],
-          pathStack: pathStack
-        };
+        dirObj = dirObj.content[pathStack[i]]
       } else {
-        return `No such directory: ${path}`;
+        return {
+          dirObj: null,
+          clearedPath: clearedPath
+        };
       }
     }
+    return {
+      dirObj: dirObj,
+      clearedPath: clearedPath
+    };
   },
   echo: {
     name: 'echo',
@@ -48,23 +54,14 @@ const commands = {
     name: 'list',
     description: 'List directory contents',
     isQuery: false,
-    execute: function(path) {
-      if (!path) {
-        const fileList = Object.keys(FILESYSTEM['~'].content);
-        return fileList.join(' ');
-      }
-      const directories = path.split('/');
-      const directory = directories[directories.length - 1];
-      // Logic to list contents of the directory
-      const content = FILESYSTEM['~'].content[directory];
-      if (content && content.type === 'directory') {
-        const fileList = Object.keys(content.content);
-        return fileList.join(' ');
-      } else if (content && content.type === 'file') {
-        return `${directory} is a file`;
-      } else {
-        return `${path} not found`;
-      }
+    execute: function(terminal, args) {
+      let path = args[0];
+      if (!path) path = terminal.currentPath;
+      const { dirObj, clearedPath } = commands.getDirObj(terminal.currentPath, path, FILESYSTEM);
+      
+      if (!dirObj) return `${clearedPath} does not exist`;
+      if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
+      return Object.keys(dirObj.content).join(' ');
     }
   },
   goto: {
@@ -75,10 +72,10 @@ const commands = {
       if (args.length === 0) return 'No directory specified';
 
       const path = args[0];
-      const { dirObj, pathStack} = commands.getDirObj(terminal.currentPath, path, FILESYSTEM);
+      const { dirObj, clearedPath} = commands.getDirObj(terminal.currentPath, path, FILESYSTEM);
       
-      if (dirObj.type !== 'directory') return `${path} is not a directory`;
-      terminal.currentPath = pathStack.join('/');
+      if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
+      terminal.currentPath = clearedPath;
       setTerminalOptions(terminal);
       return `Changed directory to ${terminal.currentPath}`;
     }

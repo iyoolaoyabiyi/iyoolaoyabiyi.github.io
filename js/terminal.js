@@ -104,7 +104,7 @@ function executeCommand(command, args, commandObj) {
         terminalCommand.innerHTML = '';
       });
     case 'list':
-      return commandObj.execute(args[0]);
+      return commandObj.execute(terminal, args);
     case 'goto':
       return commandObj.execute(terminal, args);
     case 'open':

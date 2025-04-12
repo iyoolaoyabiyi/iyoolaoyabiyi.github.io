@@ -7,7 +7,7 @@ const portfolio = {
           type: 'directory',
           name: 'personal',
           content: {
-            'static calculator': {
+            'static-calculator': {
               type: 'file',
               name: 'static calculator',
               content: `This is my calculator`
