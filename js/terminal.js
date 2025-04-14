@@ -169,9 +169,9 @@ function processPrompt(e) {
     const prompt = commandLineInput.value.trim();
     if (prompt !== '') {
       // Check if command is valid
-      const [ commandName, ...args ] = prompt.split(' ');
-      let response = executeCommand(commands, commandName, args);
-      commandObj = commands[commandName];
+      const [ command, ...args ] = prompt.split(' ');
+      let response = executeCommand(commands, command, args);
+      commandObj = commands[command];
       if (response) appendResponseLine(buildResponseLine(response));
     }
     if (!commandObj.isQuery) appendCommandLine();
