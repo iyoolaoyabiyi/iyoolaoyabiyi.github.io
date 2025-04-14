@@ -1,37 +1,4 @@
 const commands = {
-  getPathObj: function(current, path, fileSystem) {
-    let segments = [];
-    let pathStack = [];
-    let pathObj = fileSystem['~'];
-    let clearedPath = '';
-
-    if (path.startsWith('~')) segments = path.split('/');
-    else if (path.startsWith('/')) {
-      segments = path.split('/');
-      segments[0] = '~';
-    } else segments = current.split('/').concat(path.split('/'));
-    // Resolve final directory path
-    for (let part of segments) {
-      if (part === '' || part === '.') continue;
-      if (part === '..') pathStack.pop();
-      else pathStack.push(part);
-    }
-    clearedPath = pathStack.join('/');
-    for (let i = 1; i < pathStack.length; i++) {
-      if (pathObj.content && pathObj.content[pathStack[i]]) {
-        pathObj = pathObj.content[pathStack[i]]
-      } else {
-        return {
-          pathObj: null,
-          clearedPath: clearedPath
-        };
-      }
-    }
-    return {
-      pathObj: pathObj,
-      clearedPath: clearedPath
-    };
-  },
   echo: {
     name: 'echo',
     description: 'Display a line of text',
@@ -57,7 +24,7 @@ const commands = {
     execute: function(terminal, args) {
       let path = args[0];
       if (!path) path = terminal.currentPath;
-      const { pathObj, clearedPath } = commands.getPathObj(terminal.currentPath, path, FILESYSTEM);
+      const { pathObj, clearedPath } = getPathObj(terminal.currentPath, path, FILESYSTEM);
       
       if (!pathObj) return `${clearedPath} does not exist`;
       if (pathObj.type !== 'directory') return `${clearedPath} is not a directory`;
@@ -72,7 +39,7 @@ const commands = {
       if (args.length === 0) return 'No directory specified';
 
       const path = args[0];
-      const { pathObj, clearedPath} = commands.getPathObj(terminal.currentPath, path, FILESYSTEM);
+      const { pathObj, clearedPath} = getPathObj(terminal.currentPath, path, FILESYSTEM);
       
       if (!pathObj) return `${clearedPath} does not exist`;
       if (pathObj.type !== 'directory') return `${clearedPath} is not a directory`;
@@ -89,7 +56,7 @@ const commands = {
       // Logic to read file
       if (args.length === 0) return 'No file specified';
       const path = args[0];
-      const { pathObj, clearedPath} = commands.getPathObj(terminal.currentPath, path, FILESYSTEM);
+      const { pathObj, clearedPath} = getPathObj(terminal.currentPath, path, FILESYSTEM);
       
       if (!pathObj) return `${clearedPath} does not exist`;
       if (pathObj.type === 'directory') return `${clearedPath} is not a file`;
@@ -106,3 +73,37 @@ const commands = {
     }
   }
 }
+
+function getPathObj(current, path, fileSystem) {
+  let segments = [];
+  let pathStack = [];
+  let pathObj = fileSystem['~'];
+  let clearedPath = '';
+
+  if (path.startsWith('~')) segments = path.split('/');
+  else if (path.startsWith('/')) {
+    segments = path.split('/');
+    segments[0] = '~';
+  } else segments = current.split('/').concat(path.split('/'));
+  // Resolve final directory path
+  for (let part of segments) {
+    if (part === '' || part === '.') continue;
+    if (part === '..') pathStack.pop();
+    else pathStack.push(part);
+  }
+  clearedPath = pathStack.join('/');
+  for (let i = 1; i < pathStack.length; i++) {
+    if (pathObj.content && pathObj.content[pathStack[i]]) {
+      pathObj = pathObj.content[pathStack[i]]
+    } else {
+      return {
+        pathObj: null,
+        clearedPath: clearedPath
+      };
+    }
+  }
+  return {
+    pathObj: pathObj,
+    clearedPath: clearedPath
+  };
+};

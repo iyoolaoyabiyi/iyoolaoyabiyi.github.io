@@ -156,6 +156,8 @@ function executeCommand(commands, command, args) {
           }
         })
       });
+    default: 
+      return `command not found: ${command}`;
   }
 }
 
@@ -168,18 +170,9 @@ function processPrompt(e) {
     if (prompt !== '') {
       // Check if command is valid
       const [ commandName, ...args ] = prompt.split(' ');
-      let response = '';
-      for (let command in commands) {
-        if (commandName === command) {
-          commandObj = commands[command];
-          response = executeCommand(commands, command, args);
-          if (response) appendResponseLine(buildResponseLine(response));
-          break;
-        }
-      }
-      // If command is not valid, add error message
-      if (!commandObj)
-        appendResponseLine(buildResponseLine(`Command not found: ${commandName}`));
+      let response = executeCommand(commands, commandName, args);
+      commandObj = commands[commandName];
+      if (response) appendResponseLine(buildResponseLine(response));
     }
     if (!commandObj.isQuery) appendCommandLine();
   }
