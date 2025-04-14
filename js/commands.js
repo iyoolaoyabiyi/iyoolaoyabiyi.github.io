@@ -100,11 +100,9 @@ const commands = {
     name: 'exit',
     description: 'Exit the terminal',
     isQuery: true,
-    execute: function() {
-      setTimeout(() => {
-        window.close();
-      }, 500);
-      return 'Exiting terminal...';
+    execute: function(exitFunction) {
+      exitFunction();
+      return null;
     }
   }
 }
