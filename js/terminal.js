@@ -99,17 +99,17 @@ function executeCommand(command, args, commandObj) {
   switch (command) {
     case commands.echo.name:
       return commandObj.execute(args);
-    case 'clear':
+    case commands.clear.name:
       return commandObj.execute(() => {
         terminalCommand.innerHTML = '';
       });
-    case 'list':
+    case commands.list.name:
       return commandObj.execute(terminal, args);
-    case 'goto':
+    case commands.goto.name:
       return commandObj.execute(terminal, args);
-    case 'open':
+    case command.open.name:
       return commandObj.execute(terminal, args);
-    case 'exit':
+    case command.exit.name:
       return commandObj.execute();
   }
 }
