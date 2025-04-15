@@ -1,4 +1,6 @@
 @import "variables";
+@import 'terminal';
+@import 'gui';
 
 * {
   box-sizing: border-box;
@@ -9,6 +11,14 @@ body {
   margin: 0;
   font-family: monospace;
   color: $foreground;
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 10px;
 }
 
 p {

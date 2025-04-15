@@ -1,8 +1,8 @@
 @import "variables";
 
 .terminal-window {
-  width: clamp(800px, 800px, 100%);
-  margin: 50px auto;
+  width: clamp(200px, 100%, 800px);
+  margin: 20px auto;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);

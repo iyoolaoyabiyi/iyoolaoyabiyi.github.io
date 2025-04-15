@@ -81,8 +81,6 @@ const commands = {
     execute: function(args) {
       const commandsList = Object.keys(commands) 
       let output = '';
-      console.log(args);
-      
       if (args.length >= 1) {
         if (args.length === 1) {
           const command = args[0];
