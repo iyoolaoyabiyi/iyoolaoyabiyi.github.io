@@ -1,186 +1,165 @@
-// Terminal DOM
-const terminalScreen = document.getElementById('terminal');
-const terminalCommand = document.getElementById('masterCommand');
-let commandLine = document.getElementById('commandLine');
-const commandLineInput = commandLine.querySelector('input');
-const openGuiBtn = document.getElementById('openGuiBtn');
-const userName = document.querySelectorAll('[data-type="username"]');
-const hostName = document.querySelectorAll('[data-type="hostname"]');
-const pathName = document.querySelectorAll('[data-type="path"]');
-
+// Terminal Object
 const terminal = {
   // options
   user: 'guest',
   hostname: 'IyosWebServer',
   currentPath: '~',
   needResponse: false,
+  commands: commands,
   // DOM
-  get body() {
-    return document.getElementById('terminal');
+  window: document.getElementById('terminalWindow'),
+  openGuiBtn: document.getElementById('openGuiBtn'),
+  _commandLine: document.getElementById('commandLine'),
+  // get body() {
+  //   return document.getElementById('terminal');
+  // },
+  body: {
+    get element() {
+      return document.getElementById('terminal')
+    },
+    addResponse(response, isPrompt = false) {
+      const responseLine = document.createElement('div');
+      responseLine.classList.add('response');
+      if (isPrompt) responseLine.id = 'responseLine';
+      responseLine.innerHTML =`
+        <p class="response-text">${response}</p>
+        ${isPrompt ? '<input type="text" class="input" />' : ''}
+      `;
+      this.element.append(responseLine);
+      this.element.scrollTop = this.element.scrollHeight;
+    },
+    addCommandLine() {
+      const commandLine = document.createElement('div');
+      let commandLineInput = null;
+      commandLine.classList.add('line');
+      commandLine.id = 'commandLine';
+      commandLine.innerHTML = `
+        <p class="prompt">
+          <span data-type="username">${terminal.user}</span>
+          @
+          <span data-type="hostname">${terminal.hostname}</span>
+          :
+          <span data-type="path">${terminal.currentPath}</span>
+          $
+        </p>
+        <input class="input" type="text" />
+      `;
+      if (terminal.commandLine) {
+        commandLineInput = terminal.commandLine.querySelector('input');
+        // Deactivate commandLine
+        commandLineInput.disabled = true;
+        commandLineInput.removeAttribute('autofocus');
+        commandLineInput.removeEventListener('keydown', terminal.processPrompt);
+        terminal.commandLine.id = '';
+      }
+      // Append new commandLine
+      terminal.commandLine = commandLine;
+      commandLineInput = terminal.commandLine.querySelector('input');
+      commandLineInput.disabled = false;
+      this.element.append(terminal.commandLine);
+      commandLineInput.focus();
+      commandLineInput.addEventListener('keydown', terminal.processPrompt.bind(terminal));
+    }
   },
   get commandLine() {
-    return document.getElementById('commandLine');
+    return this._commandLine;
+  },
+  set commandLine(commandLine) {
+    this._commandLine = commandLine;
   },
   // Methods
-  clear: function() {
-    this.body.innerHTML = '';
+  clear() {
+    this.body.element.innerHTML = '';
   },
-  resetOptions: function() {
+  addOptions() {
+    document.querySelectorAll('[data-type="username"]').forEach(el => {
+      el.textContent = this.user;
+    });
+    document.querySelectorAll('[data-type="hostname"]').forEach(el => {
+      el.textContent = this.hostname;
+    });
+    document.querySelectorAll('[data-type="path"]').forEach(el => {
+      el.textContent = this.currentPath;
+    });
+  },
+  resetOptions() {
     this.user = 'guest';
     this.hostname = 'iyoswebserver';
     this.currentPath = '~';
   },
-  openGUI: function() {
-    document.querySelector('.terminal').classList.add("hidden");
+  openGUI() {
+    this.window.classList.add("hidden");
     document.querySelector('.gui').classList.remove("hidden");
-  }
-}
-
-function setTerminalOptions(options) {
-  userName.forEach(el => {
-    el.textContent = options.user;
-  });
-  hostName.forEach(el => {
-    el.textContent = options.hostname;
-  });
-  pathName.forEach(el => {
-    el.textContent = options.currentPath;
-  });
-}
-
-function focusOnLine() {
-  if (terminal.needResponse) {
-    const responseLine = document.getElementById('responseLine');
-    const responseInput = responseLine.querySelector('input');
-    responseInput.focus();
-  } else {
-    const commandLineInput = terminal.commandLine.querySelector('input');
-    commandLineInput.focus();
-  }
-}
-
-function buildResponseLine(responseText, isPrompt = false) {
-  const responseLine = document.createElement('div');
-  responseLine.classList.add('response');
-  if (isPrompt) responseLine.id = 'responseLine';
-  responseLine.innerHTML =`
-    <p class="response-text">${responseText}</p>
-    ${isPrompt ? '<input type="text" class="input" />' : ''}
-  `;
-  return responseLine;
-}
-
-function appendResponseLine(responseLine) {
-  terminal.body.append(responseLine);
-  // Scroll to bottom of terminal
-  terminalScreen.scrollTop = terminalScreen.scrollHeight;
-}
-
-function buildCommandLine() {
-  const commandLine = document.createElement('div');
-  commandLine.classList.add('line');
-  commandLine.id = 'commandLine';
-  commandLine.innerHTML = `
-    <p class="prompt">
-      <span data-type="username">${terminal.user}</span>
-      @
-      <span data-type="hostname">${terminal.hostname}</span>
-      :
-      <span data-type="path">${terminal.currentPath}</span>
-      $
-    </p>
-    <input class="input" type="text" />
-  `;
-  return commandLine;
-}
-
-function appendCommandLine() {
-  let commandLine = document.getElementById('commandLine');
-  let commandLineInput = null;
-  if (commandLine) {
-    commandLineInput = commandLine.querySelector('input');
-    // Deactivate commandLine
-    commandLineInput.disabled = true;
-    commandLineInput.removeAttribute('autofocus')
-    commandLineInput.removeEventListener('keydown', processPrompt);
-    commandLine.id = '';
-  }
-  // Append new commandLine
-  commandLine = buildCommandLine();
-  commandLineInput = commandLine.querySelector('input');
-  commandLineInput.disabled = false;
-  terminal.body.append(commandLine);
-  commandLineInput.focus();
-  commandLineInput.addEventListener('keydown', processPrompt);
-}
-
-function executeCommand(commands, command, args) {
-  const commandObj = commands[command];
-  switch (command) {
-    case commands.echo.name:
-      return commandObj.execute(args);
-    case commands.clear.name:
-      return commandObj.execute(() => {
-        terminal.clear();
-      });
-    case commands.list.name:
-      return commandObj.execute(terminal, args);
-    case commands.goto.name:
-      return commandObj.execute(terminal, args);
-    case commands.open.name:
-      return commandObj.execute(terminal, args);
-    case commands.exit.name:
-      return commandObj.execute(() => {
-        let responseInput = null;
-        terminal.needResponse = true;
-        appendResponseLine(buildResponseLine('Are you sure you want to quit?(yes/no)', true));
-        responseInput = document.querySelector('#responseLine input');
-        responseInput.focus();
-        responseInput.addEventListener('keydown', e => {
-          if (e.key === 'Enter') {
-            response = responseInput.value;
-            terminal.needResponse = false;
-            switch (response.toLowerCase()) {
-              case 'yes':
-              case 'y':
-                terminal.clear();
-                terminal.resetOptions();
-                setTerminalOptions(terminal)
-                appendCommandLine();
-                terminal.openGUI();
-                break;
-              default:
-                document.querySelector('#responseLine').id = '';
-                appendCommandLine();
-            }
-          }
-        })
-      });
-    default: 
-      return `command not found: ${command}`;
-  }
-}
-
-function processPrompt(e) {
-  const commandLine = document.getElementById('commandLine');
-  let commandLineInput = commandLine.querySelector('input');
-  let commandObj = null
-  if (e.key === 'Enter') {
-    const prompt = commandLineInput.value.trim();
-    if (prompt !== '') {
-      // Check if command is valid
-      const [ command, ...args ] = prompt.split(' ');
-      let response = executeCommand(commands, command, args);
-      commandObj = commands[command];
-      if (response) appendResponseLine(buildResponseLine(response));
+  },
+  focusInput() {
+    if (this.needResponse) {
+      const responseLine = document.getElementById('responseLine');
+      responseLine.querySelector('input').focus();
+    } else {
+      this.commandLine.querySelector('input').focus();
     }
-    if (!commandObj.isQuery) appendCommandLine();
+  },
+  executeCommand(command, args) {
+    const commandObj = this.commands[command];
+    switch (command) {
+      case this.commands.echo.name:
+        return commandObj.execute(args);
+      case this.commands.clear.name:
+        return commandObj.execute(terminal.clear.bind(terminal));
+      case this.commands.list.name:
+        return commandObj.execute(terminal, args);
+      case this.commands.goto.name:
+        return commandObj.execute(terminal, args);
+      case this.commands.open.name:
+        return commandObj.execute(terminal, args);
+      case this.commands.exit.name:
+        return commandObj.execute(() => {
+          let responseInput = null;
+          terminal.needResponse = true;
+          this.body.addResponse('Are you sure you want to quit?(yes/no)', true);
+          responseInput = document.querySelector('#responseLine input');
+          responseInput.focus();
+          responseInput.addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+              response = responseInput.value;
+              terminal.needResponse = false;
+              switch (response.toLowerCase()) {
+                case 'yes':
+                case 'y':
+                  terminal.clear();
+                  terminal.resetOptions();
+                  terminal.addOptions();
+                  this.body.addCommandLine();
+                  terminal.openGUI();
+                  break;
+                default:
+                  document.querySelector('#responseLine').id = '';
+                  this.body.addCommandLine();
+              }
+            }
+          })
+        });
+      default: 
+        return `command not found: ${command}`;
+    }
+  },
+  processPrompt(e) {
+    let commandLineInput = this.commandLine.querySelector('input');
+    if (e.key === 'Enter') {
+      const prompt = commandLineInput.value.trim();
+      if (prompt !== '') {
+        // Check if command is valid
+        const [ command, ...args ] = prompt.split(' ');
+        let response = this.executeCommand(command, args);
+        if (response) this.body.addResponse(response);
+      }
+      if (!terminal.needResponse) body.addCommandLine();
+    }
   }
 }
 
-setTerminalOptions(terminal)
-
-terminalScreen.addEventListener('click', focusOnLine);
-commandLineInput.addEventListener('keydown', processPrompt);
+terminal.addOptions()
+terminal.body.element.addEventListener('click', terminal.focusInput.bind(terminal));
+terminal.commandLine.querySelector('input').addEventListener('keydown', terminal.processPrompt.bind(terminal));
 // commandLineInput.focus();
-openGuiBtn.addEventListener('click', terminal.openGUI );
+terminal.openGuiBtn.addEventListener('click', terminal.openGUI.bind(terminal) );

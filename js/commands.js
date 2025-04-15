@@ -24,11 +24,11 @@ const commands = {
     execute: function(terminal, args) {
       let path = args[0];
       if (!path) path = terminal.currentPath;
-      const { pathObj, clearedPath } = getPathObj(terminal.currentPath, path, FILESYSTEM);
+      const { dirObj, clearedPath } = getDirObj(terminal.currentPath, path, FILESYSTEM);
       
-      if (!pathObj) return `${clearedPath} does not exist`;
-      if (pathObj.type !== 'directory') return `${clearedPath} is not a directory`;
-      return Object.keys(pathObj.content).join(' ');
+      if (!dirObj) return `${clearedPath} does not exist`;
+      if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
+      return Object.keys(dirObj.content).join(' ');
     }
   },
   goto: {
@@ -39,12 +39,12 @@ const commands = {
       if (args.length === 0) return 'No directory specified';
 
       const path = args[0];
-      const { pathObj, clearedPath} = getPathObj(terminal.currentPath, path, FILESYSTEM);
+      const { dirObj, clearedPath} = getDirObj(terminal.currentPath, path, FILESYSTEM);
       
-      if (!pathObj) return `${clearedPath} does not exist`;
-      if (pathObj.type !== 'directory') return `${clearedPath} is not a directory`;
+      if (!dirObj) return `${clearedPath} does not exist`;
+      if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
       terminal.currentPath = clearedPath;
-      setTerminalOptions(terminal);
+      terminal.addOptions();
       return `Changed directory to ${terminal.currentPath}`;
     }
   },
@@ -56,11 +56,11 @@ const commands = {
       // Logic to read file
       if (args.length === 0) return 'No file specified';
       const path = args[0];
-      const { pathObj, clearedPath} = getPathObj(terminal.currentPath, path, FILESYSTEM);
+      const { dirObj, clearedPath} = getDirObj(terminal.currentPath, path, FILESYSTEM);
       
-      if (!pathObj) return `${clearedPath} does not exist`;
-      if (pathObj.type === 'directory') return `${clearedPath} is not a file`;
-      return pathObj.content;
+      if (!dirObj) return `${clearedPath} does not exist`;
+      if (dirObj.type === 'directory') return `${clearedPath} is not a file`;
+      return dirObj.content;
     }
   },
   exit: {
@@ -74,36 +74,39 @@ const commands = {
   }
 }
 
-function getPathObj(current, path, fileSystem) {
+function getDirObj(currentPath, path, fileSystem) {
   let segments = [];
   let pathStack = [];
-  let pathObj = fileSystem['~'];
+  let dirObj = fileSystem['~'];
   let clearedPath = '';
 
-  if (path.startsWith('~')) segments = path.split('/');
-  else if (path.startsWith('/')) {
+  if (path.startsWith('~')) {
+    segments = path.split('/');
+  } else if (path.startsWith('/')) {
     segments = path.split('/');
     segments[0] = '~';
-  } else segments = current.split('/').concat(path.split('/'));
-  // Resolve final directory path
+  } else {
+    segments = currentPath.split('/').concat(path.split('/'));
+  }
+
   for (let part of segments) {
     if (part === '' || part === '.') continue;
-    if (part === '..') pathStack.pop();
-    else pathStack.push(part);
-  }
-  clearedPath = pathStack.join('/');
-  for (let i = 1; i < pathStack.length; i++) {
-    if (pathObj.content && pathObj.content[pathStack[i]]) {
-      pathObj = pathObj.content[pathStack[i]]
+    if (part === '..') {
+      if (pathStack.length > 1) pathStack.pop();
     } else {
-      return {
-        pathObj: null,
-        clearedPath: clearedPath
-      };
+      pathStack.push(part);
     }
   }
-  return {
-    pathObj: pathObj,
-    clearedPath: clearedPath
-  };
-};
+
+  clearedPath = pathStack.join('/');
+
+  for (let i = 1; i < pathStack.length; i++) {
+    if (dirObj.content && dirObj.content[pathStack[i]]) {
+      dirObj = dirObj.content[pathStack[i]];
+    } else {
+      return { dirObj: null, clearedPath: clearedPath };
+    }
+  }
+
+  return { dirObj: dirObj, clearedPath: clearedPath };
+}

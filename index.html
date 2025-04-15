@@ -11,38 +11,38 @@
 </head>
 <body>
   <!-- Terminal -->
-  <div class="terminal">
-    <div class="terminal-window">
-      <div class="terminal-header">
-        <div class="buttons">
-          <button class="red"></button>
-          <button class="yellow"></button>
-          <button class="green"></button>
-        </div>
+  <!-- <div class="terminal-container"> -->
+  <div class="terminal-window" id="terminalWindow">
+    <div class="terminal-header">
+      <div class="buttons">
+        <button class="red"></button>
+        <button class="yellow"></button>
+        <button class="green"></button>
+      </div>
+      <p class="prompt">
+        <span data-type="username">user</span>
+        @
+        <span data-type="hostname">IyosWebServer</span>
+        : 
+        <span data-type="path">~</span>
+      </p>
+      <button class="btn" id="openGuiBtn">GUI</button>
+    </div>
+    <div class="terminal-body" id="terminal">
+      <div class="line" id="commandLine">
         <p class="prompt">
           <span data-type="username">user</span>
           @
           <span data-type="hostname">IyosWebServer</span>
-          : 
+          :
           <span data-type="path">~</span>
+          $
         </p>
-        <button class="btn" id="openGuiBtn">GUI</button>
-      </div>
-      <div class="terminal-body" id="terminal">
-        <div class="line" id="commandLine">
-          <p class="prompt">
-            <span data-type="username">user</span>
-            @
-            <span data-type="hostname">IyosWebServer</span>
-            :
-            <span data-type="path">~</span>
-            $
-          </p>
-          <input class="input" type="text" autofocus />
-        </div>
+        <input class="input" type="text" autofocus />
       </div>
     </div>
   </div>
+  <!-- </div> -->
   <!-- GUI -->
   <div class="gui hidden">
     <header class="gui-header">

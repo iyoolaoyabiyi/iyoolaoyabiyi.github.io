@@ -1,22 +1,20 @@
-.terminal {
-  padding: 10px;
-  display: flex;
-}
-.terminal .terminal-window {
+.terminal-window {
   width: clamp(800px, 800px, 100%);
   margin: 50px auto;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
-.terminal .terminal-header {
+
+.terminal-header {
   background-color: #333333;
   padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.terminal .terminal-body {
+
+.terminal-body {
   background-color: #001010;
   background-image: linear-gradient(135deg, #1c1c1c, #000000, #1c1c1c);
   padding: 1rem;
@@ -26,21 +24,25 @@
   color: #001010;
   cursor: text;
 }
-.terminal .line, .terminal .response {
+
+.line, .response {
   display: flex;
   align-items: start;
 }
-.terminal .response {
+
+.response {
   color: #eeffff;
   gap: 5px;
 }
-.terminal .prompt {
+
+.prompt {
   display: flex;
   gap: 0;
   color: #33ff00;
   margin-right: 0.5rem;
 }
-.terminal .input {
+
+.input {
   flex: 1;
   color: #eeffff;
   background: transparent;
@@ -50,23 +52,24 @@
   font-size: 1em;
   min-width: 50px;
 }
-.terminal .buttons {
+
+.buttons {
   display: flex;
   gap: 6px;
 }
-.terminal .buttons button {
+.buttons button {
   width: 12px;
   height: 12px;
   border: none;
   border-radius: 50%;
   background-color: #eeffff;
 }
-.terminal .buttons .red {
+.buttons .red {
   background-color: #ff5f56;
 }
-.terminal .buttons .yellow {
+.buttons .yellow {
   background-color: #ffbd2e;
 }
-.terminal .buttons .green {
+.buttons .green {
   background-color: #27c93f;
 }/*# sourceMappingURL=terminal.css.map */

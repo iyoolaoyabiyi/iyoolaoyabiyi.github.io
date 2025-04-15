@@ -15,9 +15,9 @@ closeBtn.addEventListener('click', () => {
 });
 openTerminalBtn.addEventListener('click', () => {
   dialog.close();
-  commandLineInput.focus();
-  document.querySelector('.terminal').classList.remove("hidden");
+  terminal.focusInput()
+  terminal.window.classList.remove("hidden");
   document.querySelector('.gui').classList.add("hidden");
-  commandLineInput.focus();
+  terminal.focusInput()
 });
 // dialog.showModal();
