@@ -78,11 +78,29 @@ const commands = {
     name: 'help',
     description: 'Display help information with a list of available commands',
     isQuery: false,
-    execute: function() {
-      let output = '<p>Available commands:</p>';
-      Object.keys(commands).forEach(key => {
-        output += `<p>${key}: ${commands[key].description}</p>`;
-      });
+    execute: function(args) {
+      const commandsList = Object.keys(commands) 
+      let output = '';
+      if (args) {
+        if (args.length === 1) {
+          const command = args[0];
+          for (let i = 0; i < commandsList.length; i++) {
+            if (command === commandsList[i]) {
+              output = `<p>${commands[command].description}</p>`;
+              break;
+            } else {
+              output = `Unknown command ${command}`;
+            }
+          }
+        } else {
+          output = `Usage: help command`;
+        }
+      } else {
+        output = '<p>Available commands:</p>';
+        commandsList.forEach(key => {
+          output += `<p>${key}: ${commands[key].description}</p>`;
+        });
+      }
       return output.trim();
     }
   }

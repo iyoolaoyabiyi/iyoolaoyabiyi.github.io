@@ -128,7 +128,7 @@ const terminal = {
           responseInput.focus();
           responseInput.addEventListener('keydown', e => {
             if (e.key === 'Enter') {
-              response = responseInput.value;
+              const response = responseInput.value;
               terminal.needResponse = false;
               switch (response.toLowerCase()) {
                 case 'yes':
@@ -147,7 +147,7 @@ const terminal = {
           })
         });
       case this.commands.help.name:
-        return commandObj.execute();
+        return commandObj.execute(args);
       default: 
         return `command not found: ${command}`;
     }
