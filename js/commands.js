@@ -1,3 +1,5 @@
+import FILESYSTEM from "./configs/filesystem.js";
+
 const commands = {
   echo: {
     name: 'echo',
@@ -110,3 +112,6 @@ function getDirObj(currentPath, path, fileSystem) {
 
   return { dirObj: dirObj, clearedPath: clearedPath };
 }
+
+export default commands;
+export {getDirObj};

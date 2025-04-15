@@ -1,3 +1,5 @@
+import commands from './commands.js';
+
 // Terminal Object
 const terminal = {
   // options
@@ -10,9 +12,6 @@ const terminal = {
   window: document.getElementById('terminalWindow'),
   openGuiBtn: document.getElementById('openGuiBtn'),
   _commandLine: document.getElementById('commandLine'),
-  // get body() {
-  //   return document.getElementById('terminal');
-  // },
   body: {
     get element() {
       return document.getElementById('terminal')
@@ -153,13 +152,9 @@ const terminal = {
         let response = this.executeCommand(command, args);
         if (response) this.body.addResponse(response);
       }
-      if (!terminal.needResponse) body.addCommandLine();
+      if (!terminal.needResponse) this.body.addCommandLine();
     }
   }
 }
 
-terminal.addOptions()
-terminal.body.element.addEventListener('click', terminal.focusInput.bind(terminal));
-terminal.commandLine.querySelector('input').addEventListener('keydown', terminal.processPrompt.bind(terminal));
-// commandLineInput.focus();
-terminal.openGuiBtn.addEventListener('click', terminal.openGUI.bind(terminal) );
+export default terminal;

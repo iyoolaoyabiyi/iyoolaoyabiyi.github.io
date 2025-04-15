@@ -85,3 +85,5 @@ const FILESYSTEM = {
     },
   }
 }
+
+export default FILESYSTEM;

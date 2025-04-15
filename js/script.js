@@ -1,3 +1,5 @@
+import terminal from './terminal.js';
+
 // DOM
 // const openBtn = document.getElementById('openModalBtn);
 const closeBtn = document.getElementById('closeModal');
@@ -21,3 +23,9 @@ openTerminalBtn.addEventListener('click', () => {
   terminal.focusInput()
 });
 // dialog.showModal();
+
+terminal.addOptions()
+terminal.body.element.addEventListener('click', terminal.focusInput.bind(terminal));
+terminal.commandLine.querySelector('input').addEventListener('keydown', terminal.processPrompt.bind(terminal));
+// commandLineInput.focus();
+terminal.openGuiBtn.addEventListener('click', terminal.openGUI.bind(terminal) );
