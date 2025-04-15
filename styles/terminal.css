@@ -5,16 +5,34 @@
   overflow: hidden;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
-
-.terminal-header {
+.terminal-window .terminal-header {
   background-color: #333333;
   padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
-.terminal-body {
+.terminal-window .terminal-header .buttons {
+  display: flex;
+  gap: 6px;
+}
+.terminal-window .terminal-header .buttons button {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background-color: #eeffff;
+}
+.terminal-window .terminal-header .buttons .red {
+  background-color: #ff5f56;
+}
+.terminal-window .terminal-header .buttons .yellow {
+  background-color: #ffbd2e;
+}
+.terminal-window .terminal-header .buttons .green {
+  background-color: #27c93f;
+}
+.terminal-window .terminal-body {
   background-color: #001010;
   background-image: linear-gradient(135deg, #1c1c1c, #000000, #1c1c1c);
   padding: 1rem;
@@ -24,25 +42,19 @@
   color: #001010;
   cursor: text;
 }
-
-.line, .response {
+.terminal-window .terminal-body #terminalIntro {
+  color: #eeffff;
+  margin-bottom: 10px;
+}
+.terminal-window .terminal-body .line, .terminal-window .terminal-body .response {
   display: flex;
   align-items: start;
 }
-
-.response {
+.terminal-window .terminal-body .response {
   color: #eeffff;
   gap: 5px;
 }
-
-.prompt {
-  display: flex;
-  gap: 0;
-  color: #33ff00;
-  margin-right: 0.5rem;
-}
-
-.input {
+.terminal-window .terminal-body .input {
   flex: 1;
   color: #eeffff;
   background: transparent;
@@ -52,24 +64,13 @@
   font-size: 1em;
   min-width: 50px;
 }
-
-.buttons {
+.terminal-window .prompt {
   display: flex;
-  gap: 6px;
+  gap: 0;
+  color: #33ff00;
+  margin-right: 0.5rem;
 }
-.buttons button {
-  width: 12px;
-  height: 12px;
-  border: none;
-  border-radius: 50%;
-  background-color: #eeffff;
-}
-.buttons .red {
-  background-color: #ff5f56;
-}
-.buttons .yellow {
-  background-color: #ffbd2e;
-}
-.buttons .green {
-  background-color: #27c93f;
+
+.text-color {
+  color: #eeffff;
 }/*# sourceMappingURL=terminal.css.map */

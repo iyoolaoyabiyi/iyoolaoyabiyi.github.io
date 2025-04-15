@@ -73,6 +73,18 @@ const commands = {
       exitFunction();
       return null;
     }
+  },
+  help: {
+    name: 'help',
+    description: 'Display help information with a list of available commands',
+    isQuery: false,
+    execute: function() {
+      let output = '<p>Available commands:</p>';
+      Object.keys(commands).forEach(key => {
+        output += `<p>${key}: ${commands[key].description}</p>`;
+      });
+      return output.trim();
+    }
   }
 }
 
@@ -109,7 +121,6 @@ function getDirObj(currentPath, path, fileSystem) {
       return { dirObj: null, clearedPath: clearedPath };
     }
   }
-
   return { dirObj: dirObj, clearedPath: clearedPath };
 }
 

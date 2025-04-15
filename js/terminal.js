@@ -7,6 +7,7 @@ const terminal = {
   hostname: 'IyosWebServer',
   currentPath: '~',
   needResponse: false,
+  firstInstance: true,
   commands: commands,
   // DOM
   window: document.getElementById('terminalWindow'),
@@ -18,8 +19,11 @@ const terminal = {
     },
     addResponse(response, isPrompt = false) {
       const responseLine = document.createElement('div');
-      responseLine.classList.add('response');
-      if (isPrompt) responseLine.id = 'responseLine';
+      responseLine.classList.add('text-color');
+      if (isPrompt) {
+        responseLine.classList.add('response');
+        responseLine.id = 'responseLine';
+      }
       responseLine.innerHTML =`
         <p class="response-text">${response}</p>
         ${isPrompt ? '<input type="text" class="input" />' : ''}
@@ -30,6 +34,10 @@ const terminal = {
     addCommandLine() {
       const commandLine = document.createElement('div');
       let commandLineInput = null;
+      if (terminal.firstInstance) {
+        document.getElementById('terminalIntro').classList.add('hidden');
+        terminal.firstInstance = false;
+      }
       commandLine.classList.add('line');
       commandLine.id = 'commandLine';
       commandLine.innerHTML = `
@@ -138,6 +146,8 @@ const terminal = {
             }
           })
         });
+      case this.commands.help.name:
+        return commandObj.execute();
       default: 
         return `command not found: ${command}`;
     }

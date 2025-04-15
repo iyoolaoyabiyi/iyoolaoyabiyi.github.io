@@ -6,59 +6,67 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
-}
-.terminal-header {
-  background-color: $dark-grey;
-  padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.terminal-body {
-  background-color: $foreground;
-  background-image: linear-gradient(135deg, #1c1c1c, #000000, #1c1c1c);
-  padding: 1rem;
-  height: 400px;
-  max-height: 400px;
-  overflow-y: scroll;
-  color: $foreground;
-  cursor: text;
-}
-.line, .response {
-  display: flex;
-  align-items: start;
-}
-.response {
-  color: $background;
-  gap: 5px;
-}
-.prompt {
-  display: flex;
-  gap: 0;
-  color: $terminal-text;
-  margin-right: 0.5rem;
-}
-.input {
-  flex: 1;
-  color: $background;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-family: inherit;
-  font-size: 1em;
-  min-width: 50px;
-}
-.buttons {
-  display: flex;
-  gap: 6px;
-  button {
-    width: 12px;
-    height: 12px;
-    border: none;
-    border-radius: 50%;
-    background-color: $background;
+  .terminal-header {
+    background-color: $dark-grey;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .buttons {
+      display: flex;
+      gap: 6px;
+      button {
+        width: 12px;
+        height: 12px;
+        border: none;
+        border-radius: 50%;
+        background-color: $background;
+      }
+      .red { background-color: #ff5f56; }
+      .yellow { background-color: #ffbd2e; }
+      .green { background-color: #27c93f; }
+    }
   }
-  .red { background-color: #ff5f56; }
-  .yellow { background-color: #ffbd2e; }
-  .green { background-color: #27c93f; }
+  .terminal-body {
+    background-color: $foreground;
+    background-image: linear-gradient(135deg, #1c1c1c, #000000, #1c1c1c);
+    padding: 1rem;
+    height: 400px;
+    max-height: 400px;
+    overflow-y: scroll;
+    color: $foreground;
+    cursor: text;
+    #terminalIntro {
+      color: $background;
+      margin-bottom: 10px;
+    }
+    .line, .response {
+      display: flex;
+      align-items: start;
+    }
+    .response {
+      color: $background;
+      gap: 5px;
+    }
+    .input {
+      flex: 1;
+      color: $background;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 1em;
+      min-width: 50px;
+    }
+  }
+  .prompt {
+    display: flex;
+    gap: 0;
+    color: $terminal-text;
+    margin-right: 0.5rem;
+  }
+}
+
+.text-color {
+  color: $background;
 }

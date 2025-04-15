@@ -11,7 +11,6 @@
 </head>
 <body>
   <!-- Terminal -->
-  <!-- <div class="terminal-container"> -->
   <div class="terminal-window" id="terminalWindow">
     <div class="terminal-header">
       <div class="buttons">
@@ -29,6 +28,10 @@
       <button class="btn" id="openGuiBtn">GUI</button>
     </div>
     <div class="terminal-body" id="terminal">
+      <div id="terminalIntro">
+        <p>To see the list of commands, type 'help'. .</p>
+        <p>The terminal is case-sensitives and commands are lowercase</p>
+      </div>
       <div class="line" id="commandLine">
         <p class="prompt">
           <span data-type="username">user</span>
@@ -42,7 +45,6 @@
       </div>
     </div>
   </div>
-  <!-- </div> -->
   <!-- GUI -->
   <div class="gui hidden">
     <header class="gui-header">
