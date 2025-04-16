@@ -96,7 +96,7 @@ const terminal = {
   },
   openGUI() {
     this.window.classList.add("hidden");
-    document.querySelector('.gui').classList.remove("hidden");
+    document.querySelector('.gui-window').classList.remove("hidden");
   },
   focusInput() {
     if (this.needResponse) {

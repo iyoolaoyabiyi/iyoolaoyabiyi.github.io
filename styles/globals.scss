@@ -13,15 +13,14 @@ body {
   color: $foreground;
 }
 
-#root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100dvh;
-  padding: 10px;
-}
+// #root {
+//   display: flex;
+//   min-height: 100dvh;
+//   justify-content: center;
+  // align-items: center;
+// }
 
-p {
+p, h1 {
   margin: 0;
   padding: 0;
 }

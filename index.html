@@ -3,52 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ioo ::  Iyola Ola Oyabiyi</title>
+  <title>ioo ::  Iyo Ola Oyabiyi</title>
 
   <link rel="stylesheet" href="styles/globals.css">
 </head>
 <body>
   <main id="root">
     <!-- Terminal -->
-    <div class="terminal-window" id="terminalWindow">
-      <div class="terminal-header">
-        <div class="buttons">
-          <button class="red"></button>
-          <button class="yellow"></button>
-          <button class="green"></button>
-        </div>
-        <p class="prompt">
-          <span data-type="username">user</span>
-          @
-          <span data-type="hostname">IyosWebServer</span>
-          : 
-          <span data-type="path">~</span>
-        </p>
-        <button class="btn" id="openGuiBtn">GUI</button>
-      </div>
-      <div class="terminal-body" id="terminal">
-        <div id="terminalIntro">
-          <p>To see the list of commands, type 'help'. .</p>
-          <p>The terminal is case-sensitives and commands are lowercase</p>
-        </div>
-        <div class="line" id="commandLine">
+     <div class="terminal-window" id="terminalWindow">
+      <div class="terminal-container">
+        <div class="terminal-header">
+          <div class="buttons">
+            <button class="red"></button>
+            <button class="yellow"></button>
+            <button class="green"></button>
+          </div>
           <p class="prompt">
             <span data-type="username">user</span>
             @
             <span data-type="hostname">IyosWebServer</span>
-            :
+            : 
             <span data-type="path">~</span>
-            $
           </p>
-          <input class="input" type="text" autofocus />
+          <button class="btn" id="openGuiBtn">GUI</button>
+        </div>
+        <div class="terminal-body" id="terminal">
+          <div id="terminalIntro">
+            <p>To see the list of commands, type 'help'. .</p>
+            <p>The terminal is case-sensitives and commands are lowercase</p>
+          </div>
+          <div class="line" id="commandLine">
+            <p class="prompt">
+              <span data-type="username">user</span>
+              @
+              <span data-type="hostname">IyosWebServer</span>
+              :
+              <span data-type="path">~</span>
+              $
+            </p>
+            <input class="input" type="text" autofocus />
+          </div>
         </div>
       </div>
     </div>
+    </main>
     <!-- GUI -->
-    <div class="gui hidden" id="guiWindow">
+    <div class="gui-window hidden" id="guiWindow">
       <header class="gui-header">
+        <h1>IOO</h1>
+        <nav class="mobile-nav">
+          <div class="nav-icon">
+            <div class="nav-icon-line"></div>
+            <div class="nav-icon-line"></div>
+          </div>
+        </nav>
         <nav class="desktop-nav">
-          <h1>IOO</h1>
           <ul>
             <li><a href="#portfolio">My Portfolio</a></li>
             <li><a href="#contact">Contact Me</a></li>
@@ -58,7 +67,6 @@
             <button class="btn" id="openTerminalBtn">Use Terminal</button>
           </div>
         </nav>
-        
       </header>
     </div>
     <!-- Modals -->

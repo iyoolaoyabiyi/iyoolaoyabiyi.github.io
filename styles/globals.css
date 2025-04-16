@@ -1,38 +1,44 @@
 .terminal-window {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+.terminal-window .terminal-container {
   width: clamp(200px, 100%, 800px);
   margin: 20px auto;
   border-radius: 8px;
   overflow: hidden;
+  align-self: center;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
-.terminal-window .terminal-header {
+.terminal-window .terminal-container .terminal-header {
   background-color: #333333;
   padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.terminal-window .terminal-header .buttons {
+.terminal-window .terminal-container .terminal-header .buttons {
   display: flex;
   gap: 6px;
 }
-.terminal-window .terminal-header .buttons button {
+.terminal-window .terminal-container .terminal-header .buttons button {
   width: 12px;
   height: 12px;
   border: none;
   border-radius: 50%;
   background-color: #eeffff;
 }
-.terminal-window .terminal-header .buttons .red {
+.terminal-window .terminal-container .terminal-header .buttons .red {
   background-color: #ff5f56;
 }
-.terminal-window .terminal-header .buttons .yellow {
+.terminal-window .terminal-container .terminal-header .buttons .yellow {
   background-color: #ffbd2e;
 }
-.terminal-window .terminal-header .buttons .green {
+.terminal-window .terminal-container .terminal-header .buttons .green {
   background-color: #27c93f;
 }
-.terminal-window .terminal-body {
+.terminal-window .terminal-container .terminal-body {
   background-color: #001010;
   background-image: linear-gradient(135deg, #1c1c1c, #000000, #1c1c1c);
   padding: 1rem;
@@ -42,19 +48,19 @@
   color: #001010;
   cursor: text;
 }
-.terminal-window .terminal-body #terminalIntro {
+.terminal-window .terminal-container .terminal-body #terminalIntro {
   color: #eeffff;
   margin-bottom: 10px;
 }
-.terminal-window .terminal-body .line, .terminal-window .terminal-body .response {
+.terminal-window .terminal-container .terminal-body .line, .terminal-window .terminal-container .terminal-body .response {
   display: flex;
   align-items: start;
 }
-.terminal-window .terminal-body .response {
+.terminal-window .terminal-container .terminal-body .response {
   color: #eeffff;
   gap: 5px;
 }
-.terminal-window .terminal-body .input {
+.terminal-window .terminal-container .terminal-body .input {
   flex: 1;
   color: #eeffff;
   background: transparent;
@@ -64,7 +70,7 @@
   font-size: 1em;
   min-width: 50px;
 }
-.terminal-window .prompt {
+.terminal-window .terminal-container .prompt {
   display: flex;
   gap: 0;
   color: #33ff00;
@@ -75,61 +81,20 @@
   color: #eeffff;
 }
 
-.gui {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  min-height: 100dvh;
-}
-.gui .gui-header {
-  width: clamp(100px, 100%, 800px);
-  margin: 1rem auto;
-  padding: 1rem 2rem;
-  background-color: #333333;
-  color: #eeffff;
-  border: 1px solid #005f5f;
-  border-radius: 10px;
-}
-.gui .gui-header nav {
-  display: flex;
+.gui-window .gui-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   justify-content: space-between;
-  align-items: center;
-  gap: 4rem;
 }
-.gui .gui-header nav h1 {
-  margin: 0;
-  color: #33ff00;
-}
-.gui .gui-header nav ul {
+.gui-window .gui-header .mobile-nav {
   display: flex;
-  list-style: none;
-  gap: 1rem;
-  padding: 0;
-  margin: 0;
+  flex-flow: row nowrap;
+  margin: 40px;
 }
-.gui .gui-header nav ul li a {
-  color: #eeffff;
-  text-decoration: none;
-}
-.gui .gui-header nav ul li a:hover {
-  text-decoration: underline;
+.gui-window .gui-header .desktop-nav {
+  display: none;
 }
 
-@media (max-width: 800px) {
-  .gui .gui-header {
-    border-radius: 0;
-    margin: 0;
-  }
-}
-@media (max-width: 600px) {
-  .gui .gui-header {
-    border-radius: 0;
-    margin: 0;
-  }
-  .gui .gui-header nav {
-    flex-flow: column nowrap;
-  }
-}
 * {
   box-sizing: border-box;
 }
@@ -141,15 +106,7 @@ body {
   color: #001010;
 }
 
-#root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100dvh;
-  padding: 10px;
-}
-
-p {
+p, h1 {
   margin: 0;
   padding: 0;
 }
