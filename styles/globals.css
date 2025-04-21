@@ -1,3 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #eeffff;
+  margin: 0;
+  font-family: monospace;
+  color: #001010;
+}
+
+p, h1 {
+  margin: 0;
+  padding: 0;
+}
+
+dialog {
+  border: none;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+dialog .modal-close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
 .terminal-window {
   display: flex;
   justify-content: center;
@@ -18,25 +61,45 @@
   align-items: center;
   justify-content: space-between;
 }
-.terminal-window .terminal-container .terminal-header .buttons {
+.terminal-window .terminal-container .terminal-header .deco-navs {
   display: flex;
   gap: 6px;
 }
-.terminal-window .terminal-container .terminal-header .buttons button {
+.terminal-window .terminal-container .terminal-header .deco-navs div {
   width: 12px;
   height: 12px;
   border: none;
   border-radius: 50%;
   background-color: #eeffff;
 }
-.terminal-window .terminal-container .terminal-header .buttons .red {
+.terminal-window .terminal-container .terminal-header .deco-navs .red {
   background-color: #ff5f56;
 }
-.terminal-window .terminal-container .terminal-header .buttons .yellow {
+.terminal-window .terminal-container .terminal-header .deco-navs .yellow {
   background-color: #ffbd2e;
 }
-.terminal-window .terminal-container .terminal-header .buttons .green {
+.terminal-window .terminal-container .terminal-header .deco-navs .green {
   background-color: #27c93f;
+}
+.terminal-window .terminal-container .terminal-header button {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 10px;
+  background-color: #33ff00;
+  color: #001010;
+  border-radius: 5px;
+}
+.terminal-window .terminal-container .terminal-header button:hover {
+  background-color: #001010;
+  color: #33ff00;
+}
+.terminal-window .terminal-container .terminal-header button:active {
+  background-color: #00ffff;
+  color: #001010;
+}
+.terminal-window .terminal-container .terminal-header button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #005f5f;
 }
 .terminal-window .terminal-container .terminal-body {
   background-color: #001010;
@@ -82,79 +145,105 @@
 }
 
 .gui-window .gui-header {
+  color: #eeffff;
   display: grid;
+  grid-template-areas: "logo icon" "nav nav";
   grid-template-columns: 1fr 1fr;
-  justify-content: space-between;
 }
-.gui-window .gui-header .mobile-nav {
+.gui-window .gui-header .header-logo {
+  grid-area: logo;
   display: flex;
-  flex-flow: row nowrap;
-  margin: 40px;
+  align-items: center;
+  background-color: #005f5f;
+  padding: 10px;
+  margin: 10px 0 0 10px;
+  border-radius: 10px 0 0 10px;
 }
-.gui-window .gui-header .desktop-nav {
-  display: none;
+.gui-window .gui-header .header-icon {
+  grid-area: icon;
+  background-color: #005f5f;
+  padding: 10px;
+  margin: 10px 10px 0 0;
+  border-radius: 0 10px 10px 0;
 }
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #eeffff;
-  margin: 0;
-  font-family: monospace;
-  color: #001010;
-}
-
-p, h1 {
-  margin: 0;
-  padding: 0;
-}
-
-.btn {
-  background-color: #33ff00;
-  color: #001010;
-  border: none;
-  padding: 0.5rem 1rem;
+.gui-window .gui-header .header-icon .nav-icon {
+  display: flex;
+  position: relative;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #eeffff;
+  max-width: 45px;
+  height: 35px;
+  padding: 3px;
+  margin-left: auto;
   border-radius: 5px;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-.btn:hover {
+.gui-window .gui-header .header-icon .nav-icon:hover {
+  border-width: 2px;
+}
+.gui-window .gui-header .header-icon .nav-icon .nav-icon-line {
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background-color: #eeffff;
+  transition: all 0.3s ease-in-out;
+}
+.gui-window .gui-header .header-icon .nav-icon .nav-icon-line:nth-child(1) {
+  transform: translateY(-5px);
+}
+.gui-window .gui-header .header-icon .nav-icon .nav-icon-line:nth-child(2) {
+  transform: translateY(5px);
+}
+.gui-window .gui-header .header-nav {
+  display: flex;
+  visibility: hidden;
+  grid-area: nav;
+  background: #005f5f;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+.gui-window .gui-header .header-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.gui-window .gui-header .header-nav ul li a {
+  color: #eeffff;
+}
+.gui-window .gui-header .header-nav ul li a:hover {
+  text-decoration: none;
+  color: #00ffff;
+}
+.gui-window .gui-header .header-nav .nav-buttons .btn {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 10px;
+  background-color: #eeffff;
+  color: #005f5f;
+  border-radius: 5px;
+}
+.gui-window .gui-header .header-nav .nav-buttons .btn:hover {
+  background-color: #005f5f;
+  color: #eeffff;
+}
+.gui-window .gui-header .header-nav .nav-buttons .btn:active {
   background-color: #00ffff;
   color: #001010;
 }
-.btn:active {
-  background-color: #005f5f;
-  color: #33ff00;
-}
-.btn:focus {
+.gui-window .gui-header .header-nav .nav-buttons .btn:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #00ffff;
+  box-shadow: 0 0 0 2px #005f5f;
 }
-
-dialog {
-  border: none;
-  border-radius: 8px;
-  padding: 2rem;
-  max-width: 500px;
-  width: 90%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.8);
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
-}
-dialog .modal-close {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-}
-
-.hidden {
-  display: none !important;
+.gui-window .gui-header .header-nav .nav-buttons .btn:hover {
+  background-color: #00ffff;
+  color: #001010;
 }/*# sourceMappingURL=globals.css.map */

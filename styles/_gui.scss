@@ -1,84 +1,104 @@
-@use "variables";
+@use "mixins";
+
+$header-space: 10px;
+$header-radius: 10px;
+$header-bg: $dark-tint;
+$header-color: $background;
+$header-transition: all 0.3s ease-in-out;
 
 // GUI
 .gui-window {
-  // display: flex;
-  // justify-content: stretch;
   .gui-header {
+    color: $header-color;
     display: grid;
+    grid-template-areas: 
+      'logo icon'
+       'nav nav'
+    ;
     grid-template-columns: 1fr 1fr;
-    justify-content: space-between;
-    .mobile-nav {
+    .header-logo {
+      grid-area: logo;
       display: flex;
-      flex-flow: row nowrap;
-      margin: 40px;
+      align-items: center;
+      background-color: $header-bg;
+      padding: $header-space;
+      margin: $header-space 0 0 $header-space;
+      border-radius: $header-radius 0 0 $header-radius;
     }
-    .desktop-nav {
-      display: none;
+    .header-icon {
+      grid-area: icon;
+      background-color: $header-bg;
+      padding: $header-space;
+      margin: $header-space $header-space 0 0;
+      border-radius: 0 $header-radius $header-radius 0;
+      .nav-icon {
+        display: flex;
+        position: relative;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid $header-color;
+        max-width: 45px;
+        height: 35px;
+        padding: 3px;
+        margin-left: auto;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        &:hover {
+          border-width: 2px;
+        }
+        .nav-icon-line {
+          position: absolute;
+          width: 30px;
+          height: 3px;
+          background-color: $header-color;
+          transition: all 0.3s ease-in-out;
+        }
+        .nav-icon-line:nth-child(1) {
+          transform: translateY(-5px);
+        }
+        .nav-icon-line:nth-child(2) {
+          transform: translateY(5px);
+        }
+      }
+    }
+    .header-nav {
+      display: flex;
+      visibility: hidden;
+      grid-area: nav;
+      background: $header-bg;
+      margin: $header-space;
+      padding: $header-space;
+      border-radius: $header-radius;
+      transition: $header-transition;
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        li {
+          a {
+            color: $header-color;
+            &:hover {
+              text-decoration: none;
+              color: $light-tint;
+            }
+          }
+        }
+      }
+      .nav-buttons {
+        .btn {
+          @include mixins.btn($header-color, $header-bg);
+          &:hover {
+            background-color: $light-tint;
+            color: $foreground;
+          }
+        }
+      }
     }
   }
 }
-
-// .gui {
-  // display: flex;
-  // flex-direction: column;
-  // position: relative;
-  // min-height: 100dvh;
-  // .gui-header {
-    // width: clamp(100px, 100%, 800px);
-    // width: 100%;
-    // margin: 1rem auto;
-//     padding: 1rem 2rem;
-//     background-color: $dark-grey;
-//     color: $background;
-//     border: 1px solid $dark-tint;
-//     border-radius: 10px;
-//     nav {
-//       display: flex;
-//       justify-content: space-between;
-//       align-items: center;
-//       gap: 4rem;
-//       h1 {
-//         margin: 0;
-//         color: $terminal-text;
-//       }
-//       ul {
-//         display: flex;
-//         list-style: none;
-//         gap: 1rem;
-//         padding: 0;
-//         margin: 0;
-//         li {
-//           a {
-//             color: $background;
-//             text-decoration: none;
-//             &:hover {
-//               text-decoration: underline;
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-
-// @media (max-width: 800px) {
-//   .gui {
-//      .gui-header {
-//       border-radius: 0;
-//       margin: 0;
-//     }
-//   }
-// }
-
-// @media (max-width: 600px) {
-//   .gui {
-//      .gui-header {
-//       border-radius: 0;
-//       margin: 0;
-//       nav {
-//         flex-flow: column nowrap;
-//       }
-//     }
-//   }
-// }

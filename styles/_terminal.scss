@@ -1,7 +1,8 @@
-@use "variables";
+@use "mixins";
 
 .terminal-window {
   display: flex;
+  // display: none;
   justify-content: center;
   // align-items: center;
   padding: 1rem;
@@ -18,10 +19,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      .buttons {
+      .deco-navs {
         display: flex;
         gap: 6px;
-        button {
+        div {
           width: 12px;
           height: 12px;
           border: none;
@@ -31,6 +32,9 @@
         .red { background-color: #ff5f56; }
         .yellow { background-color: #ffbd2e; }
         .green { background-color: #27c93f; }
+      }
+      button {
+        @include mixins.btn($terminal-text, $foreground);
       }
     }
     .terminal-body {

@@ -1,0 +1,22 @@
+@import "variables";
+
+@mixin btn($bg: $background, $color: $foreground) {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 10px;
+  background-color: $bg;
+  color: $color;
+  border-radius: 5px;
+  &:hover {
+    background-color: $color;
+    color: $bg;
+  }
+  &:active {
+    background-color: $light-tint;
+    color: $foreground;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px $dark-tint;
+  }
+}

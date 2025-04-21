@@ -1,6 +1,4 @@
 @import "variables";
-@import 'terminal';
-@import 'gui';
 
 * {
   box-sizing: border-box;
@@ -13,37 +11,9 @@ body {
   color: $foreground;
 }
 
-// #root {
-//   display: flex;
-//   min-height: 100dvh;
-//   justify-content: center;
-  // align-items: center;
-// }
-
 p, h1 {
   margin: 0;
   padding: 0;
-}
-
-.btn {
-  background-color: $terminal-text;
-  color: $foreground;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    background-color: $light-tint;
-    color: $foreground;
-  }
-  &:active {
-    background-color: $dark-tint;
-    color: $terminal-text;
-  }
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px $light-tint;
-  }
 }
 
 // Modal
@@ -72,3 +42,6 @@ dialog {
 .hidden {
   display: none !important;
 }
+
+@import 'terminal';
+@import 'gui';

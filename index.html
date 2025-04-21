@@ -13,10 +13,10 @@
      <div class="terminal-window" id="terminalWindow">
       <div class="terminal-container">
         <div class="terminal-header">
-          <div class="buttons">
-            <button class="red"></button>
-            <button class="yellow"></button>
-            <button class="green"></button>
+          <div class="deco-navs">
+            <div class="red"></div>
+            <div class="yellow"></div>
+            <div class="green"></div>
           </div>
           <p class="prompt">
             <span data-type="username">user</span>
@@ -41,7 +41,7 @@
               <span data-type="path">~</span>
               $
             </p>
-            <input class="input" type="text" autofocus />
+            <input class="input" type="text" />
           </div>
         </div>
       </div>
@@ -49,20 +49,21 @@
     <!-- GUI -->
     <div class="gui-window hidden" id="guiWindow">
       <header class="gui-header">
-        <h1>IOO</h1>
-        <nav class="mobile-nav">
+        <div class="header-logo">
+          <h1>IOO</h1>
+        </div>
+        <div class="header-icon">
           <div class="nav-icon">
             <div class="nav-icon-line"></div>
             <div class="nav-icon-line"></div>
           </div>
-        </nav>
-        <nav class="desktop-nav">
+        </div>
+        <nav class="header-nav">
           <ul>
             <li><a href="#portfolio">My Portfolio</a></li>
             <li><a href="#contact">Contact Me</a></li>
           </ul>
-          <div>
-            <button class="btn">Hire me</button>
+          <div class="nav-buttons">
             <button class="btn" id="openTerminalBtn">Use Terminal</button>
           </div>
         </nav>
