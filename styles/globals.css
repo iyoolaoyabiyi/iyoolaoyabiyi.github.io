@@ -43,6 +43,7 @@ dialog .modal-close {
 
 .terminal-window {
   display: flex;
+  display: none;
   justify-content: center;
   padding: 1rem;
 }
@@ -144,27 +145,30 @@ dialog .modal-close {
   color: #eeffff;
 }
 
+.gui-window {
+  min-height: 400vh;
+}
 .gui-window .gui-header {
+  background-color: #005f5f;
   color: #eeffff;
-  display: grid;
-  grid-template-areas: "logo icon" "nav nav";
-  grid-template-columns: 1fr 1fr;
+  border-radius: 10px;
+  position: fixed;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 10px;
 }
 .gui-window .gui-header .header-logo {
-  grid-area: logo;
   display: flex;
-  align-items: center;
-  background-color: #005f5f;
+  margin: auto;
   padding: 10px;
-  margin: 10px 0 0 10px;
-  border-radius: 10px 0 0 10px;
 }
 .gui-window .gui-header .header-icon {
-  grid-area: icon;
-  background-color: #005f5f;
+  display: none;
   padding: 10px;
-  margin: 10px 10px 0 0;
-  border-radius: 0 10px 10px 0;
+  position: absolute;
+  right: 0;
 }
 .gui-window .gui-header .header-icon .nav-icon {
   display: flex;
@@ -172,9 +176,9 @@ dialog .modal-close {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  border: 3px solid #eeffff;
-  max-width: 45px;
-  height: 35px;
+  border: 2px solid #eeffff;
+  width: 30px;
+  height: 30px;
   padding: 3px;
   margin-left: auto;
   border-radius: 5px;
@@ -186,8 +190,8 @@ dialog .modal-close {
 }
 .gui-window .gui-header .header-icon .nav-icon .nav-icon-line {
   position: absolute;
-  width: 30px;
-  height: 3px;
+  width: 20px;
+  height: 2px;
   background-color: #eeffff;
   transition: all 0.3s ease-in-out;
 }
@@ -198,13 +202,7 @@ dialog .modal-close {
   transform: translateY(5px);
 }
 .gui-window .gui-header .header-nav {
-  display: flex;
-  visibility: hidden;
-  grid-area: nav;
-  background: #005f5f;
-  margin: 10px;
   padding: 10px;
-  border-radius: 10px;
   transition: all 0.3s ease-in-out;
 }
 .gui-window .gui-header .header-nav ul {
@@ -212,7 +210,8 @@ dialog .modal-close {
   margin: 0;
   padding: 0;
   display: flex;
-  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -222,6 +221,9 @@ dialog .modal-close {
 .gui-window .gui-header .header-nav ul li a:hover {
   text-decoration: none;
   color: #00ffff;
+}
+.gui-window .gui-header .header-nav .nav-buttons {
+  text-align: center;
 }
 .gui-window .gui-header .header-nav .nav-buttons .btn {
   cursor: pointer;

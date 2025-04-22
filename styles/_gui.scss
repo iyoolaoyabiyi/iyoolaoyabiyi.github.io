@@ -8,38 +8,53 @@ $header-transition: all 0.3s ease-in-out;
 
 // GUI
 .gui-window {
+  min-height: 400vh;
   .gui-header {
+    background-color: $header-bg;
     color: $header-color;
-    display: grid;
-    grid-template-areas: 
-      'logo icon'
-       'nav nav'
-    ;
-    grid-template-columns: 1fr 1fr;
+    border-radius: $header-radius;
+    position: fixed;
+    right: 0;
+    left: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 10px;
+    // grid-template-areas: 
+    //   'logo icon'
+    //    'nav nav'
+    // ;
+    // grid-template-columns: 1fr 1fr;
     .header-logo {
-      grid-area: logo;
       display: flex;
-      align-items: center;
-      background-color: $header-bg;
+      margin: auto;
+      // align-self: center;
+      // justify-content: center;
       padding: $header-space;
-      margin: $header-space 0 0 $header-space;
-      border-radius: $header-radius 0 0 $header-radius;
+      // grid-area: logo;
+      // align-items: center;
+      // background-color: $header-bg;
+      // margin: $header-space 0 0 $header-space;
+      // border-radius: $header-radius $header-radius 0 0;
     }
     .header-icon {
-      grid-area: icon;
-      background-color: $header-bg;
+      display: none;
       padding: $header-space;
-      margin: $header-space $header-space 0 0;
-      border-radius: 0 $header-radius $header-radius 0;
+      position: absolute;
+      right: 0;
+      // grid-area: icon;
+      // display: none;
+      // background-color: $header-bg;
+      // margin: $header-space $header-space 0 0;
+      // border-radius: 0 $header-radius $header-radius 0;
       .nav-icon {
         display: flex;
         position: relative;
         flex-flow: column nowrap;
         align-items: center;
         justify-content: center;
-        border: 3px solid $header-color;
-        max-width: 45px;
-        height: 35px;
+        border: 2px solid $header-color;
+        width: 30px;
+        height: 30px;
         padding: 3px;
         margin-left: auto;
         border-radius: 5px;
@@ -50,10 +65,10 @@ $header-transition: all 0.3s ease-in-out;
         }
         .nav-icon-line {
           position: absolute;
-          width: 30px;
-          height: 3px;
+          width: 20px;
+          height: 2px;
           background-color: $header-color;
-          transition: all 0.3s ease-in-out;
+          transition: $header-transition;
         }
         .nav-icon-line:nth-child(1) {
           transform: translateY(-5px);
@@ -64,22 +79,23 @@ $header-transition: all 0.3s ease-in-out;
       }
     }
     .header-nav {
-      display: flex;
-      visibility: hidden;
-      grid-area: nav;
-      background: $header-bg;
-      margin: $header-space;
+      // display: block;
       padding: $header-space;
-      border-radius: $header-radius;
       transition: $header-transition;
+      // grid-area: nav;
+      // margin: $header-space;
+      // background: $header-bg;
+      // border-radius: 0 0 $header-radius $header-radius;
       ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
         display: flex;
-        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
         gap: 1.5rem;
         margin-bottom: 2rem;
+        // flex-flow: column nowrap;
         li {
           a {
             color: $header-color;
@@ -91,6 +107,7 @@ $header-transition: all 0.3s ease-in-out;
         }
       }
       .nav-buttons {
+        text-align: center;
         .btn {
           @include mixins.btn($header-color, $header-bg);
           &:hover {
