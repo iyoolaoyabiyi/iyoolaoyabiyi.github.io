@@ -43,7 +43,6 @@ dialog .modal-close {
 
 .terminal-window {
   display: flex;
-  display: none;
   justify-content: center;
   padding: 1rem;
 }
@@ -118,7 +117,7 @@ dialog .modal-close {
 }
 .terminal-window .terminal-container .terminal-body .line, .terminal-window .terminal-container .terminal-body .response {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
 }
 .terminal-window .terminal-container .terminal-body .response {
   color: #eeffff;
@@ -146,7 +145,7 @@ dialog .modal-close {
 }
 
 .gui-window {
-  min-height: 400vh;
+  min-height: 100vh;
 }
 .gui-window .gui-header {
   background-color: #005f5f;
@@ -158,6 +157,7 @@ dialog .modal-close {
   display: flex;
   flex-flow: column nowrap;
   margin: 10px;
+  z-index: 1;
 }
 .gui-window .gui-header .header-logo {
   display: flex;
@@ -251,6 +251,40 @@ dialog .modal-close {
 .gui-window .gui-header .header-nav .nav-buttons .btn:hover {
   background-color: #00ffff;
   color: #001010;
+}
+.gui-window .about {
+  padding-top: 10rem;
+}
+.gui-window .about .intro {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.gui-window .about .intro .profile-pic-container {
+  position: relative;
+  background: #001010 url("../assets/cover.png") no-repeat center center;
+  background-size: contain;
+  width: 100%;
+  height: 200px;
+  margin-bottom: 50px;
+}
+.gui-window .about .intro .profile-pic-container img {
+  width: 80px;
+  position: absolute;
+  bottom: -40px;
+  margin-left: 10px;
+  border-radius: 50%;
+}
+.gui-window .about .intro .info-container {
+  padding: 10px;
+}
+.gui-window .about .intro .info-container .username {
+  margin-bottom: 1rem;
+}
+.gui-window .about .intro .info-container .username h3 {
+  margin: 0 0 5px 0;
 }
 
 @media (min-width: 576px) {

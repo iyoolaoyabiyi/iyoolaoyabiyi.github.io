@@ -2,9 +2,7 @@
 
 .terminal-window {
   display: flex;
-  display: none;
   justify-content: center;
-  // align-items: center;
   padding: 1rem;
   .terminal-container {
     width: clamp(200px, 100%, 800px);
@@ -52,7 +50,7 @@
       }
       .line, .response {
         display: flex;
-        align-items: start;
+        align-items: flex-start;
       }
       .response {
         color: $background;
