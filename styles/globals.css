@@ -162,6 +162,7 @@ dialog .modal-close {
 .gui-window .gui-header .header-logo {
   display: flex;
   margin: auto;
+  transition: all 0.3s ease-in-out;
   padding: 10px;
 }
 .gui-window .gui-header .header-icon {
@@ -202,6 +203,8 @@ dialog .modal-close {
   transform: translateY(5px);
 }
 .gui-window .gui-header .header-nav {
+  display: flex;
+  flex-flow: column nowrap;
   padding: 10px;
   transition: all 0.3s ease-in-out;
 }
@@ -248,4 +251,24 @@ dialog .modal-close {
 .gui-window .gui-header .header-nav .nav-buttons .btn:hover {
   background-color: #00ffff;
   color: #001010;
+}
+
+@media (min-width: 576px) {
+  .gui-window .gui-header {
+    flex-flow: row nowrap;
+    justify-content: space-between;
+  }
+  .gui-window .gui-header .header-logo {
+    margin: 0;
+  }
+  .gui-window .gui-header .header-icon {
+    display: none;
+  }
+  .gui-window .gui-header .header-nav {
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+  .gui-window .gui-header .header-nav ul {
+    margin: 0 2rem 0 0;
+  }
 }/*# sourceMappingURL=globals.css.map */

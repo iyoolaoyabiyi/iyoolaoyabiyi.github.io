@@ -27,9 +27,10 @@ $header-transition: all 0.3s ease-in-out;
     .header-logo {
       display: flex;
       margin: auto;
+      transition: $header-transition;
+      padding: $header-space;
       // align-self: center;
       // justify-content: center;
-      padding: $header-space;
       // grid-area: logo;
       // align-items: center;
       // background-color: $header-bg;
@@ -79,7 +80,8 @@ $header-transition: all 0.3s ease-in-out;
       }
     }
     .header-nav {
-      // display: block;
+      display: flex;
+      flex-flow: column nowrap;
       padding: $header-space;
       transition: $header-transition;
       // grid-area: nav;
@@ -114,6 +116,28 @@ $header-transition: all 0.3s ease-in-out;
             background-color: $light-tint;
             color: $foreground;
           }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .gui-window {
+    .gui-header {
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      .header-logo {
+        margin: 0;
+      }
+      .header-icon {
+        display: none;
+      }
+      .header-nav {
+        flex-flow: row nowrap;
+        align-items: center;
+        ul {
+          margin: 0 2rem 0 0;
         }
       }
     }

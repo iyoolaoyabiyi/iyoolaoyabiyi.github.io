@@ -14,22 +14,24 @@ const gui = {
       
     });
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 40) {
-        if (this.isMenuOpen) {
-          icon.parentElement.style.display = 'block';
-          logoContainer.style.margin = '0';
-          closeMenu();
-        } 
-      } else {
+      if (window.innerWidth < 576) {
+        if (window.scrollY > 40) {
+          if (this.isMenuOpen) {
+            icon.parentElement.style.display = 'block';
+            logoContainer.style.margin = '0';
+            closeMenu();
+          } 
+        } else {
           icon.parentElement.style.display = 'none';
           logoContainer.style.margin = 'auto';
           if (!this.isMenuOpen) {
             openMenu();
           }
         }
+      }
     });
     function openMenu() {
-      nav.style.display = 'block';
+      nav.style.display = 'flex';
       setTimeout(() => {
         nav.style.opacity = '1';
       }, 300);
