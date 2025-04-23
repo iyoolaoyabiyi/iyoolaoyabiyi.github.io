@@ -321,11 +321,7 @@ dialog .modal-close {
 }
 
 @media (min-width: 576px) {
-  .gui-window .gui-header {
-    padding: 10px;
-  }
   .gui-window .gui-header .header-container {
-    border-radius: 10px;
     flex-flow: row nowrap;
     justify-content: space-between;
   }
@@ -348,5 +344,13 @@ dialog .modal-close {
   }
   .gui-window .about .intro .profile-pic-container {
     margin-top: -60px;
+  }
+}
+@media (min-width: 600px) {
+  .gui-window .gui-header {
+    padding: 10px 0;
+  }
+  .gui-window .gui-header .header-container {
+    border-radius: 10px;
   }
 }/*# sourceMappingURL=globals.css.map */
