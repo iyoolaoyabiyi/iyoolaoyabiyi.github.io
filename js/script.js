@@ -2,20 +2,16 @@ import terminal from './terminal.js';
 import gui from './gui.js';
 
 // DOM
-// const openBtn = document.getElementById('openModalBtn);
-const closeBtn = document.getElementById('closeModal');
+const closeModalBtn = document.getElementById('closeModal');
 const dialog = document.getElementById('welcomeModal');
 const openTerminalBtn = document.getElementById('openTerminalBtn');
 
 // Modal Functionality
-// openBtn.addEventListener('click', () => {
-//   dialog.showModal();
-// });
-
-closeBtn.addEventListener('click', () => {
+closeModalBtn.addEventListener('click', () => {
   dialog.close();
-  commandLineInput.focus();
+  document.querySelector('#commandLine input').focus();
 });
+
 openTerminalBtn.addEventListener('click', () => {
   dialog.close();
   terminal.focusInput()
@@ -31,4 +27,5 @@ terminal.commandLine.querySelector('input').addEventListener('keydown', terminal
 // commandLineInput.focus();
 terminal.openGuiBtn.addEventListener('click', terminal.openGUI.bind(terminal) );
 
+dialog.showModal();
 gui.activate();

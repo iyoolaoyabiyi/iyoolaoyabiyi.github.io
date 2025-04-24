@@ -9,7 +9,7 @@ body {
   color: #001010;
 }
 
-p, h1 {
+p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
 }
@@ -18,27 +18,63 @@ img {
   max-width: 100%;
 }
 
-dialog {
+dialog#welcomeModal {
   border: none;
   border-radius: 8px;
-  padding: 2rem;
+  padding: 1rem;
   max-width: 500px;
   width: 90%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px #eeffff88;
 }
-dialog::backdrop {
+dialog#welcomeModal::backdrop {
   background-color: rgba(0, 0, 0, 0.8);
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
 }
-dialog .modal-close {
-  position: absolute;
-  top: 10px;
-  right: 20px;
+dialog#welcomeModal .modal-close {
   cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
   background: none;
   border: none;
   font-size: 1.2rem;
+}
+dialog#welcomeModal .modal-close:hover {
+  transform: scale(1.2);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 0 2px #005f5f;
+}
+dialog#welcomeModal .modal-close:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #005f5f;
+}
+dialog#welcomeModal h2 {
+  margin-bottom: 1.5rem;
+}
+dialog#welcomeModal p {
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+dialog#welcomeModal p button {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 10px;
+  background-color: #001010;
+  color: #eeffff;
+  border-radius: 5px;
+}
+dialog#welcomeModal p button:hover {
+  background-color: #eeffff;
+  color: #001010;
+}
+dialog#welcomeModal p button:active {
+  background-color: #00ffff;
+  color: #001010;
+}
+dialog#welcomeModal p button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #005f5f;
 }
 
 .hidden {

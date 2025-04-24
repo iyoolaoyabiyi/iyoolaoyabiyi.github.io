@@ -1,3 +1,4 @@
+@use 'mixins';
 @import "variables";
 
 * {
@@ -11,7 +12,7 @@ body {
   color: $foreground;
 }
 
-p, h1 {
+p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
 }
@@ -21,25 +22,44 @@ img {
 }
 
 // Modal
-dialog {
+dialog#welcomeModal {
   border: none;
   border-radius: 8px;
-  padding: 2rem;
+  padding: 1rem;
   max-width: 500px;
   width: 90%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px #{$background}88;
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
   }
   .modal-close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
     cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     background: none;
     border: none;
     font-size: 1.2rem;
+    &:hover {
+      transform: scale(1.2);
+      transition: all 0.2s ease-in-out;
+      box-shadow: 0 0 0 2px $dark-tint;
+    }
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px $dark-tint;
+    }
+  }
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+  p {
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    button {
+      @include mixins.btn($foreground, $background);
+    }
   }
 }
 

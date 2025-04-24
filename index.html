@@ -10,7 +10,7 @@
 <body>
   <main id="root">
     <!-- Terminal -->
-     <div class="terminal-window hidden" id="terminalWindow">
+     <div class="terminal-window" id="terminalWindow">
       <div class="terminal-container">
         <div class="terminal-header">
           <div class="deco-navs">
@@ -47,7 +47,7 @@
       </div>
     </div>
     <!-- GUI -->
-    <div class="gui-window" id="guiWindow">
+    <div class="gui-window hidden" id="guiWindow">
       <header class="gui-header">
         <div class="header-container">
           <div class="header-logo">
@@ -106,14 +106,14 @@
     <!-- Modals -->
     <dialog id="welcomeModal">
       <button class="modal-close" id="closeModal">X</button>
-      <h2>Welcome to my website!</h2>
-      <p>I'm Iyo,</p>
-      <p>Please note the this is a terminal based version of my website. If you're only here to check out my portfolio,</p>
-      <button style="cursor: pointer">Use the GUI version of my website</button>
-      <p>If you're up for a terminal based fun,</p>
-      <button style='cursor: pointer'>Click here </button> 
-      <p>for a list of available commands.</p>
-      Have fun!
+      <h2>Welcome to Iyo's website!</h2>
+      <p>By default, this site runs in <b>terminal mode</b>: you’ll need to type commands manually to explore.</p>
+      <p>If that’s not your thing or you’re short on time, no worries; You can <button>Use the GUI version</button></p>
+      
+      <p>But if you’re feeling curious or adventurous, you can <button>Click here for a list of available commands</button> </p>
+      
+      <p>Or simply close this message and jump right into the terminal experience.</p>
+      <p>Have fun!</p>
     </dialog>
     <script type="module" src="./js/script.js"></script>
   </main>
