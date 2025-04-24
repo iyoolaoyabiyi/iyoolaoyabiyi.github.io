@@ -1,18 +1,26 @@
+import { openTerminal } from "./script.js";
+
 const gui = {
   isMenuOpen: true,
-  activate() {
+  window: document.querySelector('.gui-window'),
+  openTerminalBtn: document.getElementById('openTerminalBtn'),
+  activateMenu() {
     const icon = document.querySelector('.nav-icon');
     const logoContainer = document.querySelector('.header-logo');
     const lines = document.querySelectorAll('.nav-icon-line');
     const nav = document.querySelector('.header-nav');
+    const openTerminalBtn = document.getElementById('openTerminalBtn');
+
+    // Menu Management
     icon.addEventListener('click', () => {
       if (!gui.isMenuOpen) {
         openMenu();
+        console.log(document.querySelectorAll('.open-gui-btn'));
       } else {
         closeMenu();
       }
-      
     });
+
     window.addEventListener('scroll', () => {
       if (window.innerWidth < 576) {
         if (window.scrollY > 40) {
@@ -30,6 +38,7 @@ const gui = {
         }
       }
     });
+
     function openMenu() {
       nav.style.display = 'flex';
       setTimeout(() => {

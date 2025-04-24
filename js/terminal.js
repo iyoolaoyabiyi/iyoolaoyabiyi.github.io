@@ -1,4 +1,5 @@
 import commands from './commands.js';
+import { openGUI } from './script.js';
 
 // Terminal Object
 const terminal = {
@@ -7,7 +8,6 @@ const terminal = {
   hostname: 'IyosWebServer',
   currentPath: '~',
   needResponse: false,
-  firstInstance: true,
   commands: commands,
   // DOM
   window: document.getElementById('terminalWindow'),
@@ -34,10 +34,6 @@ const terminal = {
     addCommandLine() {
       const commandLine = document.createElement('div');
       let commandLineInput = null;
-      if (terminal.firstInstance) {
-        document.getElementById('terminalIntro').classList.add('hidden');
-        terminal.firstInstance = false;
-      }
       commandLine.classList.add('line');
       commandLine.id = 'commandLine';
       commandLine.innerHTML = `
@@ -94,10 +90,6 @@ const terminal = {
     this.hostname = 'iyoswebserver';
     this.currentPath = '~';
   },
-  openGUI() {
-    this.window.classList.add("hidden");
-    document.querySelector('.gui-window').classList.remove("hidden");
-  },
   focusInput() {
     if (this.needResponse) {
       const responseLine = document.getElementById('responseLine');
@@ -137,7 +129,7 @@ const terminal = {
                   terminal.resetOptions();
                   terminal.addOptions();
                   this.body.addCommandLine();
-                  terminal.openGUI();
+                  openGUI();
                   break;
                 default:
                   document.querySelector('#responseLine').id = '';
