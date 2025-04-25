@@ -50,6 +50,24 @@ gui.activateMenu();
 gui.openTerminalBtn.addEventListener('click', () => {
   openTerminal();
 });
+gui.tabBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    if (!btn.classList.contains('active')) {
+      gui.tabBtns.forEach(btn => {
+        btn.classList.remove('active');
+      });
+      btn.classList.add('active');
+      gui.tabs.forEach(tab => {
+        if (btn.dataset.tabFor === tab.id) {
+          gui.tabs.forEach(tab => {
+            tab.classList.add('hidden');
+          })
+          tab.classList.remove('hidden');
+        }
+      })
+    }
+  });
+});
 
 // Helpers
 function updateUser(userData) {

@@ -1,15 +1,14 @@
-import { openTerminal } from "./script.js";
-
 const gui = {
   isMenuOpen: true,
   window: document.querySelector('.gui-window'),
   openTerminalBtn: document.getElementById('openTerminalBtn'),
+  tabBtns: document.querySelectorAll('.tabs-btns button'),
+  tabs: document.querySelectorAll('.tab'),
   activateMenu() {
     const icon = document.querySelector('.nav-icon');
     const logoContainer = document.querySelector('.header-logo');
     const lines = document.querySelectorAll('.nav-icon-line');
     const nav = document.querySelector('.header-nav');
-    const openTerminalBtn = document.getElementById('openTerminalBtn');
 
     // Menu Management
     icon.addEventListener('click', () => {

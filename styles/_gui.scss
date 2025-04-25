@@ -3,7 +3,7 @@
 $max-width: 600px;
 $padding-space: 10px;
 $header-radius: 10px;
-$header-bg: $dark-tint;
+$header-bg: $foreground;
 $header-color: $background;
 $header-transition: all 0.3s ease-in-out;
 
@@ -186,6 +186,54 @@ $header-transition: all 0.3s ease-in-out;
         p {
           margin-bottom: 5px;
           line-height: 1.5;
+        }
+      }
+    }
+  }
+  .content-tabs {
+    nav {
+      max-width: $max-width;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid $dark-grey;
+      button {
+        cursor: pointer;
+        width: 100%;
+        padding: 15px 5px;
+        border: none;
+        background: transparent;
+        &:hover {
+          background-color: $light-grey;
+          color: $foreground;
+        }
+      }
+      .active {
+        border-bottom: 4px solid $foreground;
+      }
+    }
+    .display-container {
+      max-width: $max-width;
+      margin: 0 auto;
+      padding: 1rem $padding-space;
+      .card {
+        text-decoration: none;
+        cursor: pointer;
+        .card-header {
+          margin-bottom: 1.2rem;
+        }
+        .card-body {
+          display: flex;
+          flex-flow: column nowrap;
+          gap: 1rem;
+        }
+        .card-img {
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+          img {
+            object-fit: cover;
+            max-height: 600px;
+            border-radius: 10px 10px 0 0;
+          }
         }
       }
     }

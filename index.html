@@ -10,7 +10,7 @@
 <body>
   <main id="root">
     <!-- Terminal -->
-     <div class="terminal-window" id="terminalWindow">
+     <div class="terminal-window hidden" id="terminalWindow">
       <div class="terminal-container">
         <div class="terminal-header">
           <div class="deco-navs">
@@ -47,7 +47,7 @@
       </div>
     </div>
     <!-- GUI -->
-    <div class="gui-window hidden" id="guiWindow">
+    <div class="gui-window" id="guiWindow">
       <header class="gui-header">
         <div class="header-container">
           <div class="header-logo">
@@ -61,8 +61,9 @@
           </div>
           <nav class="header-nav">
             <ul>
-              <li><a href="#portfolio">My Portfolio</a></li>
-              <li><a href="#contact">Contact Me</a></li>
+              <li><a href="#">My Portfolio</a></li>
+              <li><a href="#">My Posts</a></li>
+              <li><a href="#">Contact Me</a></li>
             </ul>
             <div class="nav-buttons">
               <button class="btn" id="openTerminalBtn">Use Terminal</button>
@@ -97,8 +98,40 @@
           </div>
           <div class="description">
             <p>Hello, I’m Iyo: a self-taught developer, builder, and lifelong tinkerer from Nigeria.</p>
-            <p>I love creating things that are useful and a little bit delightful; I enjoy building intuitive digital experiences and solving problems through code. Whether I’m writing code, crafting words, or fixing something around the house, I enjoy figuring things out and making them work better. My approach to work, and life, is thoughtful, hands-on, and always curious.</p>
+            <p>I love creating things that are useful and a little bit delightful; I enjoy building intuitive digital experiences and solving problems through code.</p>
+            <p>Whether I’m writing code, crafting words, or fixing something around the house, I enjoy figuring things out and making them work better. My approach to work, and life, is thoughtful, hands-on, and always curious.</p>
             <p>I'm all about clarity, creativity, and doing meaningful work; one project at a time.</p> 
+          </div>
+        </div>
+      </section>
+      <section class="content-tabs">
+        <nav class="tabs-btns">
+          <button class="active" data-tab-for="portfolio">portfolio</button>
+          <button data-tab-for="posts">posts</button>
+          <button data-tab-for="contact">contact</button>
+        </nav>
+        <div class="display-container">
+          <div class="tab portfolio" id="portfolio">
+            <div class="card" href="#">
+              <div class="card-header">
+                <h2>Portfolio 1</h2>
+              </div>
+              <div class="card-body">
+                <p>Project 1: A portfolio website coded with HTML, CSS, and vanilla JavaScript.</p>
+                <div class="card-img">
+                  <img src="./assets/portfolio1.png" alt="Portfolio 1">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab posts hidden" id="posts">
+            <p>Stay tuned for more updates!</p>
+          </div>
+          <div class="tab contact hidden" id="contact">
+            <h2>Contact Me</h2>
+            <p>If you want to reach out, you can find me on:</p>
+            <ul>
+              <li><a href="https://twitter.com/iyoolaoyabiyi" target="_blank">Twitter</a></li>
           </div>
         </div>
       </section>
