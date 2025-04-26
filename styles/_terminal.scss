@@ -32,7 +32,7 @@
         .green { background-color: #27c93f; }
       }
       button {
-        @include mixins.btn($terminal-text, $foreground);
+        @include mixins.btn($terminal-text, $foreground, $terminal-text);
       }
     }
     .terminal-body {

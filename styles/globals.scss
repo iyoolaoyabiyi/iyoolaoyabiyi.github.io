@@ -1,6 +1,14 @@
 @use 'mixins';
 @import "variables";
 
+$background: $white;
+$foreground: $black;
+$primary-tint: $teal;
+$secondary-tint: $cyan;
+$terminal-text: $green;
+$primary-grey: $dark-grey;
+$secondary-grey: $light-grey;
+
 * {
   box-sizing: border-box;
 }
@@ -12,9 +20,17 @@ body {
   color: $foreground;
 }
 
+button {
+  font-family: monospace;
+}
+
 p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
+}
+
+p {
+  font-size: 14px;
 }
 
 img {
@@ -44,11 +60,11 @@ dialog#welcomeModal {
     &:hover {
       transform: scale(1.2);
       transition: all 0.2s ease-in-out;
-      box-shadow: 0 0 0 2px $dark-tint;
+      box-shadow: 0 0 0 2px $secondary-tint;
     }
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 2px $dark-tint;
+      box-shadow: 0 0 0 2px $secondary-tint;
     }
   }
   h2 {
@@ -58,7 +74,7 @@ dialog#welcomeModal {
     line-height: 1.5;
     margin-bottom: 1rem;
     button {
-      @include mixins.btn($foreground, $background);
+      @include mixins.btn($foreground, $background, $primary-tint);
     }
   }
 }

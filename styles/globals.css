@@ -9,9 +9,17 @@ body {
   color: #001010;
 }
 
+button {
+  font-family: monospace;
+}
+
 p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
+}
+
+p {
+  font-size: 14px;
 }
 
 img {
@@ -40,14 +48,14 @@ dialog#welcomeModal .modal-close {
   border: none;
   font-size: 1.2rem;
 }
-dialog#welcomeModal .modal-close:hover {
+dialog#welcomeModal .modal-close:hover, dialog#welcomeModal .gui-window .content-tabs .display-container .card .card-footer .modal-close.btn:focus, .gui-window .content-tabs .display-container .card .card-footer dialog#welcomeModal .modal-close.btn:focus, dialog#welcomeModal .gui-window .gui-header .header-container .header-nav .nav-buttons .modal-close.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons dialog#welcomeModal .modal-close.btn:focus, dialog#welcomeModal .gui-window .gui-header .header-container .header-nav ul li a.modal-close:focus, .gui-window .gui-header .header-container .header-nav ul li dialog#welcomeModal a.modal-close:focus, dialog#welcomeModal .terminal-window .terminal-container .terminal-header button.modal-close:focus, .terminal-window .terminal-container .terminal-header dialog#welcomeModal button.modal-close:focus, dialog#welcomeModal p button.modal-close:focus {
   transform: scale(1.2);
   transition: all 0.2s ease-in-out;
-  box-shadow: 0 0 0 2px #005f5f;
+  box-shadow: 0 0 0 2px #00ffff;
 }
 dialog#welcomeModal .modal-close:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #005f5f;
+  box-shadow: 0 0 0 2px #00ffff;
 }
 dialog#welcomeModal h2 {
   margin-bottom: 1.5rem;
@@ -64,17 +72,17 @@ dialog#welcomeModal p button {
   color: #eeffff;
   border-radius: 5px;
 }
-dialog#welcomeModal p button:hover {
-  background-color: #eeffff;
+dialog#welcomeModal p button:hover, dialog#welcomeModal p button:focus {
+  box-shadow: 0 0 0 2px #005f5f;
+  background: transparent;
   color: #001010;
 }
 dialog#welcomeModal p button:active {
-  background-color: #00ffff;
-  color: #001010;
+  background-color: #005f5f;
+  color: #eeffff;
 }
 dialog#welcomeModal p button:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #005f5f;
 }
 
 .hidden {
@@ -129,17 +137,17 @@ dialog#welcomeModal p button:focus {
   color: #001010;
   border-radius: 5px;
 }
-.terminal-window .terminal-container .terminal-header button:hover {
-  background-color: #001010;
+.terminal-window .terminal-container .terminal-header button:hover, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .terminal-window .terminal-container .terminal-header button.btn:focus, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .terminal-window .terminal-container .terminal-header button.btn:focus, .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header dialog#welcomeModal p button:focus, dialog#welcomeModal p .terminal-window .terminal-container .terminal-header button:focus {
+  box-shadow: 0 0 0 2px #33ff00;
+  background: transparent;
   color: #33ff00;
 }
 .terminal-window .terminal-container .terminal-header button:active {
-  background-color: #00ffff;
+  background-color: #33ff00;
   color: #001010;
 }
 .terminal-window .terminal-container .terminal-header button:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #005f5f;
 }
 .terminal-window .terminal-container .terminal-body {
   background-color: #001010;
@@ -228,7 +236,7 @@ dialog#welcomeModal p button:focus {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-.gui-window .gui-header .header-container .header-icon .nav-icon:hover {
+.gui-window .gui-header .header-container .header-icon .nav-icon:hover, .gui-window .gui-header .header-container .header-icon .content-tabs .display-container .card .card-footer .nav-icon.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .gui-header .header-container .header-icon .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-icon .header-nav .nav-buttons .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .header-icon .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-icon .header-nav ul li a.nav-icon:focus, .gui-window .gui-header .header-container .header-nav ul li .header-icon a.nav-icon:focus, .gui-window .gui-header .header-container .header-icon dialog#welcomeModal p button.nav-icon:focus, dialog#welcomeModal p .gui-window .gui-header .header-container .header-icon button.nav-icon:focus, .gui-window .gui-header .header-container .header-icon .terminal-window .terminal-container .terminal-header button.nav-icon:focus, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-icon button.nav-icon:focus {
   border-width: 2px;
 }
 .gui-window .gui-header .header-container .header-icon .nav-icon .nav-icon-line {
@@ -263,9 +271,12 @@ dialog#welcomeModal p button:focus {
 .gui-window .gui-header .header-container .header-nav ul li a {
   color: #eeffff;
 }
-.gui-window .gui-header .header-container .header-nav ul li a:hover {
+.gui-window .gui-header .header-container .header-nav ul li a:hover, .gui-window .gui-header .header-container .header-nav ul li .content-tabs .display-container .card .card-footer a.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .gui-header .header-container .header-nav ul li a.btn:focus, .gui-window .gui-header .header-container .header-nav ul li .nav-buttons a.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons ul li a.btn:focus, .gui-window .gui-header .header-container .header-nav ul li a:focus {
   text-decoration: none;
   color: #00ffff;
+}
+.gui-window .gui-header .header-container .header-nav ul li a:focus {
+  outline: none;
 }
 .gui-window .gui-header .header-container .header-nav .nav-buttons {
   text-align: center;
@@ -278,8 +289,9 @@ dialog#welcomeModal p button:focus {
   color: #001010;
   border-radius: 5px;
 }
-.gui-window .gui-header .header-container .header-nav .nav-buttons .btn:hover {
-  background-color: #001010;
+.gui-window .gui-header .header-container .header-nav .nav-buttons .btn:hover, .gui-window .gui-header .header-container .header-nav .nav-buttons .btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons dialog#welcomeModal p button.btn:focus, dialog#welcomeModal p .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus {
+  box-shadow: 0 0 0 2px #00ffff;
+  background: transparent;
   color: #eeffff;
 }
 .gui-window .gui-header .header-container .header-nav .nav-buttons .btn:active {
@@ -288,11 +300,6 @@ dialog#welcomeModal p button:focus {
 }
 .gui-window .gui-header .header-container .header-nav .nav-buttons .btn:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #005f5f;
-}
-.gui-window .gui-header .header-container .header-nav .nav-buttons .btn:hover {
-  background-color: #00ffff;
-  color: #001010;
 }
 .gui-window .about {
   padding-top: 12rem;
@@ -324,7 +331,7 @@ dialog#welcomeModal p button:focus {
   border-radius: 50%;
   cursor: pointer;
 }
-.gui-window .about .intro .profile-pic-container img:hover {
+.gui-window .about .intro .profile-pic-container img:hover, .gui-window .about .intro .profile-pic-container .content-tabs .display-container .card .card-footer img.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .about .intro .profile-pic-container img.btn:focus, .gui-window .about .intro .profile-pic-container .gui-header .header-container .header-nav .nav-buttons img.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .about .intro .profile-pic-container img.btn:focus {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   transform: scale(1.05);
 }
@@ -340,11 +347,11 @@ dialog#welcomeModal p button:focus {
 }
 .gui-window .about .intro .info-container .other-info {
   display: flex;
-  gap: 1rem;
+  gap: 5px 1rem;
+  flex-wrap: wrap;
 }
 .gui-window .about .intro .info-container .other-info .info-box {
   display: flex;
-  flex-flow: row nowrap;
   gap: 8px;
 }
 .gui-window .about .intro .description {
@@ -355,52 +362,117 @@ dialog#welcomeModal p button:focus {
   margin-bottom: 5px;
   line-height: 1.5;
 }
-.gui-window .content-tabs nav {
+.gui-window .content-tabs .tabs-btns {
   max-width: 600px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #333333;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-.gui-window .content-tabs nav button {
+.gui-window .content-tabs .tabs-btns::-webkit-scrollbar {
+  display: none;
+}
+.gui-window .content-tabs .tabs-btns button {
   cursor: pointer;
   width: 100%;
-  padding: 15px 5px;
+  padding: 0 5px;
   border: none;
   background: transparent;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: #333333aa;
 }
-.gui-window .content-tabs nav button:hover {
+.gui-window .content-tabs .tabs-btns button span {
+  margin: 0 auto;
+  display: block;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 15px 0;
+}
+.gui-window .content-tabs .tabs-btns button:hover, .gui-window .content-tabs .tabs-btns .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .tabs-btns button.btn:focus, .gui-window .content-tabs .tabs-btns dialog#welcomeModal p button:focus, dialog#welcomeModal p .gui-window .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .content-tabs .tabs-btns button.btn:focus {
   background-color: #cccccc;
   color: #001010;
 }
-.gui-window .content-tabs nav .active {
+.gui-window .content-tabs .tabs-btns .active span {
+  color: #001010;
   border-bottom: 4px solid #001010;
 }
 .gui-window .content-tabs .display-container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 1rem 10px;
+  padding: 0 10px 1rem;
 }
 .gui-window .content-tabs .display-container .card {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
   text-decoration: none;
   cursor: pointer;
-}
-.gui-window .content-tabs .display-container .card .card-header {
-  margin-bottom: 1.2rem;
+  border-bottom: 1px solid #333333;
+  padding: 10px 0;
 }
 .gui-window .content-tabs .display-container .card .card-body {
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
   gap: 1rem;
 }
-.gui-window .content-tabs .display-container .card .card-img {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-.gui-window .content-tabs .display-container .card .card-img img {
+.gui-window .content-tabs .display-container .card .card-body .card-img img {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
   -o-object-fit: cover;
      object-fit: cover;
   max-height: 600px;
-  border-radius: 10px 10px 0 0;
+  max-width: 100%;
+}
+.gui-window .content-tabs .display-container .card .card-footer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.gui-window .content-tabs .display-container .card .card-footer .btn {
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 10px;
+  background-color: #001010;
+  color: #eeffff;
+  border-radius: 5px;
+}
+.gui-window .content-tabs .display-container .card .card-footer .btn:hover, .gui-window .content-tabs .display-container .card .card-footer .btn:focus, .gui-window .content-tabs .display-container .card .card-footer dialog#welcomeModal p button.btn:focus, dialog#welcomeModal p .gui-window .content-tabs .display-container .card .card-footer button.btn:focus {
+  box-shadow: 0 0 0 2px #005f5f;
+  background: transparent;
+  color: #001010;
+}
+.gui-window .content-tabs .display-container .card .card-footer .btn:active {
+  background-color: #005f5f;
+  color: #eeffff;
+}
+.gui-window .content-tabs .display-container .card .card-footer .btn:focus {
+  outline: none;
+}
+.gui-window .content-tabs .display-container .contact {
+  padding: 10px;
+}
+.gui-window .content-tabs .display-container .contact ul {
+  list-style-type: none;
+  margin: 8px;
+  padding: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 5px;
+}
+.gui-window .content-tabs .display-container .contact ul li a {
+  color: #001010;
+  text-decoration: underline;
+}
+.gui-window .content-tabs .display-container .contact ul li a:hover, .gui-window .content-tabs .display-container .contact .gui-header .header-container .header-nav ul li a:focus, .gui-window .gui-header .header-container .header-nav .content-tabs .display-container .contact ul li a:focus, .gui-window .content-tabs .display-container .contact ul li .gui-header .header-container .header-nav .nav-buttons a.btn:focus, .gui-window .content-tabs .display-container .contact ul li .card .card-footer a.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .contact ul li a.btn:focus {
+  color: #005f5f;
 }
 
 @media (min-width: 576px) {
@@ -429,7 +501,7 @@ dialog#welcomeModal p button:focus {
     margin-top: -60px;
   }
 }
-@media (min-width: 600px) {
+@media (min-width: 610px) {
   .gui-window .gui-header {
     padding: 10px 0;
   }

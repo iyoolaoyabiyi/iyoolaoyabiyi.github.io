@@ -1,6 +1,8 @@
 import terminal from './terminal.js';
 import gui from './gui.js';
 import defaultUserData from './configs/userData.js';
+import portfolio from "./configs/portfolio.js";
+import posts from "./configs/posts.js";
 
 // DOM
 const welcomeDialog = document.getElementById('welcomeModal');
@@ -38,6 +40,8 @@ document.querySelectorAll('.close-modal-btn').forEach((btn) => {
   });
 });
 
+// localStorage.clear()
+
 // Terminal Functionalities
 terminal.addOptions();
 terminal.body.element.addEventListener('click', terminal.focusInput.bind(terminal));
@@ -68,6 +72,8 @@ gui.tabBtns.forEach((btn) => {
     }
   });
 });
+gui.populateTab('portfolio', portfolio);
+gui.populateTab('posts', posts);
 
 // Helpers
 function updateUser(userData) {

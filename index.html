@@ -10,7 +10,7 @@
 <body>
   <main id="root">
     <!-- Terminal -->
-     <div class="terminal-window hidden" id="terminalWindow">
+     <div class="terminal-window" id="terminalWindow">
       <div class="terminal-container">
         <div class="terminal-header">
           <div class="deco-navs">
@@ -36,7 +36,7 @@
             <p class="prompt">
               <span data-type="username">user</span>
               @
-              <span data-type="hostname">IyosWebServer</span>
+              <span data-type="hostname">iyosWebsite</span>
               :
               <span data-type="path">~</span>
               $
@@ -47,11 +47,11 @@
       </div>
     </div>
     <!-- GUI -->
-    <div class="gui-window" id="guiWindow">
+    <div class="gui-window hidden" id="guiWindow">
       <header class="gui-header">
         <div class="header-container">
           <div class="header-logo">
-            <h1 aria-label="Iyo Ola Oyabiyi">IOO</h1>
+            <h1 aria-label="Iyo Ola Oyabiyi">IYO</h1>
           </div>
           <div class="header-icon">
             <div class="nav-icon">
@@ -72,7 +72,7 @@
         </div>
       </header>
       <section class="about">
-        <h2>My Profile</h2>
+        <h2>Iyola's Profile</h2>
         <div class="intro">
           <div class="cover-pic">
             <img src="./assets/cover.png" alt="Iyo's cover">
@@ -106,32 +106,23 @@
       </section>
       <section class="content-tabs">
         <nav class="tabs-btns">
-          <button class="active" data-tab-for="portfolio">portfolio</button>
-          <button data-tab-for="posts">posts</button>
-          <button data-tab-for="contact">contact</button>
+          <button class="active" data-tab-for="portfolio"><span>portfolio</span></button>
+          <button data-tab-for="posts"><span>posts</span></button>
+          <button data-tab-for="contact"><span>contact</span></button>
         </nav>
         <div class="display-container">
-          <div class="tab portfolio" id="portfolio">
-            <div class="card" href="#">
-              <div class="card-header">
-                <h2>Portfolio 1</h2>
-              </div>
-              <div class="card-body">
-                <p>Project 1: A portfolio website coded with HTML, CSS, and vanilla JavaScript.</p>
-                <div class="card-img">
-                  <img src="./assets/portfolio1.png" alt="Portfolio 1">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="tab posts hidden" id="posts">
-            <p>Stay tuned for more updates!</p>
-          </div>
+          <div class="tab portfolio" id="portfolio"></div>
+          <div class="tab posts hidden" id="posts"></div>
           <div class="tab contact hidden" id="contact">
-            <h2>Contact Me</h2>
-            <p>If you want to reach out, you can find me on:</p>
+            <p>You can contact me via;</p>
             <ul>
-              <li><a href="https://twitter.com/iyoolaoyabiyi" target="_blank">Twitter</a></li>
+              <li>Email: <a href="mailto:iyoolaoyabiyi@gmail.com" target="_blank">iyoolaoyabiyi@gmail.com</a></li>
+            </ul>
+            <p>Or Check me out on:</p>
+            <ul>
+              <li><a href="https://github.com/iyoolaoyabiyi">GitHub</a></li>
+              <li><a href="https://x.com/iyoolaoyabiyi">X</a></li>
+            </ul>
           </div>
         </div>
       </section>
@@ -148,5 +139,23 @@
     </dialog>
     <script type="module" src="./js/script.js"></script>
   </main>
+  <!-- Templates -->
+  <template id="cardTemplate">
+    <div class="card" href="#">
+      <div class="card-header">
+        <h2 class="card-title"></h2>
+      </div>
+      <div class="card-body">
+        <p class="card-description"></p>
+        <div class="card-img">
+          <img src="" alt="">
+        </div>
+      </div>
+      <div class="card-footer">
+        <a class="source-link btn" href="" target="_blank">View Source</a>
+        <a class="demo-link btn" href="" target="_blank">View Demo</a>
+      </div>
+    </div>
+  </template>
 </body>
 </html>

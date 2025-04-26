@@ -1,3 +1,5 @@
+
+
 const gui = {
   isMenuOpen: true,
   window: document.querySelector('.gui-window'),
@@ -58,6 +60,65 @@ const gui = {
       });
       gui.isMenuOpen = false;
     }
+  },
+  populatePortfolio(portfolio) {
+    const portfolioCardTemplate = document.querySelector('#cardTemplate');
+    const portfolioContainer = document.querySelector('#portfolio');
+    portfolio.forEach((item) => {
+      const card = portfolioCardTemplate.content.cloneNode(true);
+      const cardTitle = card.querySelector('.card-title');
+      const cardDescription = card.querySelector('.card-description');
+      const cardImg = card.querySelector('.card-img img');
+      const sourceLink = card.querySelector('.source-link');
+      const demoLink = card.querySelector('.demo-link');
+
+      cardImg.src =`${imgDir}/${item.img}`;
+      cardImg.alt = item.name;
+      cardTitle.textContent = item.name;
+      cardDescription.textContent = item.description;
+      sourceLink.href = item.sourceLink;
+      demoLink.href = item.demoLink;
+      
+      portfolioContainer.appendChild(card);
+    });
+  },
+  populateTab(tabID, contentArr) {
+    const imgDir = './assets/images';
+    const tabContainer = document.querySelector(`#${tabID}`);
+    if (!tabContainer) {
+      console.error(`Tab with id ${tabID} not found`);
+      return;
+    }
+    if (contentArr.length === 0 || !contentArr) {
+      const emptyMessage = document.createElement('p');
+      emptyMessage.style.padding = '10px 0'
+      emptyMessage.textContent = 'No content available';
+      tabContainer.appendChild(emptyMessage);
+      return;
+    }
+    const cardTemplate = document.querySelector(`#cardTemplate`);
+    contentArr.forEach((item) => {
+      const card = cardTemplate.content.cloneNode(true);
+      const cardImg = card.querySelector('.card-img img');
+      const cardTitle = card.querySelector('.card-title');
+      const cardDescription = card.querySelector('.card-description');
+      const sourceLink = card.querySelector('.source-link');
+      const demoLink = card.querySelector('.demo-link');
+      cardTitle.textContent = item.name ? item.name : 'Untitled';
+      cardDescription.textContent = item.description;
+      if (item.img) {
+        cardImg.src =`${imgDir}/${item.img}`;
+        cardImg.alt = item.name;
+      } else card.querySelector('.card-img').remove();
+      if (item.sourceLink) sourceLink.href = item.sourceLink;
+      else sourceLink.remove();
+      if (item.demoLink) demoLink.href = item.demoLink;
+      else demoLink.remove();
+      if (!item.img && !item.sourceLink && !item.demoLink) {
+        card.querySelector('.card-footer').remove();
+      }
+      tabContainer.appendChild(card);
+    });
   }
 }
 

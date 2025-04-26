@@ -1,6 +1,4 @@
-@import "variables";
-
-@mixin btn($bg: $background, $color: $foreground) {
+@mixin btn($bg, $color, $tint) {
   cursor: pointer;
   border: none;
   padding: 0.5rem 10px;
@@ -8,15 +6,16 @@
   color: $color;
   border-radius: 5px;
   &:hover {
-    background-color: $color;
+    box-shadow: 0 0 0 2px $tint;
+    background: transparent;
     color: $bg;
   }
   &:active {
-    background-color: $light-tint;
-    color: $foreground;
+    background-color: $tint;
+    color: $color;
   }
   &:focus {
+    @extend :hover;
     outline: none;
-    box-shadow: 0 0 0 2px $dark-tint;
   }
 }
