@@ -1,5 +1,17 @@
 import commands from './commands.js';
-import { openGUI } from './script.js';
+import { getSavedData, openGUI, saveUserData } from './script.js';
+import defaultUserData from './configs/userData.js';
+
+// let userData = localStorage.getItem('userData');
+
+// if (userData) {
+//   Object.assign(userData, JSON.parse(userData));
+// } else {
+//   userData = defaultUserData;
+//   saveUserData(userData);
+// }
+
+// console.log(userData);
 
 // Terminal Object
 const terminal = {
@@ -33,12 +45,13 @@ const terminal = {
     },
     addCommandLine() {
       const commandLine = document.createElement('div');
+      const userData = getSavedData();
       let commandLineInput = null;
       commandLine.classList.add('line');
       commandLine.id = 'commandLine';
       commandLine.innerHTML = `
         <p class="prompt">
-          <span data-type="username">${terminal.user}</span>
+          <span data-type="username">${userData.username}</span>
           @
           <span data-type="hostname">${terminal.hostname}</span>
           :
@@ -75,8 +88,9 @@ const terminal = {
     this.body.element.innerHTML = '';
   },
   addOptions() {
+    const userData = getSavedData();
     document.querySelectorAll('[data-type="username"]').forEach(el => {
-      el.textContent = this.user;
+      el.textContent = userData.username;
     });
     document.querySelectorAll('[data-type="hostname"]').forEach(el => {
       el.textContent = this.hostname;

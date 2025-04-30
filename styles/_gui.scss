@@ -4,8 +4,8 @@ $max-width: 600px;
 $padding-width: 10px;
 $transition: all 0.3s ease-in-out;
 $header-radius: 10px;
-// $foreground: $foreground;
-// $background: $background;
+// var(--foreground): var(--foreground);
+// var(--background): var(--background);
 
 // GUI
 .gui-window {
@@ -20,8 +20,8 @@ $header-radius: 10px;
     .header-container {
       display: flex;
       flex-flow: column nowrap;
-      background-color: $foreground;
-      color: $background;
+      background-color: var(--foreground);
+      color: var(--background);
       .header-logo {
         display: flex;
         margin: auto;
@@ -39,7 +39,7 @@ $header-radius: 10px;
           flex-flow: column nowrap;
           align-items: center;
           justify-content: center;
-          border: 2px solid $background;
+          border: 2px solid var(--background);
           width: 30px;
           height: 30px;
           padding: 3px;
@@ -54,7 +54,7 @@ $header-radius: 10px;
             position: absolute;
             width: 20px;
             height: 2px;
-            background-color: $background;
+            background-color: var(--background);
             transition: $transition;
           }
           .nav-icon-line:nth-child(1) {
@@ -81,10 +81,10 @@ $header-radius: 10px;
           margin-bottom: 2rem;
           li {
             a {
-              color: $background;
+              color: var(--background);
               &:hover {
                 text-decoration: none;
-                color: $secondary-tint;
+                color: var(--secondary-tint);
               }
               &:focus {
                 @extend :hover;
@@ -96,7 +96,7 @@ $header-radius: 10px;
         .nav-buttons {
           text-align: center;
           .btn {
-            @include mixins.btn($background, $foreground, $secondary-tint);
+            @include mixins.btn(var(--background), var(--foreground), var(--secondary-tint));
           }
         }
       }
@@ -185,7 +185,7 @@ $header-radius: 10px;
         font-size: 0.9rem;
         font-weight: bold;
         text-transform: capitalize;
-        color: #{$dark-grey}aa;
+        color: var(--secondary-grey);
         span {
           margin: 0 auto;
           display: block;
@@ -193,14 +193,14 @@ $header-radius: 10px;
           padding: 15px 0;
         }
         &:hover {
-          background-color: $light-grey;
-          color: $foreground;
+          background-color: var(--grey);
+          color: var(--foreground);
         }
       }
       .active {
         span {
-          color: $foreground;
-          border-bottom: 4px solid $foreground;
+          color: var(--foreground);
+          border-bottom: 4px solid var(--foreground);
         }
       }
     }
@@ -238,7 +238,7 @@ $header-radius: 10px;
           align-items: center;
           .btn {
             text-decoration: none;
-            @include mixins.btn($foreground, $background, $primary-tint);
+            @include mixins.btn(var(--foreground), var(--background), var(--tint));
           }
         }
       }
@@ -253,10 +253,10 @@ $header-radius: 10px;
           gap: 5px;
           li {
             a {
-              color: $foreground;
+              color: var(--foreground);
               text-decoration: underline;
               &:hover {
-                color: $primary-tint;
+                color: var(--tint);
               }
             }
           }
@@ -305,6 +305,11 @@ $header-radius: 10px;
       padding: $padding-width 0;
       .header-container {
         border-radius: $header-radius;
+      }
+    }
+    .about {
+      h2 {
+        padding: 0;
       }
     }
   }

@@ -1,16 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+:root {
+  --background: #eeffff;
+  --foreground: #001010;
+  --tint: #005f5f;
+  --secondary-tint: #00ffff;
+  --terminal-color: #33ff00;
+  --grey: #cccccc;
+  --secondary-grey: #333333;
+}
+
+:root[data-theme=dark] {
+  --background: #001010;
+  --foreground: #eeffff;
+  --tint: #00ffff;
+  --secondary-tint: #005f5f;
+  --grey: #333333;
+  --secondary-grey: #cccccc;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  background-color: #eeffff;
+  background-color: var(--background);
   margin: 0;
-  font-family: monospace;
-  color: #001010;
+  font-family: Quantico, monospace;
+  color: var(--foreground);
 }
 
 button {
-  font-family: monospace;
+  font-family: Quantico, monospace;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -26,20 +46,20 @@ img {
   max-width: 100%;
 }
 
-dialog#welcomeModal {
+dialog {
   border: none;
   border-radius: 8px;
   padding: 1rem;
   max-width: 500px;
   width: 90%;
-  box-shadow: 0 4px 12px #eeffff88;
+  box-shadow: 0 4px 6px var(--foreground);
 }
-dialog#welcomeModal::backdrop {
+dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.8);
   -webkit-backdrop-filter: blur(1px);
           backdrop-filter: blur(1px);
 }
-dialog#welcomeModal .modal-close {
+dialog .modal-close {
   cursor: pointer;
   position: absolute;
   top: 1rem;
@@ -47,24 +67,75 @@ dialog#welcomeModal .modal-close {
   background: none;
   border: none;
   font-size: 1.2rem;
+  border-radius: 50%;
 }
-dialog#welcomeModal .modal-close:hover, dialog#welcomeModal .gui-window .content-tabs .display-container .card .card-footer .modal-close.btn:focus, .gui-window .content-tabs .display-container .card .card-footer dialog#welcomeModal .modal-close.btn:focus, dialog#welcomeModal .gui-window .gui-header .header-container .header-nav .nav-buttons .modal-close.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons dialog#welcomeModal .modal-close.btn:focus, dialog#welcomeModal .gui-window .gui-header .header-container .header-nav ul li a.modal-close:focus, .gui-window .gui-header .header-container .header-nav ul li dialog#welcomeModal a.modal-close:focus, dialog#welcomeModal .terminal-window .terminal-container .terminal-header button.modal-close:focus, .terminal-window .terminal-container .terminal-header dialog#welcomeModal button.modal-close:focus, dialog#welcomeModal p button.modal-close:focus {
+dialog .modal-close:hover, dialog .gui-window .content-tabs .display-container .card .card-footer .modal-close.btn:focus, .gui-window .content-tabs .display-container .card .card-footer dialog .modal-close.btn:focus, dialog .gui-window .gui-header .header-container .header-nav .nav-buttons .modal-close.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons dialog .modal-close.btn:focus, dialog .gui-window .gui-header .header-container .header-nav ul li a.modal-close:focus, .gui-window .gui-header .header-container .header-nav ul li dialog a.modal-close:focus, dialog .terminal-window .terminal-container .terminal-header button.modal-close:focus, .terminal-window .terminal-container .terminal-header dialog button.modal-close:focus, dialog #userSettingsModal .modal-close#saveSettingsBtn:focus, #userSettingsModal dialog .modal-close#saveSettingsBtn:focus, dialog p button.modal-close:focus {
   transform: scale(1.2);
   transition: all 0.2s ease-in-out;
-  box-shadow: 0 0 0 2px #00ffff;
+  box-shadow: 0 0 0 2px #001010;
 }
-dialog#welcomeModal .modal-close:focus {
+dialog .modal-close:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #00ffff;
+  box-shadow: 0 0 0 2px var(--secondary-tint);
 }
-dialog#welcomeModal h2 {
+dialog h2 {
   margin-bottom: 1.5rem;
 }
-dialog#welcomeModal p {
+dialog p {
   line-height: 1.5;
   margin-bottom: 1rem;
 }
-dialog#welcomeModal p button {
+dialog p button {
+  position: static;
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 10px;
+  background-color: var(--foreground);
+  color: var(--background);
+  border-radius: 5px;
+}
+dialog p button:hover, dialog p .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer dialog p button.btn:focus, dialog p .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons dialog p button.btn:focus, dialog p .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header dialog p button:focus, dialog p #userSettingsModal button#saveSettingsBtn:focus, #userSettingsModal dialog p button#saveSettingsBtn:focus, dialog p button:focus {
+  box-shadow: 0 0 0 2px var(--tint);
+  background: transparent;
+  color: var(--foreground);
+}
+dialog p button:active {
+  background-color: var(--tint);
+  color: var(--background);
+}
+dialog p button:focus {
+  outline: none;
+}
+dialog .form-control {
+  display: flex;
+  gap: 5px;
+}
+dialog .form-control input, dialog .form-control label {
+  cursor: pointer;
+}
+dialog .form-control input[type=text] {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+  border: 1px solid #001010;
+}
+dialog .form-control input[type=text]:focus {
+  outline: none;
+  border: 2px solid #005f5f;
+}
+
+#userSettingsModal #userNameSetup {
+  display: none;
+  flex-flow: column nowrap;
+}
+#userSettingsModal #userNameSetup #err {
+  display: none;
+  margin-bottom: 0;
+}
+#userSettingsModal #saveSettingsBtn {
+  margin: 10px 0 0;
+  display: block;
   cursor: pointer;
   border: none;
   padding: 0.5rem 10px;
@@ -72,21 +143,17 @@ dialog#welcomeModal p button {
   color: #eeffff;
   border-radius: 5px;
 }
-dialog#welcomeModal p button:hover, dialog#welcomeModal p button:focus {
+#userSettingsModal #saveSettingsBtn:hover, #userSettingsModal #saveSettingsBtn:focus {
   box-shadow: 0 0 0 2px #005f5f;
   background: transparent;
   color: #001010;
 }
-dialog#welcomeModal p button:active {
+#userSettingsModal #saveSettingsBtn:active {
   background-color: #005f5f;
   color: #eeffff;
 }
-dialog#welcomeModal p button:focus {
+#userSettingsModal #saveSettingsBtn:focus {
   outline: none;
-}
-
-.hidden {
-  display: none !important;
 }
 
 .terminal-window {
@@ -118,7 +185,7 @@ dialog#welcomeModal p button:focus {
   height: 12px;
   border: none;
   border-radius: 50%;
-  background-color: #eeffff;
+  background-color: var(--background);
 }
 .terminal-window .terminal-container .terminal-header .deco-navs .red {
   background-color: #ff5f56;
@@ -133,17 +200,17 @@ dialog#welcomeModal p button:focus {
   cursor: pointer;
   border: none;
   padding: 0.5rem 10px;
-  background-color: #33ff00;
+  background-color: var(--terminal-color);
   color: #001010;
   border-radius: 5px;
 }
-.terminal-window .terminal-container .terminal-header button:hover, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .terminal-window .terminal-container .terminal-header button.btn:focus, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .terminal-window .terminal-container .terminal-header button.btn:focus, .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header dialog#welcomeModal p button:focus, dialog#welcomeModal p .terminal-window .terminal-container .terminal-header button:focus {
-  box-shadow: 0 0 0 2px #33ff00;
+.terminal-window .terminal-container .terminal-header button:hover, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .terminal-window .terminal-container .terminal-header button.btn:focus, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .terminal-window .terminal-container .terminal-header button.btn:focus, .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header #userSettingsModal button#saveSettingsBtn:focus, #userSettingsModal .terminal-window .terminal-container .terminal-header button#saveSettingsBtn:focus {
+  box-shadow: 0 0 0 2px var(--terminal-color);
   background: transparent;
-  color: #33ff00;
+  color: var(--terminal-color);
 }
 .terminal-window .terminal-container .terminal-header button:active {
-  background-color: #33ff00;
+  background-color: var(--terminal-color);
   color: #001010;
 }
 .terminal-window .terminal-container .terminal-header button:focus {
@@ -156,7 +223,7 @@ dialog#welcomeModal p button:focus {
   height: 400px;
   max-height: 400px;
   overflow-y: scroll;
-  color: #001010;
+  color: var(--foreground);
   cursor: text;
 }
 .terminal-window .terminal-container .terminal-body #terminalIntro {
@@ -168,12 +235,12 @@ dialog#welcomeModal p button:focus {
   align-items: flex-start;
 }
 .terminal-window .terminal-container .terminal-body .response {
-  color: #eeffff;
+  color: var(--background);
   gap: 5px;
 }
 .terminal-window .terminal-container .terminal-body .input {
   flex: 1;
-  color: #eeffff;
+  color: var(--background);
   background: transparent;
   border: none;
   outline: none;
@@ -184,12 +251,12 @@ dialog#welcomeModal p button:focus {
 .terminal-window .terminal-container .prompt {
   display: flex;
   gap: 0;
-  color: #33ff00;
+  color: var(--terminal-color);
   margin-right: 0.5rem;
 }
 
 .text-color {
-  color: #eeffff;
+  color: var(--background);
 }
 
 .gui-window {
@@ -206,8 +273,8 @@ dialog#welcomeModal p button:focus {
 .gui-window .gui-header .header-container {
   display: flex;
   flex-flow: column nowrap;
-  background-color: #001010;
-  color: #eeffff;
+  background-color: var(--foreground);
+  color: var(--background);
 }
 .gui-window .gui-header .header-container .header-logo {
   display: flex;
@@ -227,7 +294,7 @@ dialog#welcomeModal p button:focus {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  border: 2px solid #eeffff;
+  border: 2px solid var(--background);
   width: 30px;
   height: 30px;
   padding: 3px;
@@ -236,14 +303,14 @@ dialog#welcomeModal p button:focus {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-.gui-window .gui-header .header-container .header-icon .nav-icon:hover, .gui-window .gui-header .header-container .header-icon .content-tabs .display-container .card .card-footer .nav-icon.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .gui-header .header-container .header-icon .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-icon .header-nav .nav-buttons .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .header-icon .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-icon .header-nav ul li a.nav-icon:focus, .gui-window .gui-header .header-container .header-nav ul li .header-icon a.nav-icon:focus, .gui-window .gui-header .header-container .header-icon dialog#welcomeModal p button.nav-icon:focus, dialog#welcomeModal p .gui-window .gui-header .header-container .header-icon button.nav-icon:focus, .gui-window .gui-header .header-container .header-icon .terminal-window .terminal-container .terminal-header button.nav-icon:focus, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-icon button.nav-icon:focus {
+.gui-window .gui-header .header-container .header-icon .nav-icon:hover, .gui-window .gui-header .header-container .header-icon .content-tabs .display-container .card .card-footer .nav-icon.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .gui-header .header-container .header-icon .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-icon .header-nav .nav-buttons .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .header-icon .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-icon .header-nav ul li a.nav-icon:focus, .gui-window .gui-header .header-container .header-nav ul li .header-icon a.nav-icon:focus, .gui-window .gui-header .header-container .header-icon dialog p button.nav-icon:focus, dialog p .gui-window .gui-header .header-container .header-icon button.nav-icon:focus, .gui-window .gui-header .header-container .header-icon #userSettingsModal .nav-icon#saveSettingsBtn:focus, #userSettingsModal .gui-window .gui-header .header-container .header-icon .nav-icon#saveSettingsBtn:focus, .gui-window .gui-header .header-container .header-icon .terminal-window .terminal-container .terminal-header button.nav-icon:focus, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-icon button.nav-icon:focus {
   border-width: 2px;
 }
 .gui-window .gui-header .header-container .header-icon .nav-icon .nav-icon-line {
   position: absolute;
   width: 20px;
   height: 2px;
-  background-color: #eeffff;
+  background-color: var(--background);
   transition: all 0.3s ease-in-out;
 }
 .gui-window .gui-header .header-container .header-icon .nav-icon .nav-icon-line:nth-child(1) {
@@ -269,11 +336,11 @@ dialog#welcomeModal p button:focus {
   margin-bottom: 2rem;
 }
 .gui-window .gui-header .header-container .header-nav ul li a {
-  color: #eeffff;
+  color: var(--background);
 }
-.gui-window .gui-header .header-container .header-nav ul li a:hover, .gui-window .gui-header .header-container .header-nav ul li .content-tabs .display-container .card .card-footer a.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .gui-header .header-container .header-nav ul li a.btn:focus, .gui-window .gui-header .header-container .header-nav ul li .nav-buttons a.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons ul li a.btn:focus, .gui-window .gui-header .header-container .header-nav ul li a:focus {
+.gui-window .gui-header .header-container .header-nav ul li a:hover, .gui-window .gui-header .header-container .header-nav ul li .content-tabs .display-container .card .card-footer a.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .gui-header .header-container .header-nav ul li a.btn:focus, .gui-window .gui-header .header-container .header-nav ul li .nav-buttons a.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons ul li a.btn:focus, .gui-window .gui-header .header-container .header-nav ul li a:focus, .gui-window .gui-header .header-container .header-nav ul li #userSettingsModal a#saveSettingsBtn:focus, #userSettingsModal .gui-window .gui-header .header-container .header-nav ul li a#saveSettingsBtn:focus {
   text-decoration: none;
-  color: #00ffff;
+  color: var(--secondary-tint);
 }
 .gui-window .gui-header .header-container .header-nav ul li a:focus {
   outline: none;
@@ -285,18 +352,18 @@ dialog#welcomeModal p button:focus {
   cursor: pointer;
   border: none;
   padding: 0.5rem 10px;
-  background-color: #eeffff;
-  color: #001010;
+  background-color: var(--background);
+  color: var(--foreground);
   border-radius: 5px;
 }
-.gui-window .gui-header .header-container .header-nav .nav-buttons .btn:hover, .gui-window .gui-header .header-container .header-nav .nav-buttons .btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons dialog#welcomeModal p button.btn:focus, dialog#welcomeModal p .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus {
-  box-shadow: 0 0 0 2px #00ffff;
+.gui-window .gui-header .header-container .header-nav .nav-buttons .btn:hover, .gui-window .gui-header .header-container .header-nav .nav-buttons .btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons #userSettingsModal .btn#saveSettingsBtn:focus, #userSettingsModal .gui-window .gui-header .header-container .header-nav .nav-buttons .btn#saveSettingsBtn:focus {
+  box-shadow: 0 0 0 2px var(--secondary-tint);
   background: transparent;
-  color: #eeffff;
+  color: var(--background);
 }
 .gui-window .gui-header .header-container .header-nav .nav-buttons .btn:active {
-  background-color: #00ffff;
-  color: #001010;
+  background-color: var(--secondary-tint);
+  color: var(--foreground);
 }
 .gui-window .gui-header .header-container .header-nav .nav-buttons .btn:focus {
   outline: none;
@@ -331,7 +398,7 @@ dialog#welcomeModal p button:focus {
   border-radius: 50%;
   cursor: pointer;
 }
-.gui-window .about .intro .profile-pic-container img:hover, .gui-window .about .intro .profile-pic-container .content-tabs .display-container .card .card-footer img.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .about .intro .profile-pic-container img.btn:focus, .gui-window .about .intro .profile-pic-container .gui-header .header-container .header-nav .nav-buttons img.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .about .intro .profile-pic-container img.btn:focus {
+.gui-window .about .intro .profile-pic-container img:hover, .gui-window .about .intro .profile-pic-container .content-tabs .display-container .card .card-footer img.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .about .intro .profile-pic-container img.btn:focus, .gui-window .about .intro .profile-pic-container #userSettingsModal img#saveSettingsBtn:focus, #userSettingsModal .gui-window .about .intro .profile-pic-container img#saveSettingsBtn:focus, .gui-window .about .intro .profile-pic-container .gui-header .header-container .header-nav .nav-buttons img.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .about .intro .profile-pic-container img.btn:focus {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   transform: scale(1.05);
 }
@@ -384,7 +451,7 @@ dialog#welcomeModal p button:focus {
   font-size: 0.9rem;
   font-weight: bold;
   text-transform: capitalize;
-  color: #333333aa;
+  color: var(--secondary-grey);
 }
 .gui-window .content-tabs .tabs-btns button span {
   margin: 0 auto;
@@ -393,13 +460,13 @@ dialog#welcomeModal p button:focus {
   width: fit-content;
   padding: 15px 0;
 }
-.gui-window .content-tabs .tabs-btns button:hover, .gui-window .content-tabs .tabs-btns .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .tabs-btns button.btn:focus, .gui-window .content-tabs .tabs-btns dialog#welcomeModal p button:focus, dialog#welcomeModal p .gui-window .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .content-tabs .tabs-btns button.btn:focus {
-  background-color: #cccccc;
-  color: #001010;
+.gui-window .content-tabs .tabs-btns button:hover, .gui-window .content-tabs .tabs-btns .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .tabs-btns button.btn:focus, .gui-window .content-tabs .tabs-btns dialog p button:focus, dialog p .gui-window .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns #userSettingsModal button#saveSettingsBtn:focus, #userSettingsModal .gui-window .content-tabs .tabs-btns button#saveSettingsBtn:focus, .gui-window .content-tabs .tabs-btns .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .content-tabs .tabs-btns button.btn:focus {
+  background-color: var(--grey);
+  color: var(--foreground);
 }
 .gui-window .content-tabs .tabs-btns .active span {
-  color: #001010;
-  border-bottom: 4px solid #001010;
+  color: var(--foreground);
+  border-bottom: 4px solid var(--foreground);
 }
 .gui-window .content-tabs .display-container {
   max-width: 600px;
@@ -440,18 +507,18 @@ dialog#welcomeModal p button:focus {
   cursor: pointer;
   border: none;
   padding: 0.5rem 10px;
-  background-color: #001010;
-  color: #eeffff;
+  background-color: var(--foreground);
+  color: var(--background);
   border-radius: 5px;
 }
-.gui-window .content-tabs .display-container .card .card-footer .btn:hover, .gui-window .content-tabs .display-container .card .card-footer .btn:focus, .gui-window .content-tabs .display-container .card .card-footer dialog#welcomeModal p button.btn:focus, dialog#welcomeModal p .gui-window .content-tabs .display-container .card .card-footer button.btn:focus {
-  box-shadow: 0 0 0 2px #005f5f;
+.gui-window .content-tabs .display-container .card .card-footer .btn:hover, .gui-window .content-tabs .display-container .card .card-footer .btn:focus, .gui-window .content-tabs .display-container .card .card-footer #userSettingsModal .btn#saveSettingsBtn:focus, #userSettingsModal .gui-window .content-tabs .display-container .card .card-footer .btn#saveSettingsBtn:focus {
+  box-shadow: 0 0 0 2px var(--tint);
   background: transparent;
-  color: #001010;
+  color: var(--foreground);
 }
 .gui-window .content-tabs .display-container .card .card-footer .btn:active {
-  background-color: #005f5f;
-  color: #eeffff;
+  background-color: var(--tint);
+  color: var(--background);
 }
 .gui-window .content-tabs .display-container .card .card-footer .btn:focus {
   outline: none;
@@ -468,11 +535,11 @@ dialog#welcomeModal p button:focus {
   gap: 5px;
 }
 .gui-window .content-tabs .display-container .contact ul li a {
-  color: #001010;
+  color: var(--foreground);
   text-decoration: underline;
 }
-.gui-window .content-tabs .display-container .contact ul li a:hover, .gui-window .content-tabs .display-container .contact .gui-header .header-container .header-nav ul li a:focus, .gui-window .gui-header .header-container .header-nav .content-tabs .display-container .contact ul li a:focus, .gui-window .content-tabs .display-container .contact ul li .gui-header .header-container .header-nav .nav-buttons a.btn:focus, .gui-window .content-tabs .display-container .contact ul li .card .card-footer a.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .contact ul li a.btn:focus {
-  color: #005f5f;
+.gui-window .content-tabs .display-container .contact ul li a:hover, .gui-window .content-tabs .display-container .contact ul li #userSettingsModal a#saveSettingsBtn:focus, #userSettingsModal .gui-window .content-tabs .display-container .contact ul li a#saveSettingsBtn:focus, .gui-window .content-tabs .display-container .contact .gui-header .header-container .header-nav ul li a:focus, .gui-window .gui-header .header-container .header-nav .content-tabs .display-container .contact ul li a:focus, .gui-window .content-tabs .display-container .contact ul li .gui-header .header-container .header-nav .nav-buttons a.btn:focus, .gui-window .content-tabs .display-container .contact ul li .card .card-footer a.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .contact ul li a.btn:focus {
+  color: var(--tint);
 }
 
 @media (min-width: 576px) {
@@ -508,4 +575,10 @@ dialog#welcomeModal p button:focus {
   .gui-window .gui-header .header-container {
     border-radius: 10px;
   }
+  .gui-window .about h2 {
+    padding: 0;
+  }
+}
+.hidden {
+  display: none;
 }/*# sourceMappingURL=globals.css.map */

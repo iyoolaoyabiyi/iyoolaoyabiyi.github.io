@@ -1,27 +1,40 @@
 @use 'mixins';
+
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import "variables";
 
-$background: $white;
-$foreground: $black;
-$primary-tint: $teal;
-$secondary-tint: $cyan;
-$terminal-text: $green;
-$primary-grey: $dark-grey;
-$secondary-grey: $light-grey;
+:root {
+  --background: #{$light-color};
+  --foreground: #{$dark-color};
+  --tint: #{$dark-tint};
+  --secondary-tint: #{$light-tint};
+  --terminal-color: #{$green};
+  --grey: #{$light-grey};
+  --secondary-grey: #{$dark-grey};
+}
+
+:root[data-theme="dark"] {
+  --background: #{$dark-color};
+  --foreground: #{$light-color};
+  --tint: #{$light-tint};
+  --secondary-tint: #{$dark-tint};
+  --grey: #{$dark-grey};
+  --secondary-grey: #{$light-grey};
+}
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  background-color: $background;
+  background-color: var(--background);
   margin: 0;
-  font-family: monospace;
-  color: $foreground;
+  font-family: Quantico, monospace;
+  color: var(--foreground);
 }
 
 button {
-  font-family: monospace;
+  font-family: Quantico, monospace;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -38,13 +51,13 @@ img {
 }
 
 // Modal
-dialog#welcomeModal {
+dialog {
   border: none;
   border-radius: 8px;
   padding: 1rem;
   max-width: 500px;
   width: 90%;
-  box-shadow: 0 4px 12px #{$background}88;
+  box-shadow: 0 4px 6px var(--foreground);
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(1px);
@@ -57,14 +70,15 @@ dialog#welcomeModal {
     background: none;
     border: none;
     font-size: 1.2rem;
+    border-radius: 50%;
     &:hover {
       transform: scale(1.2);
       transition: all 0.2s ease-in-out;
-      box-shadow: 0 0 0 2px $secondary-tint;
+      box-shadow: 0 0 0 2px $dark-color;
     }
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 2px $secondary-tint;
+      box-shadow: 0 0 0 2px var(--secondary-tint);
     }
   }
   h2 {
@@ -74,14 +88,49 @@ dialog#welcomeModal {
     line-height: 1.5;
     margin-bottom: 1rem;
     button {
-      @include mixins.btn($foreground, $background, $primary-tint);
+      position: static;
+      @include mixins.btn(var(--foreground), var(--background), var(--tint));
+    }
+  }
+  .form-control {
+    display: flex;
+    gap: 5px;
+    input, label {
+      cursor: pointer;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      border-radius: 5px;
+      margin-top: 5px;
+      border: 1px solid $dark-color;
+      &:focus {
+        outline: none;
+        border: 2px solid $dark-tint;
+      }
     }
   }
 }
 
-.hidden {
-  display: none !important;
+#userSettingsModal {
+  #userNameSetup {
+    display: none;
+    flex-flow: column nowrap;
+    #err {
+      display: none;
+      margin-bottom: 0;
+    }
+  }
+  #saveSettingsBtn {
+    margin: 10px 0 0;
+    display: block;
+    @include mixins.btn($dark-color, $light-color, $dark-tint);
+  }
 }
 
 @import 'terminal';
 @import 'gui';
+
+.hidden {
+  display: none;
+}

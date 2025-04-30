@@ -19,9 +19,9 @@
             <div class="green"></div>
           </div>
           <p class="prompt">
-            <span data-type="username">user</span>
+            <span data-type="username"></span>
             @
-            <span data-type="hostname">IyosWebServer</span>
+            <span data-type="hostname"></span>
             : 
             <span data-type="path">~</span>
           </p>
@@ -72,7 +72,7 @@
         </div>
       </header>
       <section class="about">
-        <h2>Iyola's Profile</h2>
+        <h2>Profile</h2>
         <div class="intro">
           <div class="cover-pic">
             <img src="./assets/cover.png" alt="Iyo's cover">
@@ -128,17 +128,32 @@
       </section>
     </div>
     <!-- Modals -->
+     <!-- Welcome Modal -->
     <dialog id="welcomeModal">
-      <button class="modal-close close-modal-btn" id="closeModal">X</button>
+      <button class="modal-close" data-type="close-diag-btn" data-btn-for="welcomeModal">X</button>
       <h2>Welcome to Iyo's website!</h2>
       <p>By default, this site runs in <b>terminal mode</b>: you’ll need to type commands manually to explore.</p>
       <p>If that’s not your thing or you’re short on time, no worries; You can <button class='open-gui-btn'>Use the GUI version</button></p>
       
-      <p>But if you’re feeling curious or adventurous, you can simply <button class="close-modal-btn">close this message</button> and jump right into the terminal experience.</p>
+      <p>But if you’re feeling curious or adventurous, you can simply <button id="closeWelcomeDiag" data-btn-for="welcomeModal" data-type="close-diag-btn">close this message</button> and jump right into the terminal experience.</p>
       <p>Have fun!</p>
     </dialog>
     <script type="module" src="./js/script.js"></script>
   </main>
+  <!-- Settings Modal -->
+  <dialog id="userSettingsModal">
+    <button class="modal-close" data-type="close-diag-btn" data-btn-for="userSettingsModal">X</button>
+    <h2>User details</h2>
+    <div id="consent" class="form-control">
+      <label for="setCustomNameInput">Set custom username</label>
+      <input type="checkbox" name="set-custom-name-input" id="setCustomNameInput">
+    </div>
+    <div id="userNameSetup" class="form-control">
+      <input type="text" name="username" id="customNameInput" placeholder="Enter your username">
+      <p id="err"></p>
+    </div>
+    <button class="btn" id="saveSettingsBtn">Continue</button>
+  </dialog>
   <!-- Templates -->
   <template id="cardTemplate">
     <div class="card" href="#">

@@ -25,27 +25,27 @@
           height: 12px;
           border: none;
           border-radius: 50%;
-          background-color: $background;
+          background-color: var(--background);
         }
         .red { background-color: #ff5f56; }
         .yellow { background-color: #ffbd2e; }
         .green { background-color: #27c93f; }
       }
       button {
-        @include mixins.btn($terminal-text, $foreground, $terminal-text);
+        @include mixins.btn(var(--terminal-color), $dark-color, var(--terminal-color));
       }
     }
     .terminal-body {
-      background-color: $foreground;
+      background-color: $dark-color;
       background-image: linear-gradient(135deg, #1c1c1c, #000000, #1c1c1c);
       padding: 1rem;
       height: 400px;
       max-height: 400px;
       overflow-y: scroll;
-      color: $foreground;
+      color: var(--foreground);
       cursor: text;
       #terminalIntro {
-        color: $background;
+        color: $light-color;
         margin-bottom: 10px;
       }
       .line, .response {
@@ -53,12 +53,12 @@
         align-items: flex-start;
       }
       .response {
-        color: $background;
+        color: var(--background);
         gap: 5px;
       }
       .input {
         flex: 1;
-        color: $background;
+        color: var(--background);
         background: transparent;
         border: none;
         outline: none;
@@ -70,11 +70,11 @@
     .prompt {
       display: flex;
       gap: 0;
-      color: $terminal-text;
+      color: var(--terminal-color);
       margin-right: 0.5rem;
     }
   }
 }
 .text-color {
-  color: $background;
+  color: var(--background);
 }
