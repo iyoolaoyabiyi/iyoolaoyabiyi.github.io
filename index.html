@@ -51,7 +51,7 @@
       <header class="gui-header">
         <div class="header-container">
           <div class="header-logo">
-            <h1 aria-label="Iyo Ola Oyabiyi">IYO</h1>
+            <h1>IYO</h1>
           </div>
           <div class="header-icon">
             <div class="nav-icon">
@@ -137,8 +137,11 @@
       
       <p>But if you're feeling curious or adventurous, you can simply <button id="closeWelcomeDiag" data-btn-for="welcomeModal" data-type="close-diag-btn">close this message</button> and jump right into the terminal experience.</p>
       <p>Have fun!</p>
+      <div class="form-control">
+        <input type="checkbox" name="set-first-time-input" id="setFirstTimeInput">
+        <label for="setFirstTimeInput">Show this message again</label>
+      </div>
     </dialog>
-    <script type="module" src="./js/script.js"></script>
   </main>
   <!-- Settings Modal -->
   <dialog id="userSettingsModal">
@@ -154,7 +157,7 @@
     </div>
     <div class="form-control">
       <label for="setDarkModeInput">Dark mode</label>
-      <input type="checkbox" name="set-dark-mode-input" id="setDarkMode" checked>
+      <input type="checkbox" name="set-dark-mode-input" id="setDarkModeInput" checked>
     </div>
     <button class="btn" id="saveSettingsBtn">Continue</button>
   </dialog>
@@ -185,5 +188,7 @@
       </div>
     </div>
   </template>
+
+  <script type="module" src="./js/script.js"></script>
 </body>
 </html>

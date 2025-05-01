@@ -92,18 +92,18 @@ dialog p button {
   cursor: pointer;
   border: none;
   padding: 0.5rem 10px;
-  background-color: var(--foreground);
-  color: var(--background);
+  background-color: #001010;
+  color: #eeffff;
   border-radius: 5px;
 }
 dialog p button:hover, dialog p .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer dialog p button.btn:focus, dialog p .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons dialog p button.btn:focus, dialog p .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header dialog p button:focus, dialog p .floating-settings-btn button:focus, .floating-settings-btn dialog p button:focus, dialog p #userSettingsModal button#saveSettingsBtn:focus, #userSettingsModal dialog p button#saveSettingsBtn:focus, dialog p button:focus {
-  box-shadow: 0 0 0 2px var(--tint);
+  box-shadow: 0 0 0 2px #005f5f;
   background: transparent;
-  color: var(--foreground);
+  color: #001010;
 }
 dialog p button:active {
-  background-color: var(--tint);
-  color: var(--background);
+  background-color: #005f5f;
+  color: #eeffff;
 }
 dialog p button:focus {
   outline: none;

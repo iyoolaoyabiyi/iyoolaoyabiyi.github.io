@@ -23,13 +23,15 @@ settingsBtns.forEach((btn) => {
 
 if (userSettings.firstTime) {
   welcomeDialog.showModal();
-  updateUserSettings('firstTime', false);
+  // updateUserSettings('firstTime', false);
 } else {
   handleViewChangeFocus();
 }
 
 if (userSettings.window === 'gui') openGUI();
 else openTerminal();
+
+document.getElementById('setFirstTimeInput').checked = userSettings.firstTime;
 
 // Modals Functionality
 document.querySelectorAll('.open-gui-btn').forEach((btn) => {
@@ -51,7 +53,10 @@ document.querySelectorAll('[data-type="close-diag-btn"').forEach((btn) => {
   });
     
 welcomeDialog.addEventListener('close', () => {
-  userSettingsDialog.showModal(); 
+  userSettingsDialog.showModal();
+  if (document.getElementById('setFirstTimeInput').checked) 
+    updateUserSettings('firstTime', true);
+  else updateUserSettings('firstTime', false);
 });
 
 // Settings Functionality
@@ -87,7 +92,7 @@ userSettingsDialog.querySelector('#saveSettingsBtn')
     }
 });
 
-userSettingsDialog.querySelector('#setDarkMode')
+userSettingsDialog.querySelector('#setDarkModeInput')
   .addEventListener('change', function() {
     if (this.checked) {
       document.documentElement.dataset.theme = 'dark';
@@ -96,7 +101,13 @@ userSettingsDialog.querySelector('#setDarkMode')
       document.documentElement.dataset.theme = 'light';
       updateUserSettings('theme', 'light');
     }
-  })
+  });
+
+welcomeDialog.querySelector('#setFirstTimeInput')
+  .addEventListener('change', function() {
+    if (this.checked) updateUserSettings('firstTime', true);
+    else updateUserSettings('firstTime', false);
+  });
 
 // Terminal Functionalities
 terminal.addOptions();
@@ -160,9 +171,9 @@ function setTheme(theme) {
   document.documentElement.dataset.theme = theme;
   updateUserSettings('theme', theme);
   if (theme === 'dark') {
-    document.querySelector('#setDarkMode').checked = true;
+    document.querySelector('#setDarkModeInput').checked = true;
   } else {
-    document.querySelector('#setDarkMode').checked = false;
+    document.querySelector('#setDarkModeInput').checked = false;
   }
 }
 

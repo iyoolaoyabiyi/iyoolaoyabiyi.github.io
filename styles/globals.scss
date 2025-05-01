@@ -91,7 +91,7 @@ dialog {
     margin-bottom: 1rem;
     button {
       position: static;
-      @include mixins.btn(var(--foreground), var(--background), var(--tint));
+      @include mixins.btn($dark-color, $light-color, $dark-tint);
     }
   }
   .form-control {
