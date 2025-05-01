@@ -151,6 +151,9 @@ dialog {
   bottom: 10px;
   button {
     @include mixins.btn(var(--foreground), var(--background), var(--tint));
+    &:hover {
+      background: var(--background);
+    }
     &:active {
       background: var(--background);
     }

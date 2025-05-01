@@ -204,6 +204,9 @@ dialog .form-control input[type=text]:focus {
 .floating-settings-btn button:focus {
   outline: none;
 }
+.floating-settings-btn button:hover, .floating-settings-btn .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .floating-settings-btn button:focus, .floating-settings-btn .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .floating-settings-btn button:focus, .floating-settings-btn #userSettingsModal button#saveSettingsBtn:focus, #userSettingsModal .floating-settings-btn button#saveSettingsBtn:focus, .floating-settings-btn button:focus {
+  background: var(--background);
+}
 .floating-settings-btn button:active {
   background: var(--background);
 }
