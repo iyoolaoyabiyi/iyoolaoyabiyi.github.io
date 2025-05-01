@@ -139,7 +139,7 @@
       <p>Have fun!</p>
       <div class="form-control">
         <input type="checkbox" name="set-first-time-input" id="setFirstTimeInput">
-        <label for="setFirstTimeInput">Show this message again</label>
+        <label for="setFirstTimeInput">Show this message on start</label>
       </div>
     </dialog>
   </main>
@@ -147,6 +147,10 @@
   <dialog id="userSettingsModal">
     <button class="modal-close" data-type="close-diag-btn" data-btn-for="userSettingsModal">X</button>
     <h2>User settings</h2>
+    <div class="form-control">
+      <label for="setDarkModeInput">Dark mode</label>
+      <input type="checkbox" name="set-dark-mode-input" id="setDarkModeInput" checked>
+    </div>
     <div id="consent" class="form-control">
       <label for="setCustomNameInput">Set custom terminal username</label>
       <input type="checkbox" name="set-custom-name-input" id="setCustomNameInput">
@@ -155,11 +159,10 @@
       <input type="text" name="username" id="customNameInput" placeholder="Enter your username">
       <p id="err"></p>
     </div>
-    <div class="form-control">
-      <label for="setDarkModeInput">Dark mode</label>
-      <input type="checkbox" name="set-dark-mode-input" id="setDarkModeInput" checked>
+    <div class="modal-btns">
+      <button class="btn" id="saveSettingsBtn">Continue</button>
+      <button class="btn" id="openWelcomeModalBtn">Open welcome modal</button>
     </div>
-    <button class="btn" id="saveSettingsBtn">Continue</button>
   </dialog>
   <!-- Settings Btn -->
    <div class="floating-settings-btn">

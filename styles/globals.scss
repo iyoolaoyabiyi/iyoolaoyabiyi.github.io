@@ -112,6 +112,11 @@ dialog {
       }
     }
   }
+  .modal-btns {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
 }
 
 #userSettingsModal {
@@ -123,7 +128,7 @@ dialog {
       margin-bottom: 0;
     }
   }
-  #saveSettingsBtn {
+  button.btn {
     margin: 10px 0 0;
     display: block;
     @include mixins.btn($dark-color, $light-color, $dark-tint);

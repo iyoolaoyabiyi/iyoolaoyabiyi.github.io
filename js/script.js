@@ -15,6 +15,7 @@ let userSettings = getSavedSettings();
 // General Functionalities
 setTheme(userSettings.theme);
 
+// Modals Functionality
 settingsBtns.forEach((btn) => {
   btn.addEventListener('click', function() {
     userSettingsDialog.showModal();
@@ -23,7 +24,6 @@ settingsBtns.forEach((btn) => {
 
 if (userSettings.firstTime) {
   welcomeDialog.showModal();
-  // updateUserSettings('firstTime', false);
 } else {
   handleViewChangeFocus();
 }
@@ -33,7 +33,6 @@ else openTerminal();
 
 document.getElementById('setFirstTimeInput').checked = userSettings.firstTime;
 
-// Modals Functionality
 document.querySelectorAll('.open-gui-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
     welcomeDialog.close();
@@ -108,6 +107,9 @@ welcomeDialog.querySelector('#setFirstTimeInput')
     if (this.checked) updateUserSettings('firstTime', true);
     else updateUserSettings('firstTime', false);
   });
+
+  userSettingsDialog.querySelector('#openWelcomeModalBtn')
+    .addEventListener('click', () => welcomeDialog.showModal());
 
 // Terminal Functionalities
 terminal.addOptions();
