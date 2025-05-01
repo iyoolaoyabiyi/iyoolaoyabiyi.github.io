@@ -285,6 +285,7 @@ dialog .form-control input[type=text]:focus {
 .gui-window .gui-header .header-container .header-icon {
   display: none;
   padding: 10px;
+  padding-top: 17px;
   position: absolute;
   right: 0;
 }

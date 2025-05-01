@@ -4,8 +4,6 @@ $max-width: 600px;
 $padding-width: 10px;
 $transition: all 0.3s ease-in-out;
 $header-radius: 10px;
-// var(--foreground): var(--foreground);
-// var(--background): var(--background);
 
 // GUI
 .gui-window {
@@ -31,6 +29,7 @@ $header-radius: 10px;
       .header-icon {
         display: none;
         padding: $padding-width;
+        padding-top: calc($padding-width + 7px);
         position: absolute;
         right: 0;
         .nav-icon {

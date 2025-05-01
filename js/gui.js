@@ -16,9 +16,22 @@ const gui = {
     icon.addEventListener('click', () => {
       if (!gui.isMenuOpen) {
         openMenu();
-        console.log(document.querySelectorAll('.open-gui-btn'));
       } else {
         closeMenu();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 576) {
+        icon.parentElement.style.display = 'none';
+        logoContainer.style.margin = '0';
+        if (!this.isMenuOpen) {
+          openMenu();
+        }
+      } else {
+        if (this.isMenuOpen) {
+          logoContainer.style.margin = 'auto';
+        }
       }
     });
 

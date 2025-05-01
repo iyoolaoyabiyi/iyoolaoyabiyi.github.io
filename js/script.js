@@ -11,6 +11,8 @@ const userSettingsDialog = document.getElementById('userSettingsModal');
 // Data and Configs
 let userData = getSavedData();
 
+// document.documentElement.dataset.theme = userData.theme;
+
 if (userData.firstTime) {
   welcomeDialog.showModal();
   updateUserData('firstTime', false);
