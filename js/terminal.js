@@ -1,5 +1,5 @@
 import commands from './commands.js';
-import { getSavedData, openGUI, saveUserData } from './script.js';
+import { getSavedData, openGUI, updateUserData } from './script.js';
 import defaultUserData from './configs/userData.js';
 
 // let userData = localStorage.getItem('userData');
@@ -16,7 +16,7 @@ import defaultUserData from './configs/userData.js';
 // Terminal Object
 const terminal = {
   // options
-  user: 'guest',
+  // user: 'guest',
   hostname: 'IyosWebServer',
   currentPath: '~',
   needResponse: false,
@@ -100,7 +100,7 @@ const terminal = {
     });
   },
   resetOptions() {
-    this.user = 'guest';
+    // this.user = 'guest';
     this.hostname = 'iyoswebserver';
     this.currentPath = '~';
   },
@@ -154,6 +154,10 @@ const terminal = {
         });
       case this.commands.help.name:
         return commandObj.execute(args);
+      case this.commands.whoami.name:
+        return commandObj.execute(whoamiFunc, args);
+      case this.commands.username.name:
+        return commandObj.execute(usernameFunc, args);
       default: 
         return `command not found: ${command}`;
     }
@@ -171,6 +175,29 @@ const terminal = {
       if (!terminal.needResponse) this.body.addCommandLine();
     }
   }
+}
+
+function whoamiFunc(args) {
+  const users = ['iyo', 'iyoola', 'iyoolaoyabiyi'];
+  if (args.length > 1) return `Usage: whoami [user]`;
+  if (args.length < 1) {
+    const userData = getSavedData();
+    return userData.username;
+  }
+  if (users.includes(args[0])) return `${args[0]} is an awesome programmer!`;
+  else return 'Unknown user';
+}
+
+function usernameFunc(args) {
+  const userData = getSavedData();
+  const username = args[0];
+  if (args.length < 1) return userData.username;
+  if (args.length > 1) return `Usage: username [new username]`;
+  if (args[0].length < 3 || args.length >= 12) 
+    return `Username must be at least 3 characters and not more than 12 characters long`;
+  updateUserData('username', username);
+  terminal.addOptions();
+  return `Username changed to ${username}`;
 }
 
 export default terminal;

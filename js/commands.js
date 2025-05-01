@@ -103,6 +103,23 @@ const commands = {
       }
       return output.trim();
     }
+  },
+  whoami: {
+    name: 'whoami',
+    description: 'Display the current user',
+    // usage: 'whoami [username]',
+    isQuery: false,
+    execute: function(func, args) {
+      return func(args);
+    }
+  },
+  username: {
+    name: 'username',
+    description: 'Set or get the current user',
+    isQuery: false,
+    execute: function(func, args) {
+      return func(args);
+    }
   }
 }
 

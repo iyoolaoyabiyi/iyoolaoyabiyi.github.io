@@ -1,8 +1,8 @@
 const defaultUserData = {
-  username: 'user',
+  username: 'guest',
   firstTime: true,
   theme: 'dark',
-  currentView: 'terminal'
+  window: 'terminal'
 }
 
 export default defaultUserData;

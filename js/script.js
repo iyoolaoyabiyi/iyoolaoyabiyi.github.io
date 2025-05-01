@@ -9,26 +9,19 @@ const welcomeDialog = document.getElementById('welcomeModal');
 const userSettingsDialog = document.getElementById('userSettingsModal');
 
 // Data and Configs
-let userData = localStorage.getItem('userData');
+let userData = getSavedData();
 
-// Initial Setup
-// document.documentElement.dataset.theme = 'dark';
-if (userData) {
-  userData = JSON.parse(userData);
-} else {
-  userData = defaultUserData;
-  saveUserData(userData);
-}
-
-// Modals Functionality
 if (userData.firstTime) {
-  saveUserData(userData);
   welcomeDialog.showModal();
-  userData.firstTime = false;
+  updateUserData('firstTime', false);
 } else {
   handleViewChangeFocus();
 }
 
+if (userData.window === 'gui') openGUI();
+else openTerminal();
+
+// Modals Functionality
 document.querySelectorAll('.open-gui-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
     welcomeDialog.close();
@@ -40,14 +33,15 @@ document.querySelectorAll('[data-type="close-diag-btn"').forEach((btn) => {
   btn.addEventListener('click', function() {
     document.getElementById(this.dataset.btnFor).close();
     switch (this.dataset.btnFor) {
-      case 'welcomeModal':
-        userSettingsDialog.showModal();
-        break;
-      case 'userSettingsModal':
-        handleViewChangeFocus();
-        break;
-    }
+        case 'userSettingsModal':
+          handleViewChangeFocus();
+          break;
+      }
+    });
   });
+    
+welcomeDialog.addEventListener('close', () => {
+  userSettingsDialog.showModal(); 
 });
 
 userSettingsDialog.querySelector('#setCustomNameInput')
@@ -85,7 +79,8 @@ userSettingsDialog.querySelector('#saveSettingsBtn')
 // Terminal Functionalities
 terminal.addOptions();
 terminal.body.element.addEventListener('click', terminal.focusInput.bind(terminal));
-terminal.commandLine.querySelector('input').addEventListener('keydown', terminal.processPrompt.bind(terminal));
+terminal.commandLine.querySelector('input')
+  .addEventListener('keydown', terminal.processPrompt.bind(terminal));
 terminal.openGuiBtn.addEventListener('click', openGUI);
 
 // GUI Functionalities
@@ -124,19 +119,23 @@ function saveUserData(userData) {
   localStorage.setItem('userData', JSON.stringify(userData));
 }
 
-function updateUserData(userData, {name}) {
-  Object.assign(userData, { name });
+function updateUserData(key, value) {
+  userData[key] = value
   saveUserData(userData);
 }
 
 function getSavedData() {
   let userData = localStorage.getItem('userData');
   if (userData) userData = JSON.parse(userData);
+  else {
+    userData = defaultUserData;
+    localStorage.setItem('userData', JSON.stringify(userData));
+  }
   return userData;
 }
 
 function handleViewChangeFocus() {
-  if (userData.currentView === 'terminal') {
+  if (userData.window === 'terminal') {
     terminal.commandLine.querySelector('input').focus();
   }
 }
@@ -145,6 +144,7 @@ function openGUI() {
   if (gui.window.classList.contains("hidden")) {
     terminal.window.classList.add("hidden");
     gui.window.classList.remove("hidden");
+    updateUserData('window', 'gui');
   }
 }
 
@@ -153,7 +153,8 @@ function openTerminal() {
     gui.window.classList.add("hidden");
     terminal.window.classList.remove("hidden");
     terminal.commandLine.querySelector('input').focus();
+    updateUserData('window', 'terminal');
   }
 }
 
-export { openGUI, openTerminal, saveUserData, getSavedData };
+export { openGUI, openTerminal, saveUserData, getSavedData, updateUserData };
