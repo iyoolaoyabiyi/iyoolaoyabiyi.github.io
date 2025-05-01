@@ -156,6 +156,37 @@ dialog .form-control input[type=text]:focus {
   outline: none;
 }
 
+.deco-navs {
+  display: flex;
+  gap: 6px;
+}
+.deco-navs div {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--background);
+}
+.deco-navs .red {
+  background-color: #ff5f56;
+}
+.deco-navs .yellow {
+  background-color: #ffbd2e;
+}
+.deco-navs .green {
+  background-color: #27c93f;
+}
+
+.settings-btn:hover svg, .gui-window .content-tabs .display-container .card .card-footer .settings-btn.btn:focus svg, .gui-window .gui-header .header-container .header-nav .nav-buttons .settings-btn.btn:focus svg, .gui-window .gui-header .header-container .header-nav ul li a.settings-btn:focus svg, .terminal-window .terminal-container .terminal-header button.settings-btn:focus svg, dialog p button.settings-btn:focus svg, #userSettingsModal .settings-btn#saveSettingsBtn:focus svg {
+  fill: var(--background);
+}
+.settings-btn:active {
+  background: #001010;
+}
+.settings-btn svg {
+  fill: #001010;
+}
+
 .terminal-window {
   display: flex;
   justify-content: center;
@@ -176,26 +207,6 @@ dialog .form-control input[type=text]:focus {
   align-items: center;
   justify-content: space-between;
 }
-.terminal-window .terminal-container .terminal-header .deco-navs {
-  display: flex;
-  gap: 6px;
-}
-.terminal-window .terminal-container .terminal-header .deco-navs div {
-  width: 12px;
-  height: 12px;
-  border: none;
-  border-radius: 50%;
-  background-color: var(--background);
-}
-.terminal-window .terminal-container .terminal-header .deco-navs .red {
-  background-color: #ff5f56;
-}
-.terminal-window .terminal-container .terminal-header .deco-navs .yellow {
-  background-color: #ffbd2e;
-}
-.terminal-window .terminal-container .terminal-header .deco-navs .green {
-  background-color: #27c93f;
-}
 .terminal-window .terminal-container .terminal-header button {
   cursor: pointer;
   border: none;
@@ -215,6 +226,15 @@ dialog .form-control input[type=text]:focus {
 }
 .terminal-window .terminal-container .terminal-header button:focus {
   outline: none;
+}
+.terminal-window .terminal-container .terminal-header .settings-btn:hover svg, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .display-container .card .card-footer .settings-btn.btn:focus svg, .gui-window .content-tabs .display-container .card .card-footer .terminal-window .terminal-container .terminal-header .settings-btn.btn:focus svg, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav .nav-buttons .settings-btn.btn:focus svg, .gui-window .gui-header .header-container .header-nav .nav-buttons .terminal-window .terminal-container .terminal-header .settings-btn.btn:focus svg, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav ul li a.settings-btn:focus svg, .gui-window .gui-header .header-container .header-nav ul li .terminal-window .terminal-container .terminal-header a.settings-btn:focus svg, .terminal-window .terminal-container .terminal-header #userSettingsModal .settings-btn#saveSettingsBtn:focus svg, #userSettingsModal .terminal-window .terminal-container .terminal-header .settings-btn#saveSettingsBtn:focus svg, .terminal-window .terminal-container .terminal-header button.settings-btn:focus svg {
+  fill: var(--terminal-color);
+}
+.terminal-window .terminal-container .terminal-header .settings-btn:active {
+  background: #001010;
+}
+.terminal-window .terminal-container .terminal-header .settings-btn svg {
+  fill: #001010;
 }
 .terminal-window .terminal-container .terminal-body {
   background-color: #001010;
