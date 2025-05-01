@@ -121,22 +121,21 @@ gui.activateMenu();
 gui.openTerminalBtn.addEventListener('click', () => {
   openTerminal();
 });
+gui.navItems.forEach((item) => {
+  item.addEventListener('click', function() {
+    const navTab = this.dataset.tabFor;
+    
+    gui.tabBtns.forEach(btn => {
+      if (navTab === btn.dataset.tabFor) {
+        document.querySelector('.description').scrollIntoView({behavior: 'smooth'});
+        gui.openTab(btn);
+      }
+    });
+  });
+});
 gui.tabBtns.forEach((btn) => {
   btn.addEventListener('click', () => {
-    if (!btn.classList.contains('active')) {
-      gui.tabBtns.forEach(btn => {
-        btn.classList.remove('active');
-      });
-      btn.classList.add('active');
-      gui.tabs.forEach(tab => {
-        if (btn.dataset.tabFor === tab.id) {
-          gui.tabs.forEach(tab => {
-            tab.classList.add('hidden');
-          })
-          tab.classList.remove('hidden');
-        }
-      })
-    }
+    gui.openTab(btn);
   });
 });
 gui.populateTab('portfolio', portfolio);

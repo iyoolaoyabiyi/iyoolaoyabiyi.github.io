@@ -5,6 +5,7 @@ const gui = {
   window: document.querySelector('.gui-window'),
   openTerminalBtn: document.getElementById('openTerminalBtn'),
   tabBtns: document.querySelectorAll('.tabs-btns button'),
+  navItems: document.querySelectorAll('.header-nav-list li button'),
   tabs: document.querySelectorAll('.tab'),
   activateMenu() {
     const icon = document.querySelector('.nav-icon');
@@ -74,27 +75,6 @@ const gui = {
       gui.isMenuOpen = false;
     }
   },
-  populatePortfolio(portfolio) {
-    const portfolioCardTemplate = document.querySelector('#cardTemplate');
-    const portfolioContainer = document.querySelector('#portfolio');
-    portfolio.forEach((item) => {
-      const card = portfolioCardTemplate.content.cloneNode(true);
-      const cardTitle = card.querySelector('.card-title');
-      const cardDescription = card.querySelector('.card-description');
-      const cardImg = card.querySelector('.card-img img');
-      const sourceLink = card.querySelector('.source-link');
-      const demoLink = card.querySelector('.demo-link');
-
-      cardImg.src =`${imgDir}/${item.img}`;
-      cardImg.alt = item.name;
-      cardTitle.textContent = item.name;
-      cardDescription.textContent = item.description;
-      sourceLink.href = item.sourceLink;
-      demoLink.href = item.demoLink;
-      
-      portfolioContainer.appendChild(card);
-    });
-  },
   populateTab(tabID, contentArr) {
     const imgDir = './assets/images';
     const tabContainer = document.querySelector(`#${tabID}`);
@@ -132,6 +112,23 @@ const gui = {
       }
       tabContainer.appendChild(card);
     });
+  },
+  openTab(btn) {
+    if (!btn.classList.contains('active')) {
+      if (btn)
+      this.tabBtns.forEach(btn => {
+        btn.classList.remove('active');
+      });
+      btn.classList.add('active');
+      this.tabs.forEach(tab => {
+        if (btn.dataset.tabFor === tab.id) {
+          this.tabs.forEach(tab => {
+            tab.classList.add('hidden');
+          })
+          tab.classList.remove('hidden');
+        }
+      });
+    }
   }
 }
 

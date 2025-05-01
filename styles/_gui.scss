@@ -77,8 +77,13 @@ $header-radius: 10px;
           gap: 1.5rem;
           margin-bottom: 2rem;
           li {
-            a {
+            button {
               color: var(--background);
+              border: 0;
+              background: transparent;
+              text-decoration: underline;
+              cursor: pointer;
+              padding: 0;
               &:hover {
                 text-decoration: none;
                 color: var(--secondary-tint);
@@ -250,10 +255,12 @@ $header-radius: 10px;
           gap: 5px;
           li {
             a {
-              color: var(--foreground);
+              color: var(--tint);
               text-decoration: underline;
               &:hover {
-                color: var(--tint);
+                background: var(--foreground);
+                color: var(--background);
+                text-decoration: none;
               }
             }
           }
