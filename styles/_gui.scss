@@ -23,6 +23,7 @@ $header-radius: 10px;
         margin: auto;
         transition: $transition;
         padding: $padding-width;
+        cursor: pointer;
       }
       .header-icon {
         display: none;

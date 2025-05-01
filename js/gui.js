@@ -12,6 +12,7 @@ const gui = {
     const logoContainer = document.querySelector('.header-logo');
     const lines = document.querySelectorAll('.nav-icon-line');
     const nav = document.querySelector('.header-nav');
+    const headerLogo = document.querySelector('.header-logo h1');
 
     // Menu Management
     icon.addEventListener('click', () => {
@@ -52,6 +53,13 @@ const gui = {
           }
         }
       }
+    });
+
+    headerLogo.addEventListener('mouseover', function() {
+      this.textContent = 'Iyoolaoyabiyi'
+    });
+    headerLogo.addEventListener('mouseleave', function() {
+      this.textContent = 'IYO'
     });
 
     function openMenu() {

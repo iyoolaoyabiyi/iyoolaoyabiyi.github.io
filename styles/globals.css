@@ -330,6 +330,7 @@ dialog .form-control input[type=text]:focus {
   margin: auto;
   transition: all 0.3s ease-in-out;
   padding: 10px;
+  cursor: pointer;
 }
 .gui-window .gui-header .header-container .header-icon {
   display: none;
