@@ -1,17 +1,17 @@
 import commands from './commands.js';
-import { getSavedData, openGUI, updateUserData } from './script.js';
-import defaultUserData from './configs/userData.js';
+import { getSavedSettings, openGUI, updateUserSettings } from './script.js';
+import defaultUserSettings from './configs/userSettings.js';
 
-// let userData = localStorage.getItem('userData');
+// let userSettings = localStorage.getItem('userSettings');
 
-// if (userData) {
-//   Object.assign(userData, JSON.parse(userData));
+// if (userSettings) {
+//   Object.assign(userSettings, JSON.parse(userSettings));
 // } else {
-//   userData = defaultUserData;
-//   saveUserData(userData);
+//   userSettings = defaultUserSettings;
+//   saveUserSettings(userSettings);
 // }
 
-// console.log(userData);
+// console.log(userSettings);
 
 // Terminal Object
 const terminal = {
@@ -45,13 +45,13 @@ const terminal = {
     },
     addCommandLine() {
       const commandLine = document.createElement('div');
-      const userData = getSavedData();
+      const userSettings = getSavedSettings();
       let commandLineInput = null;
       commandLine.classList.add('line');
       commandLine.id = 'commandLine';
       commandLine.innerHTML = `
         <p class="prompt">
-          <span data-type="username">${userData.username}</span>
+          <span data-type="username">${userSettings.username}</span>
           @
           <span data-type="hostname">${terminal.hostname}</span>
           :
@@ -88,9 +88,9 @@ const terminal = {
     this.body.element.innerHTML = '';
   },
   addOptions() {
-    const userData = getSavedData();
+    const userSettings = getSavedSettings();
     document.querySelectorAll('[data-type="username"]').forEach(el => {
-      el.textContent = userData.username;
+      el.textContent = userSettings.username;
     });
     document.querySelectorAll('[data-type="hostname"]').forEach(el => {
       el.textContent = this.hostname;
@@ -181,21 +181,21 @@ function whoamiFunc(args) {
   const users = ['iyo', 'iyoola', 'iyoolaoyabiyi'];
   if (args.length > 1) return `Usage: whoami [user]`;
   if (args.length < 1) {
-    const userData = getSavedData();
-    return userData.username;
+    const userSettings = getSavedSettings();
+    return userSettings.username;
   }
   if (users.includes(args[0])) return `${args[0]} is an awesome programmer!`;
   else return 'Unknown user';
 }
 
 function usernameFunc(args) {
-  const userData = getSavedData();
+  const userSettings = getSavedSettings();
   const username = args[0];
-  if (args.length < 1) return userData.username;
+  if (args.length < 1) return userSettings.username;
   if (args.length > 1) return `Usage: username [new username]`;
   if (args[0].length < 3 || args.length >= 12) 
     return `Username must be at least 3 characters and not more than 12 characters long`;
-  updateUserData('username', username);
+  updateUserSettings('username', username);
   terminal.addOptions();
   return `Username changed to ${username}`;
 }

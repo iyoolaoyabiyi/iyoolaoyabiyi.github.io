@@ -8,7 +8,7 @@
   --foreground: #{$dark-color};
   --tint: #{$dark-tint};
   --secondary-tint: #{$light-tint};
-  --terminal-color: #{$green};
+  --terminal-color: #{$light-tint};
   --grey: #{$light-grey};
   --secondary-grey: #{$dark-grey};
 }
@@ -27,8 +27,10 @@
 }
 
 body {
+  position: relative;
   background-color: var(--background);
   margin: 0;
+  padding-bottom: 50px;
   font-family: Quantico, monospace;
   color: var(--foreground);
 }
@@ -143,16 +145,22 @@ dialog {
   .green { background-color: #27c93f; }
 }
 
-.settings-btn {
-  &:hover svg {
-    fill: var(--background);
-  }
-  &:active {
-    background: $dark-color;
-  }
-  svg {
-    fill: $dark-color;
-  }
+.floating-settings-btn {
+  position: fixed;
+  right: $padding-width;
+  bottom: 10px;
+  button {
+    @include mixins.btn(var(--foreground), var(--background), var(--tint));
+    &:active {
+      background: var(--background);
+    }
+    &:hover svg {
+      fill: var(--foreground);
+    }
+    svg {
+      fill: var(--background);
+    }
+}
 }
 
 @import 'terminal';

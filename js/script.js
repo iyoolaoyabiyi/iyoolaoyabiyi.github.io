@@ -1,26 +1,34 @@
 import terminal from './terminal.js';
 import gui from './gui.js';
-import defaultUserData from './configs/userData.js';
+import defaultUserSettings from './configs/userSettings.js';
 import portfolio from "./configs/portfolio.js";
 import posts from "./configs/posts.js";
 
 // DOM
 const welcomeDialog = document.getElementById('welcomeModal');
 const userSettingsDialog = document.getElementById('userSettingsModal');
+const settingsBtns = document.querySelectorAll('.settings-btn');
 
-// Data and Configs
-let userData = getSavedData();
+// Settings and Configs
+let userSettings = getSavedSettings();
 
-// document.documentElement.dataset.theme = userData.theme;
+// General Functionalities
+setTheme(userSettings.theme);
 
-if (userData.firstTime) {
+settingsBtns.forEach((btn) => {
+  btn.addEventListener('click', function() {
+    userSettingsDialog.showModal();
+  });
+});
+
+if (userSettings.firstTime) {
   welcomeDialog.showModal();
-  updateUserData('firstTime', false);
+  updateUserSettings('firstTime', false);
 } else {
   handleViewChangeFocus();
 }
 
-if (userData.window === 'gui') openGUI();
+if (userSettings.window === 'gui') openGUI();
 else openTerminal();
 
 // Modals Functionality
@@ -46,6 +54,7 @@ welcomeDialog.addEventListener('close', () => {
   userSettingsDialog.showModal(); 
 });
 
+// Settings Functionality
 userSettingsDialog.querySelector('#setCustomNameInput')
   .addEventListener('change', function() {
     const userNameSetup = userSettingsDialog.querySelector('#userNameSetup');
@@ -60,8 +69,8 @@ userSettingsDialog.querySelector('#saveSettingsBtn')
     if (userNameSetup.style.display === 'flex') {
       if (usernameInput.value && usernameInput.value.length <= 12) {
         let username = usernameInput.value;
-        userData.username = username;
-        saveUserData(userData);
+        userSettings.username = username;
+        saveUserSettings(userSettings);
         terminal.addOptions();
       } else {
         const errEl = userSettingsDialog.querySelector('#err');
@@ -77,6 +86,17 @@ userSettingsDialog.querySelector('#saveSettingsBtn')
       handleViewChangeFocus();
     }
 });
+
+userSettingsDialog.querySelector('#setDarkMode')
+  .addEventListener('change', function() {
+    if (this.checked) {
+      document.documentElement.dataset.theme = 'dark';
+      updateUserSettings('theme', 'dark');
+    } else {
+      document.documentElement.dataset.theme = 'light';
+      updateUserSettings('theme', 'light');
+    }
+  })
 
 // Terminal Functionalities
 terminal.addOptions();
@@ -117,27 +137,37 @@ gui.populateTab('posts', posts);
 
 
 // Helpers
-function saveUserData(userData) {
-  localStorage.setItem('userData', JSON.stringify(userData));
+function saveUserSettings(userSettings) {
+  localStorage.setItem('userSettings', JSON.stringify(userSettings));
 }
 
-function updateUserData(key, value) {
-  userData[key] = value
-  saveUserData(userData);
+function updateUserSettings(key, value) {
+  userSettings[key] = value
+  saveUserSettings(userSettings);
 }
 
-function getSavedData() {
-  let userData = localStorage.getItem('userData');
-  if (userData) userData = JSON.parse(userData);
+function getSavedSettings() {
+  let userSettings = localStorage.getItem('userSettings');
+  if (userSettings) userSettings = JSON.parse(userSettings);
   else {
-    userData = defaultUserData;
-    localStorage.setItem('userData', JSON.stringify(userData));
+    userSettings = defaultUserSettings;
+    localStorage.setItem('userSettings', JSON.stringify(userSettings));
   }
-  return userData;
+  return userSettings;
+}
+
+function setTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  updateUserSettings('theme', theme);
+  if (theme === 'dark') {
+    document.querySelector('#setDarkMode').checked = true;
+  } else {
+    document.querySelector('#setDarkMode').checked = false;
+  }
 }
 
 function handleViewChangeFocus() {
-  if (userData.window === 'terminal') {
+  if (userSettings.window === 'terminal') {
     terminal.commandLine.querySelector('input').focus();
   }
 }
@@ -146,7 +176,7 @@ function openGUI() {
   if (gui.window.classList.contains("hidden")) {
     terminal.window.classList.add("hidden");
     gui.window.classList.remove("hidden");
-    updateUserData('window', 'gui');
+    updateUserSettings('window', 'gui');
   }
 }
 
@@ -155,8 +185,8 @@ function openTerminal() {
     gui.window.classList.add("hidden");
     terminal.window.classList.remove("hidden");
     terminal.commandLine.querySelector('input').focus();
-    updateUserData('window', 'terminal');
+    updateUserSettings('window', 'terminal');
   }
 }
 
-export { openGUI, openTerminal, saveUserData, getSavedData, updateUserData };
+export { openGUI, openTerminal, saveUserSettings, getSavedSettings, updateUserSettings };

@@ -10,7 +10,7 @@
     border-radius: 8px;
     overflow: hidden;
     align-self: center;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    box-shadow: 0 0 5px var(--foreground);
     .terminal-header {
       background-color: $dark-grey;
       padding: 0.5rem 1rem;
@@ -39,7 +39,7 @@
       height: 400px;
       max-height: 400px;
       overflow-y: scroll;
-      color: var(--foreground);
+      color: $light-color;
       cursor: text;
       #terminalIntro {
         color: $light-color;
@@ -50,18 +50,21 @@
         align-items: flex-start;
       }
       .response {
-        color: var(--background);
+        color: $light-color;
         gap: 5px;
       }
       .input {
         flex: 1;
-        color: var(--background);
+        color: $light-color;
         background: transparent;
         border: none;
         outline: none;
         font-family: inherit;
         font-size: 1em;
         min-width: 50px;
+      }
+      [data-type="path"] {
+        color: $light-color;
       }
     }
     .prompt {
@@ -71,7 +74,4 @@
       margin-right: 0.5rem;
     }
   }
-}
-.text-color {
-  color: var(--background);
 }

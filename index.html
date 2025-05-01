@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ioo ::  Iyo Ola Oyabiyi</title>
 
-  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+  <meta name="description" content="Iyo's personal website. A developer, builder, and lifelong tinkerer from Nigeria.">
+  <meta name="keywords" content="Iyo Oyabiyi, Iyo, Portfolio, Software Developer, Nigeria, Personal Website, Portfolion Website, Web Developer, Frontend Developer, Backend Developer, Fullstack Developer">
+  <meta name="author" content="Iyo">
+
+  <title>ioo ::  Iyo Ola Oyabiyi</title>
+  <link rel="icon" type="image/png" href="./assets/dp.png">
   <link rel="stylesheet" href="styles/globals.css">
 </head>
 <body>
@@ -14,7 +18,6 @@
      <div class="terminal-window hidden" id="terminalWindow">
       <div class="terminal-container">
         <div class="terminal-header">
-          <button class="btn" id="openGuiBtn">GUI</button>
           <p class="prompt">
             <span data-type="username"></span>
             @
@@ -22,11 +25,7 @@
             : 
             <span data-type="path">~</span>
           </p>
-          <button class="settings-btn" title="User settings" aria-label="User settings">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
-              <path d="M756-120 537-339l84-84 219 219-84 84Zm-552 0-84-84 276-276-68-68-28 28-51-51v82l-28 28-121-121 28-28h82l-50-50 142-142q20-20 43-29t47-9q24 0 47 9t43 29l-92 92 50 50-28 28 68 68 90-90q-4-11-6.5-23t-2.5-24q0-59 40.5-99.5T701-841q15 0 28.5 3t27.5 9l-99 99 72 72 99-99q7 14 9.5 27.5T841-701q0 59-40.5 99.5T701-561q-12 0-24-2t-23-7L204-120Z"/>
-            </svg>
-          </button>
+          <button class="btn" id="openGuiBtn">GUI</button>
         </div>
         <div class="terminal-body" id="terminal">
           <div id="terminalIntro">
@@ -133,10 +132,10 @@
     <dialog id="welcomeModal">
       <button class="modal-close" data-type="close-diag-btn" data-btn-for="welcomeModal">X</button>
       <h2>Welcome to Iyo's website!</h2>
-      <p>By default, this site runs in <b>terminal mode</b>: you’ll need to type commands manually to explore.</p>
-      <p>If that’s not your thing or you’re short on time, no worries; You can <button class='open-gui-btn'>Use the GUI version</button></p>
+      <p>By default, this site runs in <b>terminal mode</b>: you'll need to type commands manually to explore.</p>
+      <p>If that's not your thing or you're short on time, no worries; You can <button class='open-gui-btn'>Use the GUI version</button></p>
       
-      <p>But if you’re feeling curious or adventurous, you can simply <button id="closeWelcomeDiag" data-btn-for="welcomeModal" data-type="close-diag-btn">close this message</button> and jump right into the terminal experience.</p>
+      <p>But if you're feeling curious or adventurous, you can simply <button id="closeWelcomeDiag" data-btn-for="welcomeModal" data-type="close-diag-btn">close this message</button> and jump right into the terminal experience.</p>
       <p>Have fun!</p>
     </dialog>
     <script type="module" src="./js/script.js"></script>
@@ -144,17 +143,30 @@
   <!-- Settings Modal -->
   <dialog id="userSettingsModal">
     <button class="modal-close" data-type="close-diag-btn" data-btn-for="userSettingsModal">X</button>
-    <h2>User details</h2>
+    <h2>User settings</h2>
     <div id="consent" class="form-control">
-      <label for="setCustomNameInput">Set custom username</label>
+      <label for="setCustomNameInput">Set custom terminal username</label>
       <input type="checkbox" name="set-custom-name-input" id="setCustomNameInput">
     </div>
     <div id="userNameSetup" class="form-control">
       <input type="text" name="username" id="customNameInput" placeholder="Enter your username">
       <p id="err"></p>
     </div>
+    <div class="form-control">
+      <label for="setDarkModeInput">Dark mode</label>
+      <input type="checkbox" name="set-dark-mode-input" id="setDarkMode" checked>
+    </div>
     <button class="btn" id="saveSettingsBtn">Continue</button>
   </dialog>
+  <!-- Settings Btn -->
+   <div class="floating-settings-btn">
+    <button class="settings-btn" title="User settings" aria-label="User settings">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+        <path d="M756-120 537-339l84-84 219 219-84 84Zm-552 0-84-84 276-276-68-68-28 28-51-51v82l-28 28-121-121 28-28h82l-50-50 142-142q20-20 43-29t47-9q24 0 47 9t43 29l-92 92 50 50-28 28 68 68 90-90q-4-11-6.5-23t-2.5-24q0-59 40.5-99.5T701-841q15 0 28.5 3t27.5 9l-99 99 72 72 99-99q7 14 9.5 27.5T841-701q0 59-40.5 99.5T701-561q-12 0-24-2t-23-7L204-120Z"/>
+      </svg>
+    </button>
+   </div>
+  
   <!-- Templates -->
   <template id="cardTemplate">
     <div class="card" href="#">
