@@ -10,11 +10,13 @@
     border-radius: 8px;
     overflow: hidden;
     align-self: center;
-    box-shadow: 0 0 5px var(--foreground);
+    border: 1px solid $dark-grey;
     .terminal-header {
       background-color: $dark-grey;
       padding: 0.5rem 1rem;
       display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
       align-items: center;
       justify-content: space-between;
       button {
@@ -38,9 +40,11 @@
       padding: 1rem;
       height: 400px;
       max-height: 400px;
-      overflow-y: scroll;
       color: $light-color;
       cursor: text;
+      overflow-y: scroll;
+      scrollbar-width: thin;
+      scrollbar-color: $dark-tint $light-grey;
       #terminalIntro {
         color: $light-color;
         margin-bottom: 10px;

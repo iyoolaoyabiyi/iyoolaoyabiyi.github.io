@@ -235,12 +235,14 @@ dialog .modal-btns {
   border-radius: 8px;
   overflow: hidden;
   align-self: center;
-  box-shadow: 0 0 5px var(--foreground);
+  border: 1px solid #333333;
 }
 .terminal-window .terminal-container .terminal-header {
   background-color: #333333;
   padding: 0.5rem 1rem;
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   align-items: center;
   justify-content: space-between;
 }
@@ -279,9 +281,11 @@ dialog .modal-btns {
   padding: 1rem;
   height: 400px;
   max-height: 400px;
-  overflow-y: scroll;
   color: #eeffff;
   cursor: text;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: #005f5f #cccccc;
 }
 .terminal-window .terminal-container .terminal-body #terminalIntro {
   color: #eeffff;
