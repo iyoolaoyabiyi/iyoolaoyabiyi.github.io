@@ -21,11 +21,14 @@ $header-radius: 10px;
       .header-logo {
         display: flex;
         margin: auto;
-        transition: $transition;
         padding: $padding-width;
         cursor: pointer;
+        h1 {
+          transition: $transition;
+        }
       }
       .header-icon {
+        transition: $transition;
         display: none;
         padding: $padding-width;
         padding-top: calc($padding-width + 7px);

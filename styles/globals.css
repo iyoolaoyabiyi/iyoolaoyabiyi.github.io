@@ -78,7 +78,7 @@ dialog .modal-close:hover, dialog .gui-window .content-tabs .display-container .
 }
 dialog .modal-close:focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--secondary-tint);
+  box-shadow: 0 0 0 2px #005f5f;
 }
 dialog h2 {
   margin-bottom: 1.5rem;
@@ -110,10 +110,12 @@ dialog p button:focus {
 }
 dialog .form-control {
   display: flex;
-  gap: 5px;
 }
 dialog .form-control input, dialog .form-control label {
   cursor: pointer;
+}
+dialog .form-control label {
+  padding-right: 5px;
 }
 dialog .form-control input[type=text] {
   width: 100%;
@@ -333,11 +335,14 @@ dialog .modal-btns {
 .gui-window .gui-header .header-container .header-logo {
   display: flex;
   margin: auto;
-  transition: all 0.3s ease-in-out;
   padding: 10px;
   cursor: pointer;
 }
+.gui-window .gui-header .header-container .header-logo h1 {
+  transition: all 0.3s ease-in-out;
+}
 .gui-window .gui-header .header-container .header-icon {
+  transition: all 0.3s ease-in-out;
   display: none;
   padding: 10px;
   padding-top: 17px;

@@ -3,16 +3,16 @@
 const gui = {
   isMenuOpen: true,
   window: document.querySelector('.gui-window'),
+  paddingWidth: 10,
   openTerminalBtn: document.getElementById('openTerminalBtn'),
   tabBtns: document.querySelectorAll('.tabs-btns button'),
   navItems: document.querySelectorAll('.header-nav-list li button'),
   tabs: document.querySelectorAll('.tab'),
   activateMenu() {
     const icon = document.querySelector('.nav-icon');
-    const logoContainer = document.querySelector('.header-logo');
+    const headerLogo = document.querySelector('.header-logo');
     const lines = document.querySelectorAll('.nav-icon-line');
     const nav = document.querySelector('.header-nav');
-    const headerLogo = document.querySelector('.header-logo h1');
 
     // Menu Management
     icon.addEventListener('click', () => {
@@ -26,28 +26,28 @@ const gui = {
     window.addEventListener('resize', () => {
       if (window.innerWidth > 576) {
         icon.parentElement.style.display = 'none';
-        logoContainer.style.margin = '0';
+        headerLogo.style.margin = '0';
         if (!this.isMenuOpen) {
           openMenu();
         }
       } else {
         if (this.isMenuOpen) {
-          logoContainer.style.margin = 'auto';
+          headerLogo.style.margin = 'auto';
         }
       }
     });
 
     window.addEventListener('scroll', () => {
-      if (window.innerWidth < 576) {
+      if (window.innerWidth <= 576) {
         if (window.scrollY > 40) {
           if (this.isMenuOpen) {
             icon.parentElement.style.display = 'block';
-            logoContainer.style.margin = '0';
+            headerLogo.style.margin = '0';
             closeMenu();
           } 
         } else {
           icon.parentElement.style.display = 'none';
-          logoContainer.style.margin = 'auto';
+          headerLogo.style.margin = 'auto';
           if (!this.isMenuOpen) {
             openMenu();
           }
@@ -55,11 +55,18 @@ const gui = {
       }
     });
 
-    headerLogo.addEventListener('mouseover', function() {
-      this.textContent = 'Iyoolaoyabiyi'
+    headerLogo.addEventListener('mouseenter', function() {
+      const textEl = this.querySelector('h1');
+      textEl.style.fontSize = `23px`;
+      textEl.textContent = 'Iyoolaoyabiyi';
+      icon.parentElement.style.paddingTop = `${gui.paddingWidth}px`;
+      
     });
     headerLogo.addEventListener('mouseleave', function() {
-      this.textContent = 'IYO'
+      const textEl = this.querySelector('h1');
+      textEl.style.fontSize = '32px';
+      textEl.textContent = 'IYO';
+      icon.parentElement.style.paddingTop = `${gui.paddingWidth + 7}px`;
     });
 
     function openMenu() {

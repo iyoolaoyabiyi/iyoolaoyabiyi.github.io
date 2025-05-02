@@ -80,7 +80,7 @@ dialog {
     }
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 2px var(--secondary-tint);
+      box-shadow: 0 0 0 2px $dark-tint;
     }
   }
   h2 {
@@ -96,9 +96,11 @@ dialog {
   }
   .form-control {
     display: flex;
-    gap: 5px;
     input, label {
       cursor: pointer;
+    }
+    label {
+      padding-right: 5px;
     }
     input[type="text"] {
       width: 100%;

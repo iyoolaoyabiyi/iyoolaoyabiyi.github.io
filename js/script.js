@@ -10,15 +10,14 @@ const userSettingsDialog = document.getElementById('userSettingsModal');
 const settingsBtns = document.querySelectorAll('.settings-btn');
 
 // Settings and Configs
-let userSettings = getSavedSettings();
+const userSettings = getSavedSettings();
 
 // General Functionalities
 setTheme(userSettings.theme);
 
-// Modals Functionality
 settingsBtns.forEach((btn) => {
   btn.addEventListener('click', function() {
-    userSettingsDialog.showModal();
+    openSettings(userSettingsDialog);
   });
 });
 
@@ -28,6 +27,7 @@ if (userSettings.firstTime) {
   handleViewChangeFocus();
 }
 
+// Modals Functionality
 if (userSettings.window === 'gui') openGUI();
 else openTerminal();
 
@@ -50,6 +50,7 @@ document.querySelectorAll('[data-type="close-diag-btn"').forEach((btn) => {
       }
     });
   });
+
     
 welcomeDialog.addEventListener('close', () => {
   userSettingsDialog.showModal();
@@ -102,6 +103,13 @@ userSettingsDialog.querySelector('#setDarkModeInput')
     }
   });
 
+userSettingsDialog.querySelector('#darkModeInput')
+  .addEventListener('click', function() {
+    const checkBox = this.querySelector('#setDarkModeInput');
+    checkBox.checked = !checkBox.checked;
+    checkBox.dispatchEvent(new Event('change'));
+  });
+
 welcomeDialog.querySelector('#setFirstTimeInput')
   .addEventListener('change', function() {
     if (this.checked) updateUserSettings('firstTime', true);
@@ -145,8 +153,6 @@ gui.populateTab('posts', posts);
 
 // Temp
 // localStorage.clear();
-// userSettingsDialog.showModal();
-
 
 // Helpers
 function saveUserSettings(userSettings) {
@@ -198,6 +204,14 @@ function openTerminal() {
     terminal.window.classList.remove("hidden");
     terminal.commandLine.querySelector('input').focus();
     updateUserSettings('window', 'terminal');
+  }
+}
+
+function openSettings(dialog) {
+  dialog.showModal();
+  if (dialog.open) {
+    dialog.querySelector('#err').style.display = 'none';
+    dialog.querySelector('#customNameInput').value = userSettings.username;
   }
 }
 
