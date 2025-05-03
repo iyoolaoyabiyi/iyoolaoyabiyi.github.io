@@ -31,7 +31,7 @@ if (userSettings.showWelcome) {
 if (userSettings.window === 'gui') openGUI();
 else openTerminal();
 
-document.getElementById('setFirstTimeInput').checked = userSettings.showWelcome;
+checkWelcomeChkBxes()
 
 document.querySelectorAll('.open-gui-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -59,7 +59,20 @@ welcomeDialog.addEventListener('close', () => {
   else updateUserSettings('showWelcome', false);
 });
 
+welcomeDialog.querySelector('#setFirstTimeInput')
+  .addEventListener('change', function() {
+    if (this.checked) updateUserSettings('showWelcome', true);
+    else updateUserSettings('showWelcome', false);
+    checkWelcomeChkBxes();
+  });
+
 // Settings Functionality
+userSettingsDialog.querySelector("#welcomeModalChk")
+  .addEventListener('change', function() {
+    updateUserSettings('showWelcome', this.checked);
+    checkWelcomeChkBxes();
+  });
+
 userSettingsDialog.querySelector('#setCustomNameInput')
   .addEventListener('change', function() {
     const userNameSetup = userSettingsDialog.querySelector('#userNameSetup');
@@ -160,7 +173,7 @@ function saveUserSettings(userSettings) {
 }
 
 function updateUserSettings(key, value) {
-  userSettings[key] = value
+  userSettings[key] = value;
   saveUserSettings(userSettings);
 }
 
@@ -213,6 +226,11 @@ function openSettings(dialog) {
     dialog.querySelector('#err').style.display = 'none';
     dialog.querySelector('#customNameInput').value = userSettings.username;
   }
+}
+
+function checkWelcomeChkBxes() {
+  welcomeDialog.querySelector('#setFirstTimeInput').checked = userSettings.showWelcome;
+  userSettingsDialog.querySelector("#welcomeModalChk").checked = userSettings.showWelcome;
 }
 
 export { openGUI, openTerminal, saveUserSettings, getSavedSettings, updateUserSettings };
