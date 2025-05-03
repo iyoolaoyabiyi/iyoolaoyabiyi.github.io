@@ -1,22 +1,9 @@
 import commands from './commands.js';
 import { getSavedSettings, openGUI, updateUserSettings } from './script.js';
-import defaultUserSettings from './configs/userSettings.js';
-
-// let userSettings = localStorage.getItem('userSettings');
-
-// if (userSettings) {
-//   Object.assign(userSettings, JSON.parse(userSettings));
-// } else {
-//   userSettings = defaultUserSettings;
-//   saveUserSettings(userSettings);
-// }
-
-// console.log(userSettings);
 
 // Terminal Object
 const terminal = {
   // options
-  // user: 'guest',
   hostname: 'IyosWebServer',
   currentPath: '~',
   needResponse: false,

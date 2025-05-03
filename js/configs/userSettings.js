@@ -1,6 +1,6 @@
 const defaultUserSettings = {
   username: 'guest',
-  firstTime: true,
+  showWelcome: true,
   theme: 'dark',
   window: 'terminal'
 }

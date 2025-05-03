@@ -21,7 +21,7 @@ settingsBtns.forEach((btn) => {
   });
 });
 
-if (userSettings.firstTime) {
+if (userSettings.showWelcome) {
   welcomeDialog.showModal();
 } else {
   handleViewChangeFocus();
@@ -31,7 +31,7 @@ if (userSettings.firstTime) {
 if (userSettings.window === 'gui') openGUI();
 else openTerminal();
 
-document.getElementById('setFirstTimeInput').checked = userSettings.firstTime;
+document.getElementById('setFirstTimeInput').checked = userSettings.showWelcome;
 
 document.querySelectorAll('.open-gui-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -55,8 +55,8 @@ document.querySelectorAll('[data-type="close-diag-btn"').forEach((btn) => {
 welcomeDialog.addEventListener('close', () => {
   userSettingsDialog.showModal();
   if (document.getElementById('setFirstTimeInput').checked) 
-    updateUserSettings('firstTime', true);
-  else updateUserSettings('firstTime', false);
+    updateUserSettings('showWelcome', true);
+  else updateUserSettings('showWelcome', false);
 });
 
 // Settings Functionality
@@ -112,8 +112,8 @@ userSettingsDialog.querySelector('#darkModeInput')
 
 welcomeDialog.querySelector('#setFirstTimeInput')
   .addEventListener('change', function() {
-    if (this.checked) updateUserSettings('firstTime', true);
-    else updateUserSettings('firstTime', false);
+    if (this.checked) updateUserSettings('showWelcome', true);
+    else updateUserSettings('showWelcome', false);
   });
 
   userSettingsDialog.querySelector('#openWelcomeModalBtn')
