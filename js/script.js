@@ -96,7 +96,6 @@ userSettingsDialog.querySelector('#saveSettingsBtn')
         errEl.style.color = 'red';
         errEl.style.display = "block";
         isErr = true;
-        // Remember to hide errEl when opening modal with settings button
       }
     }
     if (!isErr) {
