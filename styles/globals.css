@@ -299,6 +299,17 @@ dialog .modal-btns {
   color: #eeffff;
   gap: 5px;
 }
+.terminal-window .terminal-container .terminal-body .response p {
+  margin-bottom: 5px;
+}
+.terminal-window .terminal-container .terminal-body .response .command-text {
+  background: #eeffff;
+  color: #001010;
+  padding: 0 2px;
+}
+.terminal-window .terminal-container .terminal-body .response .folder-text {
+  color: #00ffff;
+}
 .terminal-window .terminal-container .terminal-body .input {
   flex: 1;
   color: #eeffff;

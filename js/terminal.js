@@ -31,12 +31,12 @@ const terminal = {
       const responseLineTemplate = document.querySelector('#responseLineTemplate');
       const responseLineClone = responseLineTemplate.content.cloneNode(true);
       const responseLine = responseLineClone.querySelector('.response');
-      const responseEl = responseLine.querySelector('.response-text');
+      const responseEl = responseLine.querySelector('.responseDisplay');
       const responseInput = responseLine.querySelector('input');
 
       if (!isPrompt) responseInput.remove();
-      responseEl.innerHTML = response;
-      this.inputInterface.append(responseLine);
+      responseEl.append(response);
+      this.inputInterface.appendChild(responseLine);
       this.inputInterface.scrollTop = this.inputInterface.scrollHeight; 
     }
   },
@@ -66,13 +66,15 @@ const terminal = {
     }
   },
   executeCommand(command, args) {
+    const output = document.createElement('p');
     for (let i = 0; i < commands.length; i++) {
       const commandObj = commands[i];
       if (commandObj.name.includes(command)) {
         return commandObj.execute(args);
       }
     }
-    return `<p>Command not found: ${command}`;
+    output.textContent = `Command not found: ${command}`;
+    return output;
   },
   processPrompt(e) {
     let commandLineInput = this.commandLine.querySelector('input');

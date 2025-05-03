@@ -56,6 +56,17 @@
       .response {
         color: $light-color;
         gap: 5px;
+        p{
+          margin-bottom: 5px;
+        }
+        .command-text {
+          background: $light-color;
+          color: $dark-color;
+          padding: 0 2px;
+        }
+        .folder-text {
+          color: $light-tint;
+        }
       }
       .input {
         flex: 1;

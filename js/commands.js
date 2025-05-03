@@ -84,27 +84,46 @@ const commands = [
 // Command Functions
 function helpFunc(args) {
   const argsLnt = args.length;
-  let output = '';
+  let output = document.createElement('div');
+  const para = document.createElement('p');
 
   if (argsLnt < 1) {
-    output = '<p>Available commands:</p>';
+    para.textContent =  'Available commands';
+    output.appendChild(para);
     commands.forEach(command => {
-      output += `<p><b>${command.name}</b>: ${command.description}</p>`;
+      const para = document.createElement('p');
+      const span = document.createElement('span');
+      span.classList.add('command-text')
+      command.name.forEach((name, i, names) => {
+        span.textContent += name;
+      if (i !== (names.length - 1)) span.textContent += ', ';
+      })
+      para.appendChild(span);
+      para.append(': ')
+      para.append(command.description);
+      output.appendChild(para);
     });
   } else if (argsLnt === 1) {
     const command = args[0];
-    output = `Unknown command: ${command}`;
+    para.textContent = `Unknown command: ${command}`;
     for (let i = 0; i < commands.length; i++) {
       const commandObj = commands[i];
       if (commandObj.name.includes(command)) {
-        output = `<p>${command}: ${commands[i].description}</p>`;
+        const span = document.createElement('span');
+        span.classList.add('command-text');
+        span.textContent = `${command}`;
+        para.textContent = '';
+        para.appendChild(span);
+        para.append(`: ${commandObj.description}`);
         break;
       }
     }
+    output.appendChild(para);
   } else {
-    output = `Usage: help &lt;command&gt;`;
+    para.textContent = `Usage: help <command>`;
+    output.appendChild(para);
   }
-  return output.trim();
+  return output;
 }
 
 function echoFunc(args) {
@@ -118,20 +137,31 @@ function clearFunc() {
 }
 
 function listFunc(args) {
+  const para = document.createElement('p');
   if (args.length > 1) 
-    return `Usage: list [&lt;directory&gt;]`;
+    return `Usage: list [<directory>]`;
   let path = args[0];
   if (!path) path = terminal.currentPath;
   const { dirObj, clearedPath } = getDirObj(path, terminal.currentPath, FILESYSTEM);
   
   if (!dirObj) return `${clearedPath} does not exist`;
   if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
-  return Object.keys(dirObj.content).join(' ');
+  
+  for (let key in dirObj.content) {
+    const content = dirObj.content[key];
+    if (content.type === 'directory') {
+      const span = document.createElement('span');
+      span.classList.add('folder-text');
+      span.textContent = `${content.name} `;
+      para.appendChild(span);
+    } else para.append(`${content.name} `);
+  }
+  return para;
 }
 
 function gotoFunc(args) {
   if (args.length === 0) return 'No directory specified';
-  if (args.length > 1) return `Usage: goto &lt;directory&gt;`;
+  if (args.length > 1) return `Usage: goto <directory>`;
 
   const path = args[0];
   const { dirObj, clearedPath} = getDirObj(path, terminal.currentPath, FILESYSTEM);
