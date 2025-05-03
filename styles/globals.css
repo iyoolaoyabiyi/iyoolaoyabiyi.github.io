@@ -230,7 +230,8 @@ dialog .modal-btns {
   padding: 1rem;
 }
 .terminal-window .terminal-container {
-  width: clamp(200px, 100%, 800px);
+  width: clamp(200px, 100%, 600px);
+  resize: both;
   margin: 20px auto;
   border-radius: 8px;
   overflow: hidden;
@@ -241,10 +242,18 @@ dialog .modal-btns {
   background-color: #333333;
   padding: 0.5rem 1rem;
   display: flex;
-  flex-wrap: wrap;
   gap: 10px;
   align-items: center;
   justify-content: space-between;
+}
+.terminal-window .terminal-container .terminal-header div {
+  width: 50%;
+}
+.terminal-window .terminal-container .terminal-header .header-btns {
+  text-align: right;
+}
+.terminal-window .terminal-container .terminal-header .prompt {
+  overflow: hidden;
 }
 .terminal-window .terminal-container .terminal-header button {
   cursor: pointer;
@@ -279,8 +288,8 @@ dialog .modal-btns {
   background-color: #001010;
   background-image: linear-gradient(135deg, #1c1c1c, #000000, #1c1c1c);
   padding: 1rem;
-  height: 400px;
-  max-height: 400px;
+  min-height: 400px;
+  height: 100%;
   color: #eeffff;
   cursor: text;
   overflow-y: scroll;
@@ -294,6 +303,12 @@ dialog .modal-btns {
 .terminal-window .terminal-container .terminal-body .line, .terminal-window .terminal-container .terminal-body .response {
   display: flex;
   align-items: flex-start;
+}
+.terminal-window .terminal-container .terminal-body .line {
+  flex-wrap: wrap;
+}
+.terminal-window .terminal-container .terminal-body .line .prompt {
+  flex-flow: wrap;
 }
 .terminal-window .terminal-container .terminal-body .response {
   color: #eeffff;

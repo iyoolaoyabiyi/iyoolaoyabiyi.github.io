@@ -8,7 +8,7 @@
   <meta name="keywords" content="Iyo Oyabiyi, Iyo, Portfolio, Software Developer, Nigeria, Personal Website, Portfolion Website, Web Developer, Frontend Developer, Backend Developer, Fullstack Developer">
   <meta name="author" content="Iyo">
 
-  <title>ioo ::  Iyo Ola Oyabiyi</title>
+  <title>ioo ::  Iyola Oyabiyi</title>
   <link rel="icon" type="image/png" href="./assets/dp.png">
   <link rel="stylesheet" href="styles/globals.css">
 </head>
@@ -18,19 +18,23 @@
      <div class="terminal-window hidden" id="terminalWindow">
       <div class="terminal-container">
         <div class="terminal-header">
-          <p class="prompt">
-            <span data-type="username"></span>
-            @
-            <span data-type="hostname"></span>
-            : 
-            <span data-type="path">~</span>
-          </p>
-          <button class="btn" id="openGuiBtn">GUI</button>
+          <div>
+            <p class="prompt">
+              <span data-type="username"></span>
+              @
+              <span data-type="hostname"></span>
+              : 
+              <span data-type="path">~</span>
+            </p>
+          </div>
+          <div class="header-btns">
+            <button class="btn" id="openGuiBtn">GUI</button>
+          </div>
         </div>
         <div class="terminal-body" id="terminal">
           <div id="terminalIntro">
             <p>To see the list of commands, type 'help'.</p>
-            <p>The terminal is case-sensitives and commands are lowercase.</p>
+            <p>The terminal is case-sensitive and commands are lowercase.</p>
           </div>
           <div id="inputInterface">
             <div class="line" id="commandLine">
@@ -130,13 +134,12 @@
       </section>
     </div>
     <!-- Modals -->
-     <!-- Welcome Modal -->
+    <!-- Welcome Modal -->
     <dialog id="welcomeModal">
       <button class="modal-close" data-type="close-diag-btn" data-btn-for="welcomeModal">X</button>
       <h2>Welcome to Iyo's website!</h2>
       <p>By default, this site runs in <b>terminal mode</b>: you'll need to type commands manually to explore.</p>
       <p>If that's not your thing or you're short on time, no worries; You can <button class='open-gui-btn'>Use the GUI version</button></p>
-      
       <p>But if you're feeling curious or adventurous, you can simply <button id="closeWelcomeDiag" data-btn-for="welcomeModal" data-type="close-diag-btn">close this message</button> and jump right into the terminal experience.</p>
       <p>Have fun!</p>
       <div class="form-control">

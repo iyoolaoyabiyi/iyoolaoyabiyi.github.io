@@ -3,7 +3,7 @@ import { getSavedSettings } from './script.js';
 
 // Terminal Object
 const terminal = {
-  // options
+  // Options
   hostname: 'IyosWebServer',
   currentPath: '~',
   needResponse: false,

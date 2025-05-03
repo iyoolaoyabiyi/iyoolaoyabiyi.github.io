@@ -5,7 +5,8 @@
   justify-content: center;
   padding: 1rem;
   .terminal-container {
-    width: clamp(200px, 100%, 800px);
+    width: clamp(200px, 100%, 600px);
+    resize: both;
     margin: 20px auto;
     border-radius: 8px;
     overflow: hidden;
@@ -15,10 +16,19 @@
       background-color: $dark-grey;
       padding: 0.5rem 1rem;
       display: flex;
-      flex-wrap: wrap;
+      // flex-wrap: wrap;
       gap: 10px;
       align-items: center;
       justify-content: space-between;
+      div {
+        width: 50%;
+      }
+      .header-btns {
+        text-align: right;
+      }
+      .prompt {
+        overflow: hidden
+      }
       button {
         @include mixins.btn(var(--terminal-color), $dark-color, var(--terminal-color));
       }
@@ -38,8 +48,8 @@
       background-color: $dark-color;
       background-image: linear-gradient(135deg, #1c1c1c, #000000, #1c1c1c);
       padding: 1rem;
-      height: 400px;
-      max-height: 400px;
+      min-height: 400px;
+      height: 100%;
       color: $light-color;
       cursor: text;
       overflow-y: scroll;
@@ -52,6 +62,12 @@
       .line, .response {
         display: flex;
         align-items: flex-start;
+      }
+      .line {
+        flex-wrap: wrap;
+        .prompt {
+          flex-flow: wrap;
+        }
       }
       .response {
         color: $light-color;

@@ -50,7 +50,6 @@ document.querySelectorAll('[data-type="close-diag-btn"').forEach((btn) => {
       }
     });
   });
-
     
 welcomeDialog.addEventListener('close', () => {
   userSettingsDialog.showModal();
