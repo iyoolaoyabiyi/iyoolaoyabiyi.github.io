@@ -147,9 +147,13 @@
   <dialog id="userSettingsModal">
     <button class="modal-close" data-type="close-diag-btn" data-btn-for="userSettingsModal">X</button>
     <h2>User settings</h2>
+    <div class="form-control" id="welcomeModal">
+      <label for="welcomeModalChk">Show welcome message</label>
+      <input type="checkbox" name="show-welcome-modal" id="welcomeModalChk">
+    </div>
     <div class="form-control" id="darkModeInput">
       <label for="setDarkModeInput">Dark mode</label>
-      <input type="checkbox" name="set-dark-mode-input" id="setDarkModeInput" checked>
+      <input type="checkbox" name="set-dark-mode-input" id="setDarkModeInput">
     </div>
     <div id="consent" class="form-control">
       <label for="setCustomNameInput">Set custom terminal username</label>
