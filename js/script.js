@@ -27,11 +27,11 @@ if (userSettings.showWelcome) {
   handleViewChangeFocus();
 }
 
+checkWelcomeChkBxes();
+
 // Modals Functionality
 if (userSettings.window === 'gui') openGUI();
 else openTerminal();
-
-checkWelcomeChkBxes()
 
 document.querySelectorAll('.open-gui-btn').forEach((btn) => {
   btn.addEventListener('click', () => {

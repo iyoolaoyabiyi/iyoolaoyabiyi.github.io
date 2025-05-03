@@ -32,16 +32,18 @@
             <p>To see the list of commands, type 'help'.</p>
             <p>The terminal is case-sensitives and commands are lowercase.</p>
           </div>
-          <div class="line" id="commandLine">
-            <p class="prompt">
-              <span data-type="username">user</span>
-              @
-              <span data-type="hostname">iyosWebsite</span>
-              :
-              <span data-type="path">~</span>
-              $
-            </p>
-            <input class="input" type="text" />
+          <div id="inputInterface">
+            <div class="line" id="commandLine">
+              <p class="prompt">
+                <span data-type="username">user</span>
+                @
+                <span data-type="hostname">iyosWebsite</span>
+                :
+                <span data-type="path">~</span>
+                $
+              </p>
+              <input class="input" type="text" />
+            </div>
           </div>
         </div>
       </div>
@@ -178,6 +180,21 @@
    </div>
   
   <!-- Templates -->
+   <!-- Command line -->
+    <template id="commandLineTemplate">
+      <div class="line" id="commandLine">
+        <p class="prompt">
+          <span data-type="username">user</span>
+          @
+          <span data-type="hostname">iyosWebsite</span>
+          :
+          <span data-type="path">~</span>
+          $
+        </p>
+        <input class="input" type="text" />
+      </div>
+    </template>
+   <!-- Post cards -->
   <template id="cardTemplate">
     <div class="card" href="#">
       <div class="card-header">

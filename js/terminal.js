@@ -1,4 +1,5 @@
 import commands from './commands.js';
+import FILESYSTEM from './configs/filesystem.js';
 import { getSavedSettings, openGUI, updateUserSettings } from './script.js';
 
 // Terminal Object
@@ -12,9 +13,18 @@ const terminal = {
   window: document.getElementById('terminalWindow'),
   openGuiBtn: document.getElementById('openGuiBtn'),
   _commandLine: document.getElementById('commandLine'),
+  get commandLine() {
+    return this._commandLine;
+  },
+  set commandLine(commandLine) {
+    this._commandLine = commandLine;
+  },
   body: {
     get element() {
-      return document.getElementById('terminal')
+      return document.getElementById('terminal');
+    },
+    get inputInterface() {
+      return document.getElementById('inputInterface');
     },
     addResponse(response, isPrompt = false) {
       const responseLine = document.createElement('div');
@@ -27,8 +37,8 @@ const terminal = {
         <p class="response-text">${response}</p>
         ${isPrompt ? '<input type="text" class="input" />' : ''}
       `;
-      this.element.append(responseLine);
-      this.element.scrollTop = this.element.scrollHeight;
+      this.inputInterface.append(responseLine);
+      this.inputInterface.scrollTop = this.inputInterface.scrollHeight;
     },
     addCommandLine() {
       const commandLine = document.createElement('div');
@@ -59,21 +69,12 @@ const terminal = {
       terminal.commandLine = commandLine;
       commandLineInput = terminal.commandLine.querySelector('input');
       commandLineInput.disabled = false;
-      this.element.append(terminal.commandLine);
+      this.inputInterface.append(terminal.commandLine);
       commandLineInput.focus();
       commandLineInput.addEventListener('keydown', terminal.processPrompt.bind(terminal));
     }
   },
-  get commandLine() {
-    return this._commandLine;
-  },
-  set commandLine(commandLine) {
-    this._commandLine = commandLine;
-  },
   // Methods
-  clear() {
-    this.body.element.innerHTML = '';
-  },
   addOptions() {
     const userSettings = getSavedSettings();
     document.querySelectorAll('[data-type="username"]').forEach(el => {
@@ -103,44 +104,19 @@ const terminal = {
     const commandObj = this.commands[command];
     switch (command) {
       case this.commands.echo.name:
-        return commandObj.execute(args);
+        return commandObj.execute(echoFunc, args);
       case this.commands.clear.name:
-        return commandObj.execute(terminal.clear.bind(terminal));
+        return commandObj.execute(clearFunc, args);
       case this.commands.list.name:
-        return commandObj.execute(terminal, args);
+        return commandObj.execute(listFunc, args);
       case this.commands.goto.name:
-        return commandObj.execute(terminal, args);
+        return commandObj.execute(gotoFunc, args);
       case this.commands.open.name:
-        return commandObj.execute(terminal, args);
+        return commandObj.execute(openFunc, args);
       case this.commands.exit.name:
-        return commandObj.execute(() => {
-          let responseInput = null;
-          terminal.needResponse = true;
-          this.body.addResponse('Are you sure you want to quit?(yes/no)', true);
-          responseInput = document.querySelector('#responseLine input');
-          responseInput.focus();
-          responseInput.addEventListener('keydown', e => {
-            if (e.key === 'Enter') {
-              const response = responseInput.value;
-              terminal.needResponse = false;
-              switch (response.toLowerCase()) {
-                case 'yes':
-                case 'y':
-                  terminal.clear();
-                  terminal.resetOptions();
-                  terminal.addOptions();
-                  this.body.addCommandLine();
-                  openGUI();
-                  break;
-                default:
-                  document.querySelector('#responseLine').id = '';
-                  this.body.addCommandLine();
-              }
-            }
-          })
-        });
+        return commandObj.execute(exitFunc, args);
       case this.commands.help.name:
-        return commandObj.execute(args);
+        return commandObj.execute(helpFunc, args);
       case this.commands.whoami.name:
         return commandObj.execute(whoamiFunc, args);
       case this.commands.username.name:
@@ -164,6 +140,80 @@ const terminal = {
   }
 }
 
+// Command Functions
+function helpFunc(args) {
+  const commandsList = Object.keys(commands) 
+  let output = '';
+  if (args.length >= 1) {
+    if (args.length === 1) {
+      const command = args[0];
+      for (let i = 0; i < commandsList.length; i++) {
+        if (command === commandsList[i]) {
+          output = `<p>${commands[command].description}</p>`;
+          break;
+        } else {
+          output = `Unknown command ${command}`;
+        }
+      }
+    } else {
+      output = `Usage: help &lt;command&gt;`;
+    }
+  } else {
+    output = '<p>Available commands:</p>';
+    commandsList.forEach(key => {
+      output += `<p>${key}: ${commands[key].description}</p>`;
+    });
+  }
+  return output.trim();
+}
+
+function echoFunc(args) {
+  const cleanedArgs = args.map(item => item.replace(/^['"]+|['"]+$/g, ''));
+  return cleanedArgs.join(' ');
+}
+
+function clearFunc(args) {
+  terminal.body.inputInterface.innerHTML = '';
+  return null;
+}
+
+function listFunc(args) {
+  if (args.length > 1) 
+    return `Usage: list [&lt;directory&gt;]`;
+  let path = args[0];
+  if (!path) path = terminal.currentPath;
+  const { dirObj, clearedPath } = getDirObj(path, terminal.currentPath, FILESYSTEM);
+  
+  if (!dirObj) return `${clearedPath} does not exist`;
+  if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
+  return Object.keys(dirObj.content).join(' ');
+}
+
+function gotoFunc(args) {
+  if (args.length === 0) return 'No directory specified';
+  if (args.length > 1) return `Usage: goto &lt;directory&gt;`;
+
+  const path = args[0];
+  const { dirObj, clearedPath} = getDirObj(path, terminal.currentPath, FILESYSTEM);
+  
+  if (!dirObj) return `${clearedPath} does not exist`;
+  if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
+  terminal.currentPath = clearedPath;
+  terminal.addOptions();
+  return `Changed directory to ${terminal.currentPath}`;
+}
+
+function openFunc(args) {
+  if (args.length === 0) return 'No file specified';
+  if (args.length > 1) return `Usage: open &lt;file&gt;`;
+  const path = args[0];
+  const { dirObj, clearedPath} = getDirObj(path, terminal.currentPath, FILESYSTEM);
+  
+  if (!dirObj) return `${clearedPath} does not exist`;
+  if (dirObj.type === 'directory') return `${clearedPath} is not a file`;
+  return dirObj.content;
+}
+
 function whoamiFunc(args) {
   const users = ['iyo', 'iyoola', 'iyoolaoyabiyi'];
   if (args.length > 1) return `Usage: whoami [user]`;
@@ -185,6 +235,70 @@ function usernameFunc(args) {
   updateUserSettings('username', username);
   terminal.addOptions();
   return `Username changed to ${username}`;
+}
+
+function exitFunc(args) {
+  let responseInput = null;
+  terminal.needResponse = true;
+  terminal.body.addResponse('Are you sure you want to quit?(yes/no)', true);
+  responseInput = document.querySelector('#responseLine input');
+  responseInput.focus();
+  responseInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const response = responseInput.value;
+      terminal.needResponse = false;
+      switch (response.toLowerCase()) {
+        case 'yes':
+        case 'y':
+          terminal.body.inputInterface.innerHTML = '';
+          terminal.resetOptions();
+          terminal.addOptions();
+          openGUI();
+          break;
+        default:
+          document.querySelector('#responseLine').id = '';
+        }
+        terminal.body.addCommandLine();
+    }
+  })
+  return null;
+}
+
+// Helpers
+function getDirObj(path, currentPath, fileSystem) {
+  let segments = [];
+  let pathStack = [];
+  let dirObj = fileSystem['~'];
+  let clearedPath = '';
+
+  if (path.startsWith('~')) {
+    segments = path.split('/');
+  } else if (path.startsWith('/')) {
+    segments = path.split('/');
+    segments[0] = '~';
+  } else {
+    segments = currentPath.split('/').concat(path.split('/'));
+  }
+
+  for (let part of segments) {
+    if (part === '' || part === '.') continue;
+    if (part === '..') {
+      if (pathStack.length > 1) pathStack.pop();
+    } else {
+      pathStack.push(part);
+    }
+  }
+
+  clearedPath = pathStack.join('/');
+
+  for (let i = 1; i < pathStack.length; i++) {
+    if (dirObj.content && dirObj.content[pathStack[i]]) {
+      dirObj = dirObj.content[pathStack[i]];
+    } else {
+      return { dirObj: null, clearedPath: clearedPath };
+    }
+  }
+  return { dirObj: dirObj, clearedPath: clearedPath };
 }
 
 export default terminal;
