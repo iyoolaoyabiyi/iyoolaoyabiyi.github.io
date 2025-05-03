@@ -1,41 +1,71 @@
-# 👋 Hi, I'm Iyo – Web & Software Developer
+# Iyo's Portfolio Website
 
-I'm a self-taught developer with a strong passion for building clean, accessible, and impactful digital products. I work primarily with modern web technologies — blending creativity and logic to craft smooth, user-centered interfaces and solid backend systems.
+This portfolio breaks away from the typical “scrolling” personal website. Instead, it offers a **playful, interactive terminal experience** where visitors explore a mini terminal-like environment to learn about my work, background, and blog.
 
-I enjoy solving real-world problems through code and constantly learning new technologies. My journey has taken me from static web pages to dynamic apps, component libraries, backend APIs, and cloud integration — and I’m still exploring.
+It's not just a website; it's a concept that speaks to **creativity, technical fluency, and personality**.
 
----
+## Key Concept
 
-### 🛠️ Tech Stack & Tools
+Visitors essentially "play" with a simulated command-line interface to:
+- Run commands
+- Navigate a virtual filesystem
+- Access data like `portfolio`, `contact`, and more
 
-**Frontend**
-- React, Next.js, TypeScript
-- Tailwind CSS, Shadcn/UI, Framer Motion
-- Vite, Redux Toolkit
+It's delightful for tech-savvy users, **memorable for recruiters**, and surprisingly fun for casual visitors.
 
-**Backend**
-- Node.js, Express, MongoDB, SQL (MySQL, SQLite)
-- REST APIs, basic auth, and server-side rendering
-- Learning NestJS and cloud-first backend architecture
-
-**Other Tools**
-- Git & GitHub, Figma, Postman, VS Code, Netlify, Vercel
+For those who don’t have time or get confused by typed commands, a helpful `help` command and **GUI switch** make sure everyone can quickly find the info they need.
 
 ---
 
-### 🚧 Current Focus
+## Features
 
-- Deepening my understanding of full-stack architecture  
-- Building reusable UI blocks and design systems  
-- Hands-on learning of AWS, backend patterns, and system design  
-- Collaborating with other devs on real-world projects  
-- Documenting everything and writing cleaner, more expressive code
+- **Terminal interface** with responsive commands
+- **GUI alternative** for quick access
+- **Virtual filesystem** for realistic directory navigation
+- Built-in commands: `echo`, `list`, `goto`, `open`, `clear`, `exit`, `help`, etc
+- **Modal welcome** to orient first-time users
 
 ---
 
-### 📬 Let's Connect
+## Commands
 
-- GitHub: [@iyoola](https://github.com/iyoola)
-- Email: iyooyabiyi@gmail.com
+| Command   | Description                                  |
+|-----------|----------------------------------------------|
+| `echo`    | Displays a line of text                      |
+| `list`    | Lists current directory contents             |
+| `goto`    | Changes directory                            |
+| `open`    | Displays contents of a file                  |
+| `clear`   | Clears terminal screen                       |
+| `exit`    | Simulates exiting the terminal               |
+| `help`    | Displays available commands and descriptions |
+
+And more
+
+---
+
+## Tech Stack
+
+- Pure **HTML**, **CSS (SCSS)**, and **JavaScript**
+- No frameworks
+- Self-contained logic, virtual state, and command parsing
+
+---
+
+## Demo
+
+[Iyo's Portfolio Website](https://iyoolaoyabiyi.github.io)
+
+---
+
+## Screenshots
+
+_TODO: Add GIFs or screenshots of both terminal and GUI views._
+
+---
+
+## Author
+
+**Oyabiyi Iyola**  
+GitHub: [@iyoolaoyabiyi](https://github.com/iyoolaoyabiyi)
 
 ---
