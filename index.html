@@ -180,21 +180,28 @@
    </div>
   
   <!-- Templates -->
-   <!-- Command line -->
-    <template id="commandLineTemplate">
-      <div class="line" id="commandLine">
-        <p class="prompt">
-          <span data-type="username">user</span>
-          @
-          <span data-type="hostname">iyosWebsite</span>
-          :
-          <span data-type="path">~</span>
-          $
-        </p>
-        <input class="input" type="text" />
-      </div>
-    </template>
-   <!-- Post cards -->
+  <!-- Command line template -->
+  <template id="commandLineTemplate">
+    <div class="line" id="commandLine">
+      <p class="prompt">
+        <span data-type="username"></span>
+        @
+        <span data-type="hostname"></span>
+        :
+        <span data-type="path">~</span>
+        $
+      </p>
+      <input class="input" type="text" />
+    </div>
+  </template>
+  <!-- Response line template -->
+   <template id="responseLineTemplate">
+    <div class="response text-color">
+      <div class="response-text"></div>
+      <input type="text" class="input">
+    </div>
+   </template>
+   <!-- Post cards template -->
   <template id="cardTemplate">
     <div class="card" href="#">
       <div class="card-header">

@@ -8,7 +8,6 @@ const terminal = {
   hostname: 'IyosWebServer',
   currentPath: '~',
   needResponse: false,
-  commands: commands,
   // DOM
   window: document.getElementById('terminalWindow'),
   openGuiBtn: document.getElementById('openGuiBtn'),
@@ -26,56 +25,24 @@ const terminal = {
     get inputInterface() {
       return document.getElementById('inputInterface');
     },
-    addResponse(response, isPrompt = false) {
-      const responseLine = document.createElement('div');
-      responseLine.classList.add('text-color');
-      if (isPrompt) {
-        responseLine.classList.add('response');
-        responseLine.id = 'responseLine';
-      }
-      responseLine.innerHTML =`
-        <p class="response-text">${response}</p>
-        ${isPrompt ? '<input type="text" class="input" />' : ''}
-      `;
-      this.inputInterface.append(responseLine);
-      this.inputInterface.scrollTop = this.inputInterface.scrollHeight;
-    },
     addCommandLine() {
-      const commandLine = document.createElement('div');
-      const userSettings = getSavedSettings();
-      let commandLineInput = null;
-      commandLine.classList.add('line');
-      commandLine.id = 'commandLine';
-      commandLine.innerHTML = `
-        <p class="prompt">
-          <span data-type="username">${userSettings.username}</span>
-          @
-          <span data-type="hostname">${terminal.hostname}</span>
-          :
-          <span data-type="path">${terminal.currentPath}</span>
-          $
-        </p>
-        <input class="input" type="text" />
-      `;
-      if (terminal.commandLine) {
-        commandLineInput = terminal.commandLine.querySelector('input');
-        // Deactivate commandLine
-        commandLineInput.disabled = true;
-        commandLineInput.removeAttribute('autofocus');
-        commandLineInput.removeEventListener('keydown', terminal.processPrompt);
-        terminal.commandLine.id = '';
-      }
-      // Append new commandLine
-      terminal.commandLine = commandLine;
-      commandLineInput = terminal.commandLine.querySelector('input');
-      commandLineInput.disabled = false;
-      this.inputInterface.append(terminal.commandLine);
-      commandLineInput.focus();
-      commandLineInput.addEventListener('keydown', terminal.processPrompt.bind(terminal));
+      addCommandLine();
+    },
+    addResponse(response, isPrompt = false) {
+      const responseLineTemplate = document.querySelector('#responseLineTemplate');
+      const responseLineClone = responseLineTemplate.content.cloneNode(true);
+      const responseLine = responseLineClone.querySelector('.response');
+      const responseEl = responseLine.querySelector('.response-text');
+      const responseInput = responseLine.querySelector('input');
+
+      if (!isPrompt) responseInput.remove();
+      responseEl.innerHTML = response;
+      this.inputInterface.append(responseLine);
+      this.inputInterface.scrollTop = this.inputInterface.scrollHeight; 
     }
   },
   // Methods
-  addOptions() {
+  setOptions() {
     const userSettings = getSavedSettings();
     document.querySelectorAll('[data-type="username"]').forEach(el => {
       el.textContent = userSettings.username;
@@ -88,7 +55,6 @@ const terminal = {
     });
   },
   resetOptions() {
-    // this.user = 'guest';
     this.hostname = 'iyoswebserver';
     this.currentPath = '~';
   },
@@ -101,25 +67,25 @@ const terminal = {
     }
   },
   executeCommand(command, args) {
-    const commandObj = this.commands[command];
+    const commandObj = commands[command];
     switch (command) {
-      case this.commands.echo.name:
+      case commands.echo.name:
         return commandObj.execute(echoFunc, args);
-      case this.commands.clear.name:
+      case commands.clear.name:
         return commandObj.execute(clearFunc, args);
-      case this.commands.list.name:
+      case commands.list.name:
         return commandObj.execute(listFunc, args);
-      case this.commands.goto.name:
+      case commands.goto.name:
         return commandObj.execute(gotoFunc, args);
-      case this.commands.open.name:
+      case commands.open.name:
         return commandObj.execute(openFunc, args);
-      case this.commands.exit.name:
+      case commands.exit.name:
         return commandObj.execute(exitFunc, args);
-      case this.commands.help.name:
+      case commands.help.name:
         return commandObj.execute(helpFunc, args);
-      case this.commands.whoami.name:
+      case commands.whoami.name:
         return commandObj.execute(whoamiFunc, args);
-      case this.commands.username.name:
+      case commands.username.name:
         return commandObj.execute(usernameFunc, args);
       default: 
         return `command not found: ${command}`;
@@ -141,6 +107,39 @@ const terminal = {
 }
 
 // Command Functions
+function addCommandLine() {
+  let commandLineInput;
+  const commandLineTemplate = document.querySelector('#commandLineTemplate');
+  const commandLineClone = commandLineTemplate.content.cloneNode(true);
+  const commandLine = commandLineClone.querySelector('.line');
+  const usernameEl = commandLineClone.querySelector('[data-type="username"]');
+  const hostnameEl = commandLineClone.querySelector('[data-type="hostname"]');
+  const pathEl = commandLineClone.querySelector('[data-type="path"]');
+
+  const userSettings = getSavedSettings();
+  
+  // commandLine.id = 'commandLine';
+  usernameEl.textContent = userSettings.username;
+  hostnameEl.textContent = terminal.hostname;
+  pathEl.textContent = terminal.currentPath;
+
+  if (terminal.commandLine) {
+    commandLineInput = terminal.commandLine.querySelector('input');
+    // Deactivate current commandLine
+    commandLineInput.disabled = true;
+    commandLineInput.removeAttribute('autofocus');
+    commandLineInput.removeEventListener('keydown', terminal.processPrompt);
+    terminal.commandLine.id = '';
+  }
+  // Append new commandLine
+  terminal.commandLine = commandLine;
+  // console.log(terminal.commandLine);
+  commandLineInput = terminal.commandLine.querySelector('input');
+  commandLineInput.disabled = false;
+  terminal.body.inputInterface.append(terminal.commandLine);
+  commandLineInput.focus();
+  commandLineInput.addEventListener('keydown', terminal.processPrompt.bind(terminal));
+}
 function helpFunc(args) {
   const commandsList = Object.keys(commands) 
   let output = '';
@@ -199,7 +198,7 @@ function gotoFunc(args) {
   if (!dirObj) return `${clearedPath} does not exist`;
   if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
   terminal.currentPath = clearedPath;
-  terminal.addOptions();
+  terminal.setOptions();
   return `Changed directory to ${terminal.currentPath}`;
 }
 
@@ -233,7 +232,7 @@ function usernameFunc(args) {
   if (args[0].length < 3 || args.length >= 12) 
     return `Username must be at least 3 characters and not more than 12 characters long`;
   updateUserSettings('username', username);
-  terminal.addOptions();
+  terminal.setOptions();
   return `Username changed to ${username}`;
 }
 
@@ -241,7 +240,7 @@ function exitFunc(args) {
   let responseInput = null;
   terminal.needResponse = true;
   terminal.body.addResponse('Are you sure you want to quit?(yes/no)', true);
-  responseInput = document.querySelector('#responseLine input');
+  responseInput = document.querySelector('.response input');
   responseInput.focus();
   responseInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
@@ -252,7 +251,7 @@ function exitFunc(args) {
         case 'y':
           terminal.body.inputInterface.innerHTML = '';
           terminal.resetOptions();
-          terminal.addOptions();
+          terminal.setOptions();
           openGUI();
           break;
         default:

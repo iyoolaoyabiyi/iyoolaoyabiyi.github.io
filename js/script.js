@@ -89,7 +89,7 @@ userSettingsDialog.querySelector('#saveSettingsBtn')
         let username = usernameInput.value;
         userSettings.username = username;
         saveUserSettings(userSettings);
-        terminal.addOptions();
+        terminal.setOptions();
       } else {
         const errEl = userSettingsDialog.querySelector('#err');
         errEl.innerHTML = "You need to enter a username with 12 maximum characters";
@@ -133,7 +133,7 @@ welcomeDialog.querySelector('#setFirstTimeInput')
     .addEventListener('click', () => welcomeDialog.showModal());
 
 // Terminal Functionalities
-terminal.addOptions();
+terminal.setOptions();
 terminal.body.element.addEventListener('click', terminal.focusInput.bind(terminal));
 terminal.commandLine.querySelector('input')
   .addEventListener('keydown', terminal.processPrompt.bind(terminal));
