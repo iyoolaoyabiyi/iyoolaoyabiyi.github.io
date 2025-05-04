@@ -231,7 +231,6 @@ dialog .modal-btns {
 }
 .terminal-window .terminal-container {
   width: clamp(200px, 100%, 600px);
-  resize: both;
   margin: 20px auto;
   border-radius: 8px;
   overflow: hidden;
@@ -246,10 +245,11 @@ dialog .modal-btns {
   align-items: center;
   justify-content: space-between;
 }
-.terminal-window .terminal-container .terminal-header div {
-  width: 50%;
+.terminal-window .terminal-container .terminal-header .header-prompt {
+  width: 70%;
 }
 .terminal-window .terminal-container .terminal-header .header-btns {
+  width: 30%;
   text-align: right;
 }
 .terminal-window .terminal-container .terminal-header .prompt {
@@ -288,8 +288,7 @@ dialog .modal-btns {
   background-color: #001010;
   background-image: linear-gradient(135deg, #1c1c1c, #000000, #1c1c1c);
   padding: 1rem;
-  min-height: 400px;
-  height: 100%;
+  height: 400px;
   color: #eeffff;
   cursor: text;
   overflow-y: scroll;
