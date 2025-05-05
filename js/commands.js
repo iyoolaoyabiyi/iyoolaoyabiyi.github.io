@@ -1,13 +1,14 @@
+import PROFILE from './configs/myProfile.js';
+import FILESYSTEM from './configs/filesystem.js';
 import { getSavedSettings, openGUI, updateUserSettings } from './script.js';
 import terminal from "./terminal.js";
-import FILESYSTEM from './configs/filesystem.js';
 
 class COMMAND {
-  constructor(name, description, isQuery, executeFunction) {
+  constructor(name, description, executeFunction, synopsis) {
     this.name = name;
     this.description = description;
-    this.isQuery = isQuery;
-    this.executeFunction = executeFunction
+    this.executeFunction = executeFunction;
+    this.synopsis = synopsis
   }
   execute(args) {
     return this.executeFunction(args);
@@ -17,68 +18,73 @@ class COMMAND {
 const echo = new COMMAND(
   ['echo', 'write'],
   'Display a line of text',
-  false,
   echoFunc
 );
 const list = new COMMAND(
   ['list', 'ls'],
   'List directory contents',
-  false,
   listFunc
 );
 const clear = new COMMAND(
   ['clear'],
   'Clear the terminal screen',
-  false,
   clearFunc
 );
 const goto = new COMMAND(
   ['goto', 'cd'],
   'Change directory',
-  false,
   gotoFunc
 );
 const open = new COMMAND(
   ['open', 'cat'],
   'Open files and print on the standard output',
-  false,
   openFunc
 );
 const exit = new COMMAND(
   ['exit'],
   'Exit the terminal',
-  true,
   exitFunc
 );
 const help = new COMMAND(
   ['help'],
   'Display help information with a list of available commands',
-  false,
   helpFunc
 );
 const whoami = new COMMAND(
   ['whoami'],
-  'Display the current user',
-  false,
+  'Display short description about me',
   whoamiFunc
 );
 const username = new COMMAND(
   ['username'],
   'Set or get the current user',
-  false,
   usernameFunc
+);
+const visit = new COMMAND(
+  ['visit'],
+  'Opens provided link',
+  vistiFunc,
+  'visit [url]'
+)
+const calculate = new COMMAND(
+  ['calculate', 'calc'],
+  'Evaluate an arithmetic expression',
+  calculateFunc,
+  'calculate <expression>'
 );
 
 const commands = [
-  echo,
-  list,
-  clear,
-  goto,
-  open,
-  exit,
   help,
   whoami,
-  username
+  echo,
+  username,
+  clear,
+  exit,
+  list,
+  goto,
+  open,
+  visit,
+ calculate
 ]
 
 // Command Functions
@@ -142,9 +148,9 @@ function listFunc(args) {
     return `Usage: list [<directory>]`;
   let path = args[0];
   if (!path) path = terminal.currentPath;
-  const { dirObj, clearedPath } = getDirObj(path, terminal.currentPath, FILESYSTEM);
+  const { dirObj, clearedPath, error } = getDirObj({path, currentPath: terminal.currentPath, fileSystem: FILESYSTEM});
   
-  if (!dirObj) return `${clearedPath} does not exist`;
+  if (error) return error;
   if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
   
   for (let key in dirObj.content) {
@@ -164,9 +170,9 @@ function gotoFunc(args) {
   if (args.length > 1) return `Usage: goto <directory>`;
 
   const path = args[0];
-  const { dirObj, clearedPath} = getDirObj(path, terminal.currentPath, FILESYSTEM);
+  const { dirObj, clearedPath, error} = getDirObj({path, currentPath: terminal.currentPath, fileSystem: FILESYSTEM});
   
-  if (!dirObj) return `${clearedPath} does not exist`;
+  if (error) return error;
   if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
   terminal.currentPath = clearedPath;
   terminal.setOptions();
@@ -175,24 +181,18 @@ function gotoFunc(args) {
 
 function openFunc(args) {
   if (args.length === 0) return 'No file specified';
-  if (args.length > 1) return `Usage: open &lt;file&gt;`;
+  if (args.length > 1) return `Usage: open <file>`;
   const path = args[0];
-  const { dirObj, clearedPath} = getDirObj(path, terminal.currentPath, FILESYSTEM);
+  const { dirObj, clearedPath, error} = getDirObj({path, currentPath: terminal.currentPath, fileSystem: FILESYSTEM});
   
-  if (!dirObj) return `${clearedPath} does not exist`;
+  if (error) return error;
   if (dirObj.type === 'directory') return `${clearedPath} is not a file`;
   return dirObj.content;
 }
 
 function whoamiFunc(args) {
-  const users = ['iyo', 'iyoola', 'iyoolaoyabiyi'];
-  if (args.length > 1) return `Usage: whoami [user]`;
-  if (args.length < 1) {
-    const userSettings = getSavedSettings();
-    return userSettings.username;
-  }
-  if (users.includes(args[0])) return `${args[0]} is an awesome programmer!`;
-  else return 'Unknown user';
+  if (args.length > 0) return `Usage: whoami`;
+  return PROFILE.description;
 }
 
 function usernameFunc(args) {
@@ -234,21 +234,66 @@ function exitFunc() {
   return null;
 }
 
+function vistiFunc(args) {
+  if (args.length > 1) return `Usage: ${this.synopsis}`;
+  if (args.length === 0) return 'No URL provided';
+  let url = args[0].trim();
+  // Automatically add https if protocol is missing to prevent relative link handling
+  if (!/^https?:\/\//i.test(url)) {
+    url = `https://${url}`;
+  }
+  const urlRegex = /^(https?:\/\/)(www\.)?([^\s./]+\.[^\s]{2,})(\/\S*)?$/i;
+  if (!urlRegex.test(url)) return `Invalid URL: ${url}`;
+  window.open(url, '_blank');
+  return `Opening ${url}`;
+}
+
+function calculateFunc(args) {
+  if (args.length === 0) return 'No expression provided';
+  // Join args to form the full arithmetic expression.
+  const expression = args.join(' ');
+  // Allow only numbers, operators, decimals, whitespace and parentheses.
+  if (!/^[0-9+\-*/().\s]+$/.test(expression)) {
+    return `Invalid expression: ${expression}`;
+  }
+  try {
+    // Safely evaluate the arithmetic expression.
+    const result = new Function(`return ${expression}`)();
+    // Check if evaluation resulted in a valid number.
+    if (typeof result === 'number' && isFinite(result)) {
+      return `Result: ${result}`;
+    }
+    return 'Error: The expression did not evaluate to a valid number';
+  } catch (error) {
+    return `Unable to calculate: ${expression}`;
+  }
+}
+
 // Helpers
-function getDirObj(path, currentPath, fileSystem) {
+function getDirObj(dirInfo) {
+  const {path} = dirInfo;
+  let {fileSystem, currentPath} = dirInfo;
+
+  if (!path) return {error: 'What are you looking for?'};
+  if (!fileSystem) return {error: 'Where do you want to look?'};
+  if (!currentPath) currentPath = '~';
+
   let segments = [];
   let pathStack = [];
   let dirObj = fileSystem['~'];
   let clearedPath = '';
 
-  if (path.startsWith('~')) {
+
+  if (currentPath.startsWith('/')) 
+    currentPath = '~';
+
+  if (path.startsWith('~'))
     segments = path.split('/');
-  } else if (path.startsWith('/')) {
+  else if (path.startsWith('/')) {
     segments = path.split('/');
     segments[0] = '~';
-  } else {
+  } else 
     segments = currentPath.split('/').concat(path.split('/'));
-  }
 
   for (let part of segments) {
     if (part === '' || part === '.') continue;
@@ -265,7 +310,7 @@ function getDirObj(path, currentPath, fileSystem) {
     if (dirObj.content && dirObj.content[pathStack[i]]) {
       dirObj = dirObj.content[pathStack[i]];
     } else {
-      return { dirObj: null, clearedPath: clearedPath };
+      return { error: `${clearedPath} does not exist.` };
     }
   }
   return { dirObj: dirObj, clearedPath: clearedPath };
