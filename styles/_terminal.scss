@@ -59,7 +59,7 @@
       }
       .line, .response {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
       }
       .line {
         flex-wrap: wrap;
@@ -72,6 +72,9 @@
         gap: 5px;
         p{
           margin-bottom: 5px;
+        }
+        ul {
+          margin: 0;
         }
         .command-text {
           background: $light-color;

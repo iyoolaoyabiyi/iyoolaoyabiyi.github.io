@@ -73,9 +73,17 @@ const calculate = new COMMAND(
   'calculate <expression>'
 );
 
+const techs = new COMMAND(
+  ['tech-stack'],
+  'Display languages, tools, frameworks and libraries I work with',
+  techsFunc,
+  'tech-stack [option] <list item>'
+)
+
 const commands = [
   help,
   whoami,
+  techs,
   echo,
   username,
   clear,
@@ -266,6 +274,54 @@ function calculateFunc(args) {
     return 'Error: The expression did not evaluate to a valid number';
   } catch (error) {
     return `Unable to calculate: ${expression}`;
+  }
+}
+
+function techsFunc(args) {
+  const output = document.createElement('div');
+  const ul = document.createElement('ul');
+  if (args.length > 3) return `Usage: ${this.synopsis}`;
+  if (args.includes('--list') || args.length === 0) {
+    const listName = args[args.indexOf('--list') + 1];
+    if (!listName) {
+      const stacks = Object.keys(PROFILE.techStack);
+      stacks.forEach(stack => {
+        const li = document.createElement('li');
+        const span = document.createElement('span');
+        const list = PROFILE.techStack[stack];
+        span.classList.add('folder-text');
+        span.append(`${stack.replace(stack.charAt(0), stack.charAt(0).toUpperCase())}: `);
+        li.append(span);
+        list.forEach((item, i) => {
+          li.append(item)
+          if (i !== list.length - 1) {
+            li.append(', ');
+          }
+        });
+        ul.append(li);
+      });
+      output.append(ul);
+    } else {
+      const list = PROFILE.techStack[listName];
+      switch (listName) {
+        case 'languages':
+        case 'libraries':
+        case 'CMS':
+        case 'tools':
+          listItems(list);
+          break;
+        default:
+          output.append('Invalid tech list: ', listName);
+      }
+    }
+    return output;
+  }
+  function listItems(items) {
+    items.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      ul.append(li);
+    })
   }
 }
 

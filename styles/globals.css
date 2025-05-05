@@ -306,7 +306,7 @@ dialog .modal-btns {
 }
 .terminal-window .terminal-container .terminal-body .line, .terminal-window .terminal-container .terminal-body .response {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 .terminal-window .terminal-container .terminal-body .line {
   flex-wrap: wrap;
@@ -320,6 +320,9 @@ dialog .modal-btns {
 }
 .terminal-window .terminal-container .terminal-body .response p {
   margin-bottom: 5px;
+}
+.terminal-window .terminal-container .terminal-body .response ul {
+  margin: 0;
 }
 .terminal-window .terminal-container .terminal-body .response .command-text {
   background: #eeffff;

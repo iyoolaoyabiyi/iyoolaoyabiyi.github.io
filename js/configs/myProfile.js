@@ -8,12 +8,15 @@ const PROFILE = {
     'I\'m all about clarity, creativity, and doing meaningful work; one project at a time.'
   ],
   techStack: {
-    languages: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'SQL', 'PHP'],
+    languages: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'SQL', 'PHP', 'Bash'],
     libraries: ['node.js', 'jQuery', 'React', 'Tailwind CSS', 'Bootstrap', 'shadcn/ui', 'Framer Motion'],
-    cms: [
+    CMS: [
       'WordPress (site setup and design, layout structuring theme customization, plugin configuration)', 
       'Wix (site design, layout structuring)'
     ],
+    tools: [
+      'Git', 'Vite', 'SASS', 'cPanel'
+    ]
   },
   currentStudies: [
     'Advanced React patterns', 
