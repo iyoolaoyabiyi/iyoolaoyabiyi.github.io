@@ -187,9 +187,13 @@ dialog .modal-btns {
 }
 
 .floating-settings-btn {
+  width: 600px;
+  max-width: 95vw;
   position: fixed;
-  right: 10px;
   bottom: 10px;
+  right: 50%;
+  transform: translateX(50%);
+  text-align: right;
 }
 .floating-settings-btn button {
   cursor: pointer;
@@ -198,6 +202,7 @@ dialog .modal-btns {
   background-color: var(--foreground);
   color: var(--background);
   border-radius: 5px;
+  animation: 3s ease-in-out infinite notice-me;
 }
 .floating-settings-btn button:hover, .floating-settings-btn .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .floating-settings-btn button:focus, .floating-settings-btn .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .floating-settings-btn button:focus, .floating-settings-btn button:focus, .floating-settings-btn #userSettingsModal button.btn:focus, #userSettingsModal .floating-settings-btn button.btn:focus {
   box-shadow: 0 0 0 2px var(--tint);
@@ -678,4 +683,16 @@ dialog .modal-btns {
 }
 .hidden {
   display: none;
+}
+
+@keyframes notice-me {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
 }/*# sourceMappingURL=globals.css.map */

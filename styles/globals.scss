@@ -153,11 +153,16 @@ dialog {
 }
 
 .floating-settings-btn {
+  width: $max-width;
+  max-width: 95vw;
   position: fixed;
-  right: $padding-width;
   bottom: 10px;
+  right: 50%;
+  transform: translateX(50%); 
+  text-align: right;
   button {
     @include mixins.btn(var(--foreground), var(--background), var(--tint));
+    animation: 3s ease-in-out infinite notice-me;
     &:hover {
       background: var(--background);
     }
@@ -178,4 +183,17 @@ dialog {
 
 .hidden {
   display: none;
+}
+
+// Animations
+@keyframes notice-me {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
