@@ -8,11 +8,12 @@ import posts from "./configs/posts.js";
 const welcomeDialog = document.getElementById('welcomeModal');
 const userSettingsDialog = document.getElementById('userSettingsModal');
 const settingsBtns = document.querySelectorAll('.settings-btn');
+const terminalInput = terminal.commandLine.querySelector('input');
 
 // Settings and Configs
 const userSettings = getSavedSettings();
 
-// General Functionalities
+// Startup Functionalities
 setTheme(userSettings.theme);
 
 settingsBtns.forEach((btn) => {
@@ -133,8 +134,7 @@ welcomeDialog.querySelector('#setFirstTimeInput')
 // Terminal Functionalities
 terminal.setOptions();
 terminal.body.element.addEventListener('click', terminal.focusInput.bind(terminal));
-terminal.commandLine.querySelector('input')
-  .addEventListener('keydown', terminal.processPrompt.bind(terminal));
+terminalInput.addEventListener('keydown', terminal.processPrompt.bind(terminal));
 terminal.openGuiBtn.addEventListener('click', openGUI);
 
 // GUI Functionalities

@@ -1,5 +1,5 @@
 import commands from './commands.js';
-import { getSavedSettings } from './script.js';
+import { getSavedSettings, updateUserSettings } from './script.js';
 
 // Terminal Object
 const terminal = {
@@ -7,6 +7,7 @@ const terminal = {
   hostname: 'iyosWebsite',
   currentPath: '~',
   needResponse: false,
+  historyIndex: null,
   // DOM
   window: document.getElementById('terminalWindow'),
   openGuiBtn: document.getElementById('openGuiBtn'),
@@ -78,9 +79,38 @@ const terminal = {
   },
   processPrompt(e) {
     let commandLineInput = this.commandLine.querySelector('input');
+    const { commandHistory } = getSavedSettings();
+    if (e.key === 'ArrowUp') {
+      if (commandHistory.length > 0) {
+        if (this.historyIndex === null) {
+          this.historyIndex = commandHistory.length;
+        }
+        if (this.historyIndex >= 0) {
+          if (this.historyIndex !== 0) this.historyIndex--;
+          commandLineInput.value = commandHistory[this.historyIndex];
+        };
+      }
+      e.preventDefault();
+      return;
+    } else if (e.key === 'ArrowDown') {
+      if (this.historyIndex !== null) {
+        if (this.historyIndex < commandHistory.length) {
+          if (this.historyIndex !== commandHistory.length) this.historyIndex++;
+          commandLineInput.value = commandHistory[this.historyIndex];
+        }
+        if (this.historyIndex === commandHistory.length) {
+          commandLineInput.value = '';
+        }
+      }
+      e.preventDefault();
+      return;
+    }
     if (e.key === 'Enter') {
       const prompt = commandLineInput.value.trim();
       if (prompt !== '') {
+        commandHistory.push(prompt);
+        updateUserSettings('commandHistory', commandHistory);
+        this.historyIndex = null;
         // Check if command is valid
         const [ command, ...args ] = prompt.split(' ');
         let response = this.executeCommand(command, args);
