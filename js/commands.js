@@ -37,13 +37,13 @@ const goto = new COMMAND(
   ['goto', 'cd'],
   'Change directory',
   gotoFunc,
-  'goto(or cd) [directory]'
+  'goto(or cd) <directory>'
 );
 const open = new COMMAND(
   ['open', 'cat'],
   'Open files and print on the standard output',
   openFunc,
-  'open(or cat) [file]'
+  'open(or cat) <file>'
 );
 const exit = new COMMAND(
   ['exit', 'quit'],
@@ -73,19 +73,19 @@ const visit = new COMMAND(
   ['visit'],
   'Opens provided link',
   vistiFunc,
-  'visit [url]'
+  'visit <url>'
 );
 const calculate = new COMMAND(
   ['calculate', 'calc'],
   'Evaluate an arithmetic expression',
   calculateFunc,
-  'calculate(or calc) [<expression>]'
+  'calculate(or calc) <expression>'
 );
 const techs = new COMMAND(
   ['tech-stack'],
   'Display languages, tools, frameworks and libraries I work with',
   techsFunc,
-  'tech-stack --list [<list>]'
+  'tech-stack [--list] [<list>]'
 );
 
 const commands = [
@@ -207,8 +207,20 @@ function openFunc(args) {
 }
 
 function whoamiFunc(args) {
-  if (args.length > 0) return `Usage: ${this.synopsis}`;
-  return PROFILE.description;
+  if (args.length > 1) return `Usage: ${this.synopsis}`;
+  if (!args[0]) return PROFILE.description;
+  if (args[0] === '--full') {
+    const output = document.createElement('div');
+    const p = document.createElement('p');
+    p.append(PROFILE.description);
+    output.append(p);
+    PROFILE.otherDescriptions.forEach(desc => {
+      const p = document.createElement('p');
+      p.append(desc);
+      output.append(p);
+    });
+    return output;
+  } else return `Usage: ${this.synopsis}`;
 }
 
 function usernameFunc(args) {

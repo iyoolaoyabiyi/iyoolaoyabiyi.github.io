@@ -4,7 +4,7 @@ const PROFILE = {
   description: 'I\'m Iyo: a self-taught programmer focused on web technologies and software systems. I\'m very passionate about building practical tools, user-friendly interfaces, and learning.',
   otherDescriptions: [
     'I love creating things that are useful and a little bit delightful; I enjoy building intuitive digital experiences and solving problems through code.',
-    'Whether I\'m writing code, crafting words, or fixing something around the house, I enjoy figuring things out and making them work better. My approach to work -- and life -- is thoughtful, hands-on, and always curious.',
+    'Whether I\'m writing code, crafting words, or fixing something around the house, I enjoy figuring things out and making them work better. My approach to work, and life, is thoughtful, hands-on, and always curious.',
     'I\'m all about clarity, creativity, and doing meaningful work; one project at a time.'
   ],
   techStack: {
