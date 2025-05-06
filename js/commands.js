@@ -18,67 +18,75 @@ class COMMAND {
 const echo = new COMMAND(
   ['echo', 'write'],
   'Display a line of text',
-  echoFunc
+  echoFunc,
+  'echo(or write) [<text>]'
 );
 const list = new COMMAND(
   ['list', 'ls'],
   'List directory contents',
-  listFunc
+  listFunc,
+  'list(or ls) [<directory>]'
 );
 const clear = new COMMAND(
   ['clear'],
   'Clear the terminal screen',
-  clearFunc
+  clearFunc,
+  'clear'
 );
 const goto = new COMMAND(
   ['goto', 'cd'],
   'Change directory',
-  gotoFunc
+  gotoFunc,
+  'goto(or cd) [directory]'
 );
 const open = new COMMAND(
   ['open', 'cat'],
   'Open files and print on the standard output',
-  openFunc
+  openFunc,
+  'open(or cat) [file]'
 );
 const exit = new COMMAND(
-  ['exit'],
+  ['exit', 'quit'],
   'Exit the terminal',
-  exitFunc
+  exitFunc,
+  'exit(or quit)'
 );
 const help = new COMMAND(
   ['help'],
   'Display help information with a list of available commands',
-  helpFunc
+  helpFunc,
+  'help [<command>]'
 );
 const whoami = new COMMAND(
   ['whoami'],
   'Display short description about me',
-  whoamiFunc
+  whoamiFunc,
+  'whoami'
 );
 const username = new COMMAND(
   ['username'],
   'Set or get the current user',
-  usernameFunc
+  usernameFunc,
+  'username [<new username>]'
 );
 const visit = new COMMAND(
   ['visit'],
   'Opens provided link',
   vistiFunc,
   'visit [url]'
-)
+);
 const calculate = new COMMAND(
   ['calculate', 'calc'],
   'Evaluate an arithmetic expression',
   calculateFunc,
-  'calculate <expression>'
+  'calculate(or calc) [<expression>]'
 );
-
 const techs = new COMMAND(
   ['tech-stack'],
   'Display languages, tools, frameworks and libraries I work with',
   techsFunc,
-  'tech-stack [option] <list item>'
-)
+  'tech-stack --list [<list>]'
+);
 
 const commands = [
   help,
@@ -134,7 +142,7 @@ function helpFunc(args) {
     }
     output.appendChild(para);
   } else {
-    para.textContent = `Usage: help <command>`;
+    para.textContent = `Usage: ${this.synopsis}`;
     output.appendChild(para);
   }
   return output;
@@ -153,7 +161,7 @@ function clearFunc() {
 function listFunc(args) {
   const para = document.createElement('p');
   if (args.length > 1) 
-    return `Usage: list [<directory>]`;
+    return `Usage: ${this.synopsis}`;
   let path = args[0];
   if (!path) path = terminal.currentPath;
   const { dirObj, clearedPath, error } = getDirObj({path, currentPath: terminal.currentPath, fileSystem: FILESYSTEM});
@@ -175,7 +183,7 @@ function listFunc(args) {
 
 function gotoFunc(args) {
   if (args.length === 0) return 'No directory specified';
-  if (args.length > 1) return `Usage: goto <directory>`;
+  if (args.length > 1) return `Usage: ${this.synopsis}`;
 
   const path = args[0];
   const { dirObj, clearedPath, error} = getDirObj({path, currentPath: terminal.currentPath, fileSystem: FILESYSTEM});
@@ -189,7 +197,7 @@ function gotoFunc(args) {
 
 function openFunc(args) {
   if (args.length === 0) return 'No file specified';
-  if (args.length > 1) return `Usage: open <file>`;
+  if (args.length > 1) return `Usage: ${this.synopsis}`;
   const path = args[0];
   const { dirObj, clearedPath, error} = getDirObj({path, currentPath: terminal.currentPath, fileSystem: FILESYSTEM});
   
@@ -199,7 +207,7 @@ function openFunc(args) {
 }
 
 function whoamiFunc(args) {
-  if (args.length > 0) return `Usage: whoami`;
+  if (args.length > 0) return `Usage: ${this.synopsis}`;
   return PROFILE.description;
 }
 
@@ -207,7 +215,7 @@ function usernameFunc(args) {
   const userSettings = getSavedSettings();
   const username = args[0];
   if (args.length < 1) return userSettings.username;
-  if (args.length > 1) return `Usage: username [new username]`;
+  if (args.length > 1) return `Usage: ${this.synopsis}`;
   if (args[0].length < 3 || args.length >= 12) 
     return `Username must be at least 3 characters and not more than 12 characters long`;
   updateUserSettings('username', username);
@@ -315,7 +323,7 @@ function techsFunc(args) {
       }
     }
     return output;
-  }
+  } else return `Usage: ${this.synopsis}`;
   function listItems(items) {
     items.forEach(item => {
       const li = document.createElement('li');
