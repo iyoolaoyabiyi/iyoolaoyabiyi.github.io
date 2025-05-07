@@ -8,12 +8,18 @@ import posts from "./configs/posts.js";
 const welcomeDialog = document.getElementById('welcomeModal');
 const userSettingsDialog = document.getElementById('userSettingsModal');
 const settingsBtns = document.querySelectorAll('.settings-btn');
-const terminalInput = terminal.commandLine.querySelector('.input');
+let terminalInput = null;
 
 // Settings and Configs
 const userSettings = getSavedSettings();
 
 // Startup Functionalities
+terminal.addCommandLine();
+terminalInput = terminal.commandLine.querySelector('.input');
+
+if (userSettings.window === 'gui') openGUI();
+else openTerminal();
+
 setTheme(userSettings.theme);
 
 settingsBtns.forEach((btn) => {
@@ -25,15 +31,12 @@ settingsBtns.forEach((btn) => {
 if (userSettings.showWelcome) {
   welcomeDialog.showModal();
 } else {
-  handleViewChangeFocus();
+  terminal.focusInput();
 }
 
 checkWelcomeChkBxes();
 
 // Modals Functionality
-if (userSettings.window === 'gui') openGUI();
-else openTerminal();
-
 document.querySelectorAll('.open-gui-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
     welcomeDialog.close();
@@ -46,12 +49,12 @@ document.querySelectorAll('[data-type="close-diag-btn"').forEach((btn) => {
     document.getElementById(this.dataset.btnFor).close();
     switch (this.dataset.btnFor) {
         case 'userSettingsModal':
-          handleViewChangeFocus();
+          terminal.focusInput();
           break;
       }
     });
   });
-    
+
 welcomeDialog.addEventListener('close', () => {
   userSettingsDialog.showModal();
   if (document.getElementById('setFirstTimeInput').checked) 
@@ -100,7 +103,7 @@ userSettingsDialog.querySelector('#saveSettingsBtn')
     }
     if (!isErr) {
       userSettingsDialog.close();
-      handleViewChangeFocus();
+      terminal.focusInput();
     }
 });
 
@@ -134,7 +137,6 @@ welcomeDialog.querySelector('#setFirstTimeInput')
 // Terminal Functionalities
 terminal.setOptions();
 terminal.body.element.addEventListener('click', terminal.focusInput.bind(terminal));
-terminalInput.addEventListener('keydown', terminal.processPrompt.bind(terminal));
 terminal.openGuiBtn.addEventListener('click', openGUI);
 
 // GUI Functionalities
@@ -161,9 +163,6 @@ gui.tabBtns.forEach((btn) => {
 });
 gui.populateTab('portfolio', portfolio);
 gui.populateTab('posts', posts);
-
-// Temp
-// localStorage.clear();
 
 // Helpers
 function saveUserSettings(userSettings) {
@@ -195,12 +194,6 @@ function setTheme(theme) {
   }
 }
 
-function handleViewChangeFocus() {
-  if (userSettings.window === 'terminal') {
-    terminal.commandLine.querySelector('.input').focus();
-  }
-}
-
 function openGUI() {
   if (gui.window.classList.contains("hidden")) {
     terminal.window.classList.add("hidden");
@@ -213,7 +206,7 @@ function openTerminal() {
   if (terminal.window.classList.contains("hidden")) {
     gui.window.classList.add("hidden");
     terminal.window.classList.remove("hidden");
-    terminal.commandLine.querySelector('.input').focus();
+    terminal.focusInput();
     updateUserSettings('window', 'terminal');
   }
 }

@@ -36,19 +36,7 @@
             <p>To see the list of commands, type 'help'.</p>
             <p>The terminal is case-sensitive and commands are lowercase.</p>
           </div>
-          <div id="inputInterface">
-            <div class="line" id="commandLine">
-              <p class="prompt">
-                <span data-type="username">user</span>
-                @
-                <span data-type="hostname">iyosWebsite</span>
-                :
-                <span data-type="path">~</span>
-                $
-              </p>
-              <input class="input" type="text" />
-            </div>
-          </div>
+          <div id="inputInterface"></div>
         </div>
       </div>
     </div>
@@ -165,7 +153,7 @@
       <input type="checkbox" name="set-custom-name-input" id="setCustomNameInput">
     </div>
     <div id="userNameSetup" class="form-control">
-      <input type="text" name="username" id="customNameInput" placeholder="Enter your username">
+      <input type="text" name="username" id="customNameInput" placeholder="Enter your username" autocomplete="username">
       <p id="err"></p>
     </div>
     <div class="modal-btns">
@@ -194,14 +182,14 @@
         <span data-type="path">~</span>
         $
       </p>
-      <input class="input" type="text" />
+      <input class="input" type="text" name="commandLineInput" autocomplete="off" />
     </div>
   </template>
   <!-- Response line template -->
    <template id="responseLineTemplate">
     <div class="response text-color">
       <div class="responseDisplay"></div>
-      <input type="text" class="input">
+      <input type="text" class="input" name="responseLineInput" autocomplete="off">
     </div>
    </template>
    <!-- Post cards template -->

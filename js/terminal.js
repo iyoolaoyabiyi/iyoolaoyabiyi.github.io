@@ -21,27 +21,29 @@ const terminal = {
   set commandLine(commandLine) {
     this._commandLine = commandLine;
   },
+  addCommandLine() {
+    addCommandLine();
+  },
+  addResponse(response, isPrompt = false) {
+    const responseLineTemplate = document.querySelector('#responseLineTemplate');
+    const responseLineClone = responseLineTemplate.content.cloneNode(true);
+    const responseLine = responseLineClone.querySelector('.response');
+    const responseEl = responseLine.querySelector('.responseDisplay');
+    const responseInput = responseLine.querySelector('.input');
+    if (document.querySelector('#responseLine')) 
+      document.querySelector('#responseLine').id = '';
+    responseLine.id = 'responseLine';
+    if (!isPrompt) responseInput.remove();
+    responseEl.append(response);
+    this.body.inputInterface.appendChild(responseLine);
+    this.body.inputInterface.scrollTop = this.body.inputInterface.scrollHeight; 
+  },
   body: {
     get element() {
       return document.getElementById('terminal');
     },
     get inputInterface() {
       return document.getElementById('inputInterface');
-    },
-    addCommandLine() {
-      addCommandLine();
-    },
-    addResponse(response, isPrompt = false) {
-      const responseLineTemplate = document.querySelector('#responseLineTemplate');
-      const responseLineClone = responseLineTemplate.content.cloneNode(true);
-      const responseLine = responseLineClone.querySelector('.response');
-      const responseEl = responseLine.querySelector('.responseDisplay');
-      const responseInput = responseLine.querySelector('.input');
-
-      if (!isPrompt) responseInput.remove();
-      responseEl.append(response);
-      this.inputInterface.appendChild(responseLine);
-      this.inputInterface.scrollTop = this.inputInterface.scrollHeight; 
     }
   },
   // Methods
@@ -120,9 +122,11 @@ const terminal = {
         // Check if command is valid
         const [ command, ...args ] = prompt.split(' ');
         let response = this.executeCommand(command, args);
-        if (response) this.body.addResponse(response);
+        if (response) this.addResponse(response);
       }
-      if (!terminal.needResponse) this.body.addCommandLine();
+      if (!terminal.needResponse) {
+        this.addCommandLine();
+      }
     }
   }
 }

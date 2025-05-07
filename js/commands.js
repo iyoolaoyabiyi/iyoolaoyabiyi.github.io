@@ -238,7 +238,7 @@ function usernameFunc(args) {
 function exitFunc() {
   let responseInput = null;
   terminal.needResponse = true;
-  terminal.body.addResponse('Are you sure you want to quit?(yes/no)', true);
+  terminal.addResponse('Are you sure you want to quit?(yes/no)', true);
   responseInput = document.querySelector('.response input');
   responseInput.focus();
   responseInput.addEventListener('keydown', e => {
@@ -256,7 +256,7 @@ function exitFunc() {
         default:
           document.querySelector('#responseLine').id = '';
         }
-        terminal.body.addCommandLine();
+        terminal.addCommandLine();
     }
   })
   return null;
