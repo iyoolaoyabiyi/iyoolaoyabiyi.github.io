@@ -7,7 +7,10 @@ const terminal = {
   hostname: 'iyosWebsite',
   currentPath: '~',
   needResponse: false,
-  historyIndex: null,
+  history: {
+    index: null,
+    unsentCommand: ''
+  },
   // DOM
   window: document.getElementById('terminalWindow'),
   openGuiBtn: document.getElementById('openGuiBtn'),
@@ -82,24 +85,27 @@ const terminal = {
     const { commandHistory } = getSavedSettings();
     if (e.key === 'ArrowUp') {
       if (commandHistory.length > 0) {
-        if (this.historyIndex === null) {
-          this.historyIndex = commandHistory.length;
+        if (this.history.index === null) {
+          this.history.unsentCommand = commandLineInput.value.trim();
+          this.history.index = commandHistory.length;
         }
-        if (this.historyIndex >= 0) {
-          if (this.historyIndex !== 0) this.historyIndex--;
-          commandLineInput.value = commandHistory[this.historyIndex];
+        if (this.history.index == commandHistory.length) 
+          this.history.unsentCommand = commandLineInput.value.trim();
+        if (this.history.index >= 0) {
+          if (this.history.index !== 0) this.history.index--;
+          commandLineInput.value = commandHistory[this.history.index];
         };
       }
       e.preventDefault();
       return;
     } else if (e.key === 'ArrowDown') {
-      if (this.historyIndex !== null) {
-        if (this.historyIndex < commandHistory.length) {
-          if (this.historyIndex !== commandHistory.length) this.historyIndex++;
-          commandLineInput.value = commandHistory[this.historyIndex];
+      if (this.history.index !== null) {
+        if (this.history.index < commandHistory.length) {
+          if (this.history.index !== commandHistory.length) this.history.index++;
+          commandLineInput.value = commandHistory[this.history.index];
         }
-        if (this.historyIndex === commandHistory.length) {
-          commandLineInput.value = '';
+        if (this.history.index === commandHistory.length) {
+          commandLineInput.value = this.history.unsentCommand;
         }
       }
       e.preventDefault();
@@ -110,7 +116,7 @@ const terminal = {
       if (prompt !== '') {
         commandHistory.push(prompt);
         updateUserSettings('commandHistory', commandHistory);
-        this.historyIndex = null;
+        this.history.index = null;
         // Check if command is valid
         const [ command, ...args ] = prompt.split(' ');
         let response = this.executeCommand(command, args);
