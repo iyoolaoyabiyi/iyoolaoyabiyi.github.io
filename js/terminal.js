@@ -22,7 +22,35 @@ const terminal = {
     this._commandLine = commandLine;
   },
   addCommandLine() {
-    addCommandLine();
+    let commandLineInput;
+    const commandLineTemplate = document.querySelector('#commandLineTemplate');
+    const commandLineClone = commandLineTemplate.content.cloneNode(true);
+    const commandLine = commandLineClone.querySelector('.line');
+    const usernameEl = commandLineClone.querySelector('[data-type="username"]');
+    const hostnameEl = commandLineClone.querySelector('[data-type="hostname"]');
+    const pathEl = commandLineClone.querySelector('[data-type="path"]');
+
+    const userSettings = getSavedSettings();
+    
+    usernameEl.textContent = userSettings.username;
+    hostnameEl.textContent = this.hostname;
+    pathEl.textContent = this.currentPath;
+
+    if (this.commandLine) {
+      commandLineInput = this.commandLine.querySelector('.input');
+      // Deactivate current commandLine
+      commandLineInput.disabled = true;
+      commandLineInput.removeAttribute('autofocus');
+      commandLineInput.removeEventListener('keydown', this.processPrompt);
+      this.commandLine.id = '';
+    }
+    // Append new commandLine
+    this.commandLine = commandLine;
+    commandLineInput = this.commandLine.querySelector('.input');
+    commandLineInput.disabled = false;
+    this.body.inputInterface.append(this.commandLine);
+    commandLineInput.focus();
+    commandLineInput.addEventListener('keydown', this.processPrompt.bind(terminal));
   },
   addResponse(response, isPrompt = false) {
     const responseLineTemplate = document.querySelector('#responseLineTemplate');
@@ -129,38 +157,6 @@ const terminal = {
       }
     }
   }
-}
-
-function addCommandLine() {
-  let commandLineInput;
-  const commandLineTemplate = document.querySelector('#commandLineTemplate');
-  const commandLineClone = commandLineTemplate.content.cloneNode(true);
-  const commandLine = commandLineClone.querySelector('.line');
-  const usernameEl = commandLineClone.querySelector('[data-type="username"]');
-  const hostnameEl = commandLineClone.querySelector('[data-type="hostname"]');
-  const pathEl = commandLineClone.querySelector('[data-type="path"]');
-
-  const userSettings = getSavedSettings();
-  
-  usernameEl.textContent = userSettings.username;
-  hostnameEl.textContent = terminal.hostname;
-  pathEl.textContent = terminal.currentPath;
-
-  if (terminal.commandLine) {
-    commandLineInput = terminal.commandLine.querySelector('.input');
-    // Deactivate current commandLine
-    commandLineInput.disabled = true;
-    commandLineInput.removeAttribute('autofocus');
-    commandLineInput.removeEventListener('keydown', terminal.processPrompt);
-    terminal.commandLine.id = '';
-  }
-  // Append new commandLine
-  terminal.commandLine = commandLine;
-  commandLineInput = terminal.commandLine.querySelector('.input');
-  commandLineInput.disabled = false;
-  terminal.body.inputInterface.append(terminal.commandLine);
-  commandLineInput.focus();
-  commandLineInput.addEventListener('keydown', terminal.processPrompt.bind(terminal));
 }
 
 export default terminal;
