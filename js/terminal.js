@@ -33,7 +33,7 @@ const terminal = {
       const responseLineClone = responseLineTemplate.content.cloneNode(true);
       const responseLine = responseLineClone.querySelector('.response');
       const responseEl = responseLine.querySelector('.responseDisplay');
-      const responseInput = responseLine.querySelector('input');
+      const responseInput = responseLine.querySelector('.input');
 
       if (!isPrompt) responseInput.remove();
       responseEl.append(response);
@@ -61,9 +61,9 @@ const terminal = {
   focusInput() {
     if (this.needResponse) {
       const responseLine = document.getElementById('responseLine');
-      responseLine.querySelector('input').focus();
+      responseLine.querySelector('.input').focus();
     } else {
-      this.commandLine.querySelector('input').focus();
+      this.commandLine.querySelector('.input').focus();
     }
   },
   executeCommand(command, args) {
@@ -78,7 +78,7 @@ const terminal = {
     return output;
   },
   processPrompt(e) {
-    let commandLineInput = this.commandLine.querySelector('input');
+    let commandLineInput = this.commandLine.querySelector('.input');
     const { commandHistory } = getSavedSettings();
     if (e.key === 'ArrowUp') {
       if (commandHistory.length > 0) {
@@ -137,7 +137,7 @@ function addCommandLine() {
   pathEl.textContent = terminal.currentPath;
 
   if (terminal.commandLine) {
-    commandLineInput = terminal.commandLine.querySelector('input');
+    commandLineInput = terminal.commandLine.querySelector('.input');
     // Deactivate current commandLine
     commandLineInput.disabled = true;
     commandLineInput.removeAttribute('autofocus');
@@ -146,7 +146,7 @@ function addCommandLine() {
   }
   // Append new commandLine
   terminal.commandLine = commandLine;
-  commandLineInput = terminal.commandLine.querySelector('input');
+  commandLineInput = terminal.commandLine.querySelector('.input');
   commandLineInput.disabled = false;
   terminal.body.inputInterface.append(terminal.commandLine);
   commandLineInput.focus();

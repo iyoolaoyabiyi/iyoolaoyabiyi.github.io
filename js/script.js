@@ -8,7 +8,7 @@ import posts from "./configs/posts.js";
 const welcomeDialog = document.getElementById('welcomeModal');
 const userSettingsDialog = document.getElementById('userSettingsModal');
 const settingsBtns = document.querySelectorAll('.settings-btn');
-const terminalInput = terminal.commandLine.querySelector('input');
+const terminalInput = terminal.commandLine.querySelector('.input');
 
 // Settings and Configs
 const userSettings = getSavedSettings();
@@ -197,7 +197,7 @@ function setTheme(theme) {
 
 function handleViewChangeFocus() {
   if (userSettings.window === 'terminal') {
-    terminal.commandLine.querySelector('input').focus();
+    terminal.commandLine.querySelector('.input').focus();
   }
 }
 
@@ -213,7 +213,7 @@ function openTerminal() {
   if (terminal.window.classList.contains("hidden")) {
     gui.window.classList.add("hidden");
     terminal.window.classList.remove("hidden");
-    terminal.commandLine.querySelector('input').focus();
+    terminal.commandLine.querySelector('.input').focus();
     updateUserSettings('window', 'terminal');
   }
 }
