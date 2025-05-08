@@ -23,6 +23,7 @@ const terminal = {
   },
   addCommandLine() {
     let commandLineInput;
+    const responseInput = document.querySelector('#responseLine .input');
     const commandLineTemplate = document.querySelector('#commandLineTemplate');
     const commandLineClone = commandLineTemplate.content.cloneNode(true);
     const commandLine = commandLineClone.querySelector('.line');
@@ -31,6 +32,10 @@ const terminal = {
     const pathEl = commandLineClone.querySelector('[data-type="path"]');
 
     const userSettings = getSavedSettings();
+    
+    if (responseInput) {
+      if (!responseInput.disabled) responseInput.disabled = true;
+    }
     
     usernameEl.textContent = userSettings.username;
     hostnameEl.textContent = this.hostname;
@@ -53,17 +58,23 @@ const terminal = {
     commandLineInput.addEventListener('keydown', this.processPrompt.bind(terminal));
   },
   addResponse(response, isPrompt = false) {
+    const terminalResponseLine = document.querySelector('#responseLine');
+    let terminalResponseInput = null;
     const responseLineTemplate = document.querySelector('#responseLineTemplate');
     const responseLineClone = responseLineTemplate.content.cloneNode(true);
     const responseLine = responseLineClone.querySelector('.response');
     const responseEl = responseLine.querySelector('.responseDisplay');
     const responseInput = responseLine.querySelector('.input');
-    if (document.querySelector('#responseLine')) 
-      document.querySelector('#responseLine').id = '';
-    responseLine.id = 'responseLine';
+    if (terminalResponseLine) {
+      terminalResponseLine.id = '';
+      terminalResponseInput = terminalResponseLine.querySelector('.input');
+    }
+    if (terminalResponseInput)
+      terminalResponseInput.disabled = true;
     if (!isPrompt) responseInput.remove();
     responseEl.append(response);
     this.body.inputInterface.appendChild(responseLine);
+    if (isPrompt) responseInput.focus();
     this.body.inputInterface.scrollTop = this.body.inputInterface.scrollHeight; 
   },
   body: {

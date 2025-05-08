@@ -239,8 +239,7 @@ function exitFunc() {
   let responseInput = null;
   terminal.needResponse = true;
   terminal.addResponse('Are you sure you want to quit?(yes/no)', true);
-  responseInput = document.querySelector('.response input');
-  responseInput.focus();
+  responseInput = document.querySelector('#responseLine .input');
   responseInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
       const response = responseInput.value;
@@ -253,10 +252,8 @@ function exitFunc() {
           terminal.setOptions();
           openGUI();
           break;
-        default:
-          document.querySelector('#responseLine').id = '';
-        }
-        terminal.addCommandLine();
+      }
+      terminal.addCommandLine();
     }
   })
   return null;

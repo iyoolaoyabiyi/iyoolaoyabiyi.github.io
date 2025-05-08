@@ -17,9 +17,6 @@ const userSettings = getSavedSettings();
 terminal.addCommandLine();
 terminalInput = terminal.commandLine.querySelector('.input');
 
-if (userSettings.window === 'gui') openGUI();
-else openTerminal();
-
 setTheme(userSettings.theme);
 
 settingsBtns.forEach((btn) => {
@@ -34,9 +31,13 @@ if (userSettings.showWelcome) {
   terminal.focusInput();
 }
 
-checkWelcomeChkBxes();
+if (userSettings.window === 'gui') openGUI();
+else openTerminal();
+
 
 // Modals Functionality
+checkWelcomeChkBxes();
+
 document.querySelectorAll('.open-gui-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
     welcomeDialog.close();
@@ -47,11 +48,6 @@ document.querySelectorAll('.open-gui-btn').forEach((btn) => {
 document.querySelectorAll('[data-type="close-diag-btn"').forEach((btn) => {
   btn.addEventListener('click', function() {
     document.getElementById(this.dataset.btnFor).close();
-    switch (this.dataset.btnFor) {
-        case 'userSettingsModal':
-          terminal.focusInput();
-          break;
-      }
     });
   });
 
@@ -60,6 +56,11 @@ welcomeDialog.addEventListener('close', () => {
   if (document.getElementById('setFirstTimeInput').checked) 
     updateUserSettings('showWelcome', true);
   else updateUserSettings('showWelcome', false);
+});
+
+userSettingsDialog.addEventListener('close', () => {
+  if (userSettings.window === 'terminal') 
+    terminal.focusInput();
 });
 
 welcomeDialog.querySelector('#setFirstTimeInput')
@@ -103,19 +104,17 @@ userSettingsDialog.querySelector('#saveSettingsBtn')
     }
     if (!isErr) {
       userSettingsDialog.close();
-      terminal.focusInput();
     }
 });
 
 userSettingsDialog.querySelector('#setDarkModeInput')
   .addEventListener('change', function() {
     if (this.checked) {
-      document.documentElement.dataset.theme = 'dark';
       updateUserSettings('theme', 'dark');
     } else {
-      document.documentElement.dataset.theme = 'light';
       updateUserSettings('theme', 'light');
     }
+    document.documentElement.dataset.theme = userSettings.theme;
   });
 
 userSettingsDialog.querySelector('#darkModeInput')
