@@ -32,7 +32,7 @@ const terminal = {
     const pathEl = commandLineClone.querySelector('[data-type="path"]');
 
     const userSettings = getSavedSettings();
-    
+
     if (responseInput) {
       if (!responseInput.disabled) responseInput.disabled = true;
     }
@@ -155,6 +155,8 @@ const terminal = {
     if (e.key === 'Enter') {
       const prompt = commandLineInput.value.trim();
       if (prompt !== '') {
+        if (commandHistory.includes(prompt))
+          commandHistory.splice(commandHistory.indexOf(prompt), 1);
         commandHistory.push(prompt);
         updateUserSettings('commandHistory', commandHistory);
         this.history.index = null;
