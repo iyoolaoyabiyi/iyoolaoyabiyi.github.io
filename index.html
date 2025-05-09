@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta name="description" content="Iyo's personal website. A developer, builder, and lifelong tinkerer from Nigeria.">
-  <meta name="keywords" content="Iyo Oyabiyi, Iyo, Portfolio, Software Developer, Nigeria, Personal Website, Portfolion Website, Web Developer, Frontend Developer, Backend Developer, Fullstack Developer">
+  <meta name="keywords" content="Iyola Oyabiyi, Iyo, Portfolio, Software Developer, Nigeria, Personal Website, Portfolion Website, Web Developer, Frontend Developer, Backend Developer, Fullstack Developer">
   <meta name="author" content="Iyo">
 
   <title>ioo ::  Iyola Oyabiyi</title>
@@ -65,7 +65,7 @@
           </nav>
         </div>
       </header>
-      <section class="about">
+      <section class="profile">
         <h2>Profile</h2>
         <div class="intro">
           <div class="cover-pic">
@@ -75,27 +75,43 @@
             <img src="./assets/dp.png" alt="Iyo's profile picture" class="profile-pic" />
           </div>
           <div class="info-container">
-            <div class="username">
-              <h3>Iyola Oyabiyi</h3>
-              <p>@iyoolaoyabiyi</p>
+            <div class="user">
+              <h3 id="fullName"></h3>
+              <p id="username"></p>
             </div>
             <div class="other-info">
               <div class="info-box">
-                <p aria-label="Location">📌</p>
-                <p>Nigeria</p>
+                <p aria-label="Location Icon">📌</p>
+                <p id="location"></p>
               </div>
               <div class="info-box">
-                <p aria-label="Role">👨🏿‍💻</p>
-                <p>Software Developer</p>
+                <p aria-label="Role Icon">👨🏿‍💻</p>
+                <p id="role"></p>
               </div>
             </div>   
           </div>
-          <div class="description">
-            <p>Hello, I’m Iyo: a developer, builder, and lifelong tinkerer from Nigeria.</p>
-            <p>I love creating things that are useful and a little bit delightful; I enjoy building intuitive digital experiences and solving problems through code.</p>
-            <p>Whether I’m writing code, crafting words, or fixing something around the house, I enjoy figuring things out and making them work better. My approach to work -- and life -- is thoughtful, hands-on, and always curious.</p>
-            <p>I'm all about clarity, creativity, and doing meaningful work; one project at a time.</p> 
+          <div class="description" id="description"></div>
+        </div>
+        <div class="tech-stack accord">
+          <div class="accord-toggle">
+            <h3>Tech Stack</h3>
+            <button>Open</button>
           </div>
+          <div class="accord-content hidden" id="stackList"></div>
+        </div>
+        <div class="current-studies accord">
+          <div class="accord-toggle">
+            <h3>Current studies</h3>
+            <button>Open</button>
+          </div>
+          <div class="accord-content hidden" id="studiesList"></div>
+        </div>
+        <div class="interests accord">
+          <div class="accord-toggle">
+            <h3>Interests</h3>
+            <button>Open</button>
+          </div>
+          <div class="accord-content hidden" id="interestsList"></div>
         </div>
       </section>
       <section class="content-tabs">
@@ -190,6 +206,13 @@
     <div class="response text-color" id="responseLine">
       <div class="responseDisplay"></div>
       <input type="text" class="input" name="responseLineInput" autocomplete="off">
+    </div>
+   </template>
+   <!-- Lists template -->
+   <template id="listTemplate">
+    <div class="profile-list">
+      <h4></h4>
+      <ul></ul>
     </div>
    </template>
    <!-- Post cards template -->

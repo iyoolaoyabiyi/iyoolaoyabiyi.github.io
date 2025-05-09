@@ -1,4 +1,4 @@
-
+import PROFILE from "./configs/myProfile.js";
 
 const gui = {
   isMenuOpen: true,
@@ -8,6 +8,7 @@ const gui = {
   tabBtns: document.querySelectorAll('.tabs-btns button'),
   navItems: document.querySelectorAll('.header-nav-list li button'),
   tabs: document.querySelectorAll('.tab'),
+  accords: document.querySelectorAll('.accord'),
   activateMenu() {
     const icon = document.querySelector('.nav-icon');
     const headerLogo = document.querySelector('.header-logo');
@@ -89,6 +90,75 @@ const gui = {
       });
       gui.isMenuOpen = false;
     }
+  },
+  populateProfile() {
+    const nameEl = document.querySelector('#fullName');
+    const usernameEl = document.querySelector('#username');
+    const roleEl = document.querySelector('#role');
+    const locationEl = document.querySelector('#location');
+    const descEl = document.querySelector('#description');
+    const descP = document.createElement('p');
+    const otherDescDiv = document.createElement('div');
+    const descBtn = document.createElement('button');
+    const stackListEl = document.querySelector('#stackList');
+    const studiesListEl = document.querySelector('#studiesList');
+    const interestsListEl = document.querySelector('#interestsList');
+    const studiesList = document.createElement('ul');
+    const interestsList = document.createElement('ul');
+    const { name, username, role, location, description, otherDescriptions, techStack, currentStudies, interests } = PROFILE;
+
+    nameEl.textContent = name;
+    usernameEl.textContent = `@${username}`;
+    roleEl.textContent = role;
+    locationEl.textContent = location;
+    descP.textContent = description;
+    descBtn.textContent = 'show more';
+    otherDescDiv.classList.add('hidden');
+    descBtn.addEventListener('click', () => {
+      if (otherDescDiv.classList.contains('hidden')) {
+        otherDescDiv.classList.remove('hidden');
+        descEl.querySelector('button').remove();
+        descBtn.textContent = 'show less';
+        descEl.append(descBtn);
+      } else {
+        otherDescDiv.classList.add('hidden');
+        descBtn.textContent = 'show more';
+      }
+    });
+    otherDescriptions.forEach(desc => {
+      const p = document.createElement('p');
+      p.textContent = desc;
+      otherDescDiv.append(p);
+    });
+    descEl.append(descP, descBtn, otherDescDiv);
+    // Add Tech Stack
+    Object.keys(techStack).forEach(stack => {
+      const listTemplate = document.querySelector('#listTemplate');
+      const profileList = listTemplate.content.cloneNode(true);
+      const listHeading = profileList.querySelector('h4');
+      const listEl = profileList.querySelector('ul');
+      listHeading.textContent = stack.toUpperCase();
+      techStack[stack].forEach(tech => {
+        const li = document.createElement('li');
+        li.textContent = tech;
+        listEl.append(li);
+      });
+      stackListEl.append(profileList);
+    });
+    // Add Studies
+    currentStudies.forEach(study => {
+      const li = document.createElement('li');
+      li.textContent = study;
+      studiesList.append(li);
+    });
+    studiesListEl.append(studiesList);
+    // Add Interests
+    interests.forEach(interest => {
+      const li = document.createElement('li');
+      li.textContent = interest;
+      interestsList.append(li);
+    });
+    interestsListEl.append(interestsList);
   },
   populateTab(tabID, contentArr) {
     const imgDir = './assets/images';

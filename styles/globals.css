@@ -71,7 +71,7 @@ dialog .modal-close {
   font-size: 1.2rem;
   border-radius: 50%;
 }
-dialog .modal-close:hover, dialog .gui-window .content-tabs .display-container .card .card-footer .modal-close.btn:focus, .gui-window .content-tabs .display-container .card .card-footer dialog .modal-close.btn:focus, dialog .gui-window .gui-header .header-container .header-nav .nav-buttons .modal-close.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons dialog .modal-close.btn:focus, dialog .gui-window .gui-header .header-container .header-nav ul li button.modal-close:focus, .gui-window .gui-header .header-container .header-nav ul li dialog button.modal-close:focus, dialog .terminal-window .terminal-container .terminal-header button.modal-close:focus, .terminal-window .terminal-container .terminal-header dialog button.modal-close:focus, dialog .floating-settings-btn button.modal-close:focus, .floating-settings-btn dialog button.modal-close:focus, dialog #userSettingsModal button.modal-close.btn:focus, #userSettingsModal dialog button.modal-close.btn:focus, dialog p button.modal-close:focus {
+dialog .modal-close:hover, dialog .gui-window .content-tabs .display-container .card .card-footer .modal-close.btn:focus, .gui-window .content-tabs .display-container .card .card-footer dialog .modal-close.btn:focus, dialog .gui-window .profile .accord .accord-toggle button.modal-close:focus, .gui-window .profile .accord .accord-toggle dialog button.modal-close:focus, dialog .gui-window .gui-header .header-container .header-nav .nav-buttons .modal-close.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons dialog .modal-close.btn:focus, dialog .gui-window .gui-header .header-container .header-nav ul li button.modal-close:focus, .gui-window .gui-header .header-container .header-nav ul li dialog button.modal-close:focus, dialog .terminal-window .terminal-container .terminal-header button.modal-close:focus, .terminal-window .terminal-container .terminal-header dialog button.modal-close:focus, dialog .floating-settings-btn button.modal-close:focus, .floating-settings-btn dialog button.modal-close:focus, dialog #userSettingsModal button.modal-close.btn:focus, #userSettingsModal dialog button.modal-close.btn:focus, dialog p button.modal-close:focus {
   transform: scale(1.2);
   transition: all 0.2s ease-in-out;
   box-shadow: 0 0 0 2px #001010;
@@ -96,7 +96,7 @@ dialog p button {
   color: #eeffff;
   border-radius: 5px;
 }
-dialog p button:hover, dialog p .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer dialog p button.btn:focus, dialog p .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons dialog p button.btn:focus, dialog p .gui-window .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li dialog p button:focus, dialog p .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header dialog p button:focus, dialog p .floating-settings-btn button:focus, .floating-settings-btn dialog p button:focus, dialog p #userSettingsModal button.btn:focus, #userSettingsModal dialog p button.btn:focus, dialog p button:focus {
+dialog p button:hover, dialog p .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer dialog p button.btn:focus, dialog p .gui-window .profile .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle dialog p button:focus, dialog p .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons dialog p button.btn:focus, dialog p .gui-window .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li dialog p button:focus, dialog p .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header dialog p button:focus, dialog p .floating-settings-btn button:focus, .floating-settings-btn dialog p button:focus, dialog p #userSettingsModal button.btn:focus, #userSettingsModal dialog p button.btn:focus, dialog p button:focus {
   box-shadow: 0 0 0 2px #005f5f;
   background: transparent;
   color: #001010;
@@ -204,7 +204,7 @@ dialog .modal-btns {
   border-radius: 5px;
   animation: 3s ease-in-out infinite notice-me;
 }
-.floating-settings-btn button:hover, .floating-settings-btn .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .floating-settings-btn button:focus, .floating-settings-btn .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .floating-settings-btn button:focus, .floating-settings-btn button:focus, .floating-settings-btn #userSettingsModal button.btn:focus, #userSettingsModal .floating-settings-btn button.btn:focus {
+.floating-settings-btn button:hover, .floating-settings-btn .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .profile .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle .floating-settings-btn button:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .floating-settings-btn button:focus, .floating-settings-btn .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .floating-settings-btn button:focus, .floating-settings-btn button:focus, .floating-settings-btn #userSettingsModal button.btn:focus, #userSettingsModal .floating-settings-btn button.btn:focus {
   box-shadow: 0 0 0 2px var(--tint);
   background: transparent;
   color: var(--foreground);
@@ -216,13 +216,13 @@ dialog .modal-btns {
 .floating-settings-btn button:focus {
   outline: none;
 }
-.floating-settings-btn button:hover, .floating-settings-btn .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .floating-settings-btn button:focus, .floating-settings-btn .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .floating-settings-btn button:focus, .floating-settings-btn #userSettingsModal button.btn:focus, #userSettingsModal .floating-settings-btn button.btn:focus, .floating-settings-btn button:focus {
+.floating-settings-btn button:hover, .floating-settings-btn .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .profile .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle .floating-settings-btn button:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .floating-settings-btn button:focus, .floating-settings-btn .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .floating-settings-btn button:focus, .floating-settings-btn #userSettingsModal button.btn:focus, #userSettingsModal .floating-settings-btn button.btn:focus, .floating-settings-btn button:focus {
   background: var(--background);
 }
 .floating-settings-btn button:active {
   background: var(--background);
 }
-.floating-settings-btn button:hover svg, .floating-settings-btn .gui-window .content-tabs .display-container .card .card-footer button.btn:focus svg, .gui-window .content-tabs .display-container .card .card-footer .floating-settings-btn button.btn:focus svg, .floating-settings-btn .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus svg, .gui-window .gui-header .header-container .header-nav .nav-buttons .floating-settings-btn button.btn:focus svg, .floating-settings-btn .gui-window .gui-header .header-container .header-nav ul li button:focus svg, .gui-window .gui-header .header-container .header-nav ul li .floating-settings-btn button:focus svg, .floating-settings-btn .terminal-window .terminal-container .terminal-header button:focus svg, .terminal-window .terminal-container .terminal-header .floating-settings-btn button:focus svg, .floating-settings-btn #userSettingsModal button.btn:focus svg, #userSettingsModal .floating-settings-btn button.btn:focus svg, .floating-settings-btn button:focus svg {
+.floating-settings-btn button:hover svg, .floating-settings-btn .gui-window .content-tabs .display-container .card .card-footer button.btn:focus svg, .gui-window .content-tabs .display-container .card .card-footer .floating-settings-btn button.btn:focus svg, .floating-settings-btn .gui-window .profile .accord .accord-toggle button:focus svg, .gui-window .profile .accord .accord-toggle .floating-settings-btn button:focus svg, .floating-settings-btn .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus svg, .gui-window .gui-header .header-container .header-nav .nav-buttons .floating-settings-btn button.btn:focus svg, .floating-settings-btn .gui-window .gui-header .header-container .header-nav ul li button:focus svg, .gui-window .gui-header .header-container .header-nav ul li .floating-settings-btn button:focus svg, .floating-settings-btn .terminal-window .terminal-container .terminal-header button:focus svg, .terminal-window .terminal-container .terminal-header .floating-settings-btn button:focus svg, .floating-settings-btn #userSettingsModal button.btn:focus svg, #userSettingsModal .floating-settings-btn button.btn:focus svg, .floating-settings-btn button:focus svg {
   fill: var(--foreground);
 }
 .floating-settings-btn button svg {
@@ -268,7 +268,7 @@ dialog .modal-btns {
   color: #001010;
   border-radius: 5px;
 }
-.terminal-window .terminal-container .terminal-header button:hover, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .terminal-window .terminal-container .terminal-header button.btn:focus, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .terminal-window .terminal-container .terminal-header button.btn:focus, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header #userSettingsModal button.btn:focus, #userSettingsModal .terminal-window .terminal-container .terminal-header button.btn:focus {
+.terminal-window .terminal-container .terminal-header button:hover, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .terminal-window .terminal-container .terminal-header button.btn:focus, .terminal-window .terminal-container .terminal-header .gui-window .profile .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .terminal-window .terminal-container .terminal-header button.btn:focus, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header #userSettingsModal button.btn:focus, #userSettingsModal .terminal-window .terminal-container .terminal-header button.btn:focus {
   box-shadow: 0 0 0 2px var(--terminal-color);
   background: transparent;
   color: var(--terminal-color);
@@ -280,7 +280,7 @@ dialog .modal-btns {
 .terminal-window .terminal-container .terminal-header button:focus {
   outline: none;
 }
-.terminal-window .terminal-container .terminal-header .settings-btn:hover svg, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .display-container .card .card-footer .settings-btn.btn:focus svg, .gui-window .content-tabs .display-container .card .card-footer .terminal-window .terminal-container .terminal-header .settings-btn.btn:focus svg, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav .nav-buttons .settings-btn.btn:focus svg, .gui-window .gui-header .header-container .header-nav .nav-buttons .terminal-window .terminal-container .terminal-header .settings-btn.btn:focus svg, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav ul li button.settings-btn:focus svg, .gui-window .gui-header .header-container .header-nav ul li .terminal-window .terminal-container .terminal-header button.settings-btn:focus svg, .terminal-window .terminal-container .terminal-header #userSettingsModal button.settings-btn.btn:focus svg, #userSettingsModal .terminal-window .terminal-container .terminal-header button.settings-btn.btn:focus svg, .terminal-window .terminal-container .terminal-header button.settings-btn:focus svg {
+.terminal-window .terminal-container .terminal-header .settings-btn:hover svg, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .display-container .card .card-footer .settings-btn.btn:focus svg, .gui-window .content-tabs .display-container .card .card-footer .terminal-window .terminal-container .terminal-header .settings-btn.btn:focus svg, .terminal-window .terminal-container .terminal-header .gui-window .profile .accord .accord-toggle button.settings-btn:focus svg, .gui-window .profile .accord .accord-toggle .terminal-window .terminal-container .terminal-header button.settings-btn:focus svg, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav .nav-buttons .settings-btn.btn:focus svg, .gui-window .gui-header .header-container .header-nav .nav-buttons .terminal-window .terminal-container .terminal-header .settings-btn.btn:focus svg, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-nav ul li button.settings-btn:focus svg, .gui-window .gui-header .header-container .header-nav ul li .terminal-window .terminal-container .terminal-header button.settings-btn:focus svg, .terminal-window .terminal-container .terminal-header #userSettingsModal button.settings-btn.btn:focus svg, #userSettingsModal .terminal-window .terminal-container .terminal-header button.settings-btn.btn:focus svg, .terminal-window .terminal-container .terminal-header button.settings-btn:focus svg {
   fill: var(--terminal-color);
 }
 .terminal-window .terminal-container .terminal-header .settings-btn:active {
@@ -401,7 +401,7 @@ dialog .modal-btns {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-.gui-window .gui-header .header-container .header-icon .nav-icon:hover, .gui-window .gui-header .header-container .header-icon .content-tabs .display-container .card .card-footer .nav-icon.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .gui-header .header-container .header-icon .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-icon .header-nav .nav-buttons .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .header-icon .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-icon .header-nav ul li button.nav-icon:focus, .gui-window .gui-header .header-container .header-nav ul li .header-icon button.nav-icon:focus, .gui-window .gui-header .header-container .header-icon dialog p button.nav-icon:focus, dialog p .gui-window .gui-header .header-container .header-icon button.nav-icon:focus, .gui-window .gui-header .header-container .header-icon #userSettingsModal button.nav-icon.btn:focus, #userSettingsModal .gui-window .gui-header .header-container .header-icon button.nav-icon.btn:focus, .gui-window .gui-header .header-container .header-icon .floating-settings-btn button.nav-icon:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-icon button.nav-icon:focus, .gui-window .gui-header .header-container .header-icon .terminal-window .terminal-container .terminal-header button.nav-icon:focus, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-icon button.nav-icon:focus {
+.gui-window .gui-header .header-container .header-icon .nav-icon:hover, .gui-window .gui-header .header-container .header-icon .content-tabs .display-container .card .card-footer .nav-icon.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .gui-header .header-container .header-icon .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-icon .profile .accord .accord-toggle button.nav-icon:focus, .gui-window .profile .accord .accord-toggle .gui-header .header-container .header-icon button.nav-icon:focus, .gui-window .gui-header .header-container .header-icon .header-nav .nav-buttons .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .header-icon .nav-icon.btn:focus, .gui-window .gui-header .header-container .header-icon .header-nav ul li button.nav-icon:focus, .gui-window .gui-header .header-container .header-nav ul li .header-icon button.nav-icon:focus, .gui-window .gui-header .header-container .header-icon dialog p button.nav-icon:focus, dialog p .gui-window .gui-header .header-container .header-icon button.nav-icon:focus, .gui-window .gui-header .header-container .header-icon #userSettingsModal button.nav-icon.btn:focus, #userSettingsModal .gui-window .gui-header .header-container .header-icon button.nav-icon.btn:focus, .gui-window .gui-header .header-container .header-icon .floating-settings-btn button.nav-icon:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-icon button.nav-icon:focus, .gui-window .gui-header .header-container .header-icon .terminal-window .terminal-container .terminal-header button.nav-icon:focus, .terminal-window .terminal-container .terminal-header .gui-window .gui-header .header-container .header-icon button.nav-icon:focus {
   border-width: 2px;
 }
 .gui-window .gui-header .header-container .header-icon .nav-icon .nav-icon-line {
@@ -471,28 +471,28 @@ dialog .modal-btns {
 .gui-window .gui-header .header-container .header-nav .nav-buttons .btn:focus {
   outline: none;
 }
-.gui-window .about {
+.gui-window .profile {
   padding-top: 12rem;
 }
-.gui-window .about h2 {
+.gui-window .profile h2 {
   padding: 0 10px;
   max-width: 600px;
   margin: 0 auto 2rem;
 }
-.gui-window .about .intro {
+.gui-window .profile .intro {
   display: flex;
   flex-flow: column nowrap;
   max-width: 600px;
   margin: 0 auto;
 }
-.gui-window .about .intro .cover-pic img {
+.gui-window .profile .intro .cover-pic img {
   -o-object-fit: cover;
      object-fit: cover;
 }
-.gui-window .about .intro .profile-pic-container {
+.gui-window .profile .intro .profile-pic-container {
   margin: -40px 0 1rem 10px;
 }
-.gui-window .about .intro .profile-pic-container img {
+.gui-window .profile .intro .profile-pic-container img {
   -o-object-fit: cover;
      object-fit: cover;
   width: clamp(65px, 15vw, 135px);
@@ -501,36 +501,99 @@ dialog .modal-btns {
   border-radius: 50%;
   cursor: pointer;
 }
-.gui-window .about .intro .profile-pic-container img:hover, .gui-window .about .intro .profile-pic-container .content-tabs .display-container .card .card-footer img.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .about .intro .profile-pic-container img.btn:focus, .gui-window .about .intro .profile-pic-container .gui-header .header-container .header-nav .nav-buttons img.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .about .intro .profile-pic-container img.btn:focus {
+.gui-window .profile .intro .profile-pic-container img:hover, .gui-window .profile .intro .profile-pic-container .content-tabs .display-container .card .card-footer img.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .profile .intro .profile-pic-container img.btn:focus, .gui-window .profile .intro .profile-pic-container .gui-header .header-container .header-nav .nav-buttons img.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .profile .intro .profile-pic-container img.btn:focus {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   transform: scale(1.05);
 }
-.gui-window .about .intro .info-container {
+.gui-window .profile .intro .info-container {
   padding: 0 10px;
   margin-bottom: 1rem;
 }
-.gui-window .about .intro .info-container .username {
+.gui-window .profile .intro .info-container .user {
   margin-bottom: 1rem;
 }
-.gui-window .about .intro .info-container .username h3 {
+.gui-window .profile .intro .info-container .user h3 {
   margin: 0 0 5px 0;
 }
-.gui-window .about .intro .info-container .other-info {
+.gui-window .profile .intro .info-container .other-info {
   display: flex;
   gap: 5px 1rem;
   flex-wrap: wrap;
 }
-.gui-window .about .intro .info-container .other-info .info-box {
+.gui-window .profile .intro .info-container .other-info .info-box {
   display: flex;
   gap: 8px;
 }
-.gui-window .about .intro .description {
+.gui-window .profile .intro .description {
   padding: 0 10px;
   margin-bottom: 1rem;
 }
-.gui-window .about .intro .description p {
+.gui-window .profile .intro .description p {
   margin-bottom: 5px;
   line-height: 1.5;
+}
+.gui-window .profile .intro .description button {
+  color: var(--tint);
+  text-decoration: underline;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.gui-window .profile .intro .description button:hover, .gui-window .profile .intro .description .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .profile .intro .description button.btn:focus, .gui-window .profile .intro .description .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle .intro .description button:focus, .gui-window .profile .intro .description dialog p button:focus, dialog p .gui-window .profile .intro .description button:focus, .gui-window .profile .intro .description #userSettingsModal button.btn:focus, #userSettingsModal .gui-window .profile .intro .description button.btn:focus, .gui-window .profile .intro .description .floating-settings-btn button:focus, .floating-settings-btn .gui-window .profile .intro .description button:focus, .gui-window .profile .intro .description .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .gui-window .profile .intro .description button:focus, .gui-window .profile .intro .description .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .profile .intro .description button:focus, .gui-window .profile .intro .description .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .profile .intro .description button.btn:focus {
+  background: var(--tint);
+  color: var(--background);
+  text-decoration: none;
+}
+.gui-window .profile .accord {
+  margin: 0 auto;
+  max-width: 600px;
+}
+.gui-window .profile .accord .accord-toggle {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 0 10px;
+  padding: 5px 10px;
+}
+.gui-window .profile .accord .accord-toggle:hover, .gui-window .profile .accord .content-tabs .display-container .card .card-footer .accord-toggle.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .profile .accord .accord-toggle.btn:focus, .gui-window .profile .accord .accord-toggle button.accord-toggle:focus, .gui-window .profile .accord dialog p button.accord-toggle:focus, dialog p .gui-window .profile .accord button.accord-toggle:focus, .gui-window .profile .accord #userSettingsModal button.accord-toggle.btn:focus, #userSettingsModal .gui-window .profile .accord button.accord-toggle.btn:focus, .gui-window .profile .accord .floating-settings-btn button.accord-toggle:focus, .floating-settings-btn .gui-window .profile .accord button.accord-toggle:focus, .gui-window .profile .accord .terminal-window .terminal-container .terminal-header button.accord-toggle:focus, .terminal-window .terminal-container .terminal-header .gui-window .profile .accord button.accord-toggle:focus, .gui-window .profile .accord .gui-header .header-container .header-nav ul li button.accord-toggle:focus, .gui-window .gui-header .header-container .header-nav ul li .profile .accord button.accord-toggle:focus, .gui-window .profile .accord .gui-header .header-container .header-nav .nav-buttons .accord-toggle.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .profile .accord .accord-toggle.btn:focus {
+  background-color: var(--grey);
+}
+.gui-window .profile .accord .accord-toggle button {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 10px;
+  background-color: var(--foreground);
+  color: var(--background);
+  border-radius: 5px;
+  text-transform: capitalize;
+}
+.gui-window .profile .accord .accord-toggle button:hover, .gui-window .profile .accord .accord-toggle .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .profile .accord .accord-toggle button.btn:focus, .gui-window .profile .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle dialog p button:focus, dialog p .gui-window .profile .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle #userSettingsModal button.btn:focus, #userSettingsModal .gui-window .profile .accord .accord-toggle button.btn:focus, .gui-window .profile .accord .accord-toggle .floating-settings-btn button:focus, .floating-settings-btn .gui-window .profile .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .gui-window .profile .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .profile .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .profile .accord .accord-toggle button.btn:focus {
+  box-shadow: 0 0 0 2px var(--tint);
+  background: transparent;
+  color: var(--foreground);
+}
+.gui-window .profile .accord .accord-toggle button:active {
+  background-color: var(--tint);
+  color: var(--background);
+}
+.gui-window .profile .accord .accord-toggle button:focus {
+  outline: none;
+}
+.gui-window .profile .accord .accord-toggle:hover button, .gui-window .profile .accord .content-tabs .display-container .card .card-footer .accord-toggle.btn:focus button, .gui-window .content-tabs .display-container .card .card-footer .profile .accord .accord-toggle.btn:focus button, .gui-window .profile .accord dialog p button.accord-toggle:focus button, dialog p .gui-window .profile .accord button.accord-toggle:focus button, .gui-window .profile .accord #userSettingsModal button.accord-toggle.btn:focus button, #userSettingsModal .gui-window .profile .accord button.accord-toggle.btn:focus button, .gui-window .profile .accord .floating-settings-btn button.accord-toggle:focus button, .floating-settings-btn .gui-window .profile .accord button.accord-toggle:focus button, .gui-window .profile .accord .terminal-window .terminal-container .terminal-header button.accord-toggle:focus button, .terminal-window .terminal-container .terminal-header .gui-window .profile .accord button.accord-toggle:focus button, .gui-window .profile .accord .gui-header .header-container .header-nav ul li button.accord-toggle:focus button, .gui-window .gui-header .header-container .header-nav ul li .profile .accord button.accord-toggle:focus button, .gui-window .profile .accord .gui-header .header-container .header-nav .nav-buttons .accord-toggle.btn:focus button, .gui-window .gui-header .header-container .header-nav .nav-buttons .profile .accord .accord-toggle.btn:focus button, .gui-window .profile .accord .accord-toggle button.accord-toggle:focus button {
+  color: var(--foreground);
+  background: transparent;
+  border: 2px solid var(--tint);
+}
+.gui-window .profile .accord .accord-content {
+  padding: 10px;
+  border: 1px solid var(--foreground);
+  border-radius: 10px;
+}
+.gui-window .profile .accord .accord-content ul {
+  margin: 5px 0;
 }
 .gui-window .content-tabs .tabs-btns {
   max-width: 600px;
@@ -563,7 +626,7 @@ dialog .modal-btns {
   width: fit-content;
   padding: 15px 0;
 }
-.gui-window .content-tabs .tabs-btns button:hover, .gui-window .content-tabs .tabs-btns .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .tabs-btns button.btn:focus, .gui-window .content-tabs .tabs-btns dialog p button:focus, dialog p .gui-window .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns #userSettingsModal button.btn:focus, #userSettingsModal .gui-window .content-tabs .tabs-btns button.btn:focus, .gui-window .content-tabs .tabs-btns .floating-settings-btn button:focus, .floating-settings-btn .gui-window .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .content-tabs .tabs-btns button.btn:focus {
+.gui-window .content-tabs .tabs-btns button:hover, .gui-window .content-tabs .tabs-btns .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .tabs-btns button.btn:focus, .gui-window .content-tabs .tabs-btns dialog p button:focus, dialog p .gui-window .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns #userSettingsModal button.btn:focus, #userSettingsModal .gui-window .content-tabs .tabs-btns button.btn:focus, .gui-window .content-tabs .tabs-btns .floating-settings-btn button:focus, .floating-settings-btn .gui-window .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .gui-window .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .content-tabs .tabs-btns button:focus, .gui-window .content-tabs .tabs-btns .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .content-tabs .tabs-btns button.btn:focus, .gui-window .content-tabs .tabs-btns .profile .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle .content-tabs .tabs-btns button:focus {
   background-color: var(--grey);
   color: var(--foreground);
 }

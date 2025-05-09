@@ -8,14 +8,64 @@ import posts from "./configs/posts.js";
 const welcomeDialog = document.getElementById('welcomeModal');
 const userSettingsDialog = document.getElementById('userSettingsModal');
 const settingsBtns = document.querySelectorAll('.settings-btn');
-let terminalInput = null;
 
+// Startup Functionalities
 // Settings and Configs
 const userSettings = getSavedSettings();
 
-// Startup Functionalities
+// Terminal Functionalities
 terminal.addCommandLine();
-terminalInput = terminal.commandLine.querySelector('.input');
+terminal.setOptions();
+terminal.body.element.addEventListener('click', terminal.focusInput.bind(terminal));
+terminal.openGuiBtn.addEventListener('click', openGUI);
+
+// GUI Functionalities
+gui.activateMenu();
+gui.openTerminalBtn.addEventListener('click', () => {
+  openTerminal();
+});
+gui.navItems.forEach((item) => {
+  item.addEventListener('click', function() {
+    const navTab = this.dataset.tabFor;
+    
+    gui.tabBtns.forEach(btn => {
+      if (navTab === btn.dataset.tabFor) {
+        const contentTab = document.querySelector('.content-tabs');
+        scrollToElement(contentTab);
+        gui.openTab(btn);
+      }
+    });
+  });
+});
+gui.populateProfile();
+gui.populateTab('portfolio', portfolio);
+gui.populateTab('posts', posts);
+gui.tabBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    gui.openTab(btn);
+  });
+});
+gui.accords.forEach(accord => {
+  const toggle = accord.querySelector('.accord-toggle');
+  const content = accord.querySelector('.accord-content');
+  const button = accord.querySelector('.accord-toggle button');
+  toggle.addEventListener('click', () => {
+    if (content.classList.contains('hidden')){
+      gui.accords.forEach(accord => {
+        const content = accord.querySelector('.accord-content');
+        const button = accord.querySelector('.accord-toggle button')
+        content.classList.add('hidden');
+        button.textContent = 'open';
+      }) 
+      content.classList.remove('hidden');
+      button.textContent = 'close';
+      scrollToElement(document.querySelector('.accord'));
+    } else {
+      content.classList.add('hidden');
+      button.textContent = 'open';
+    }
+  });
+});
 
 setTheme(userSettings.theme);
 
@@ -24,16 +74,15 @@ settingsBtns.forEach((btn) => {
     openSettings(userSettingsDialog);
   });
 });
-
-if (userSettings.showWelcome) {
-  welcomeDialog.showModal();
-} else {
-  terminal.focusInput();
-}
-
+// ===== Do not move or reorder anything below this point =====
+// These two conditional blocks must remain in this exact sequence
+// Step 1: Show welcome dialog if enabled in user settings; otherwise focus terminal input
+if (userSettings.showWelcome) welcomeDialog.showModal();
+// else  terminal.focusInput();
+// Step 2: Open the appropriate window type (GUI or Terminal) based on user settings
 if (userSettings.window === 'gui') openGUI();
 else openTerminal();
-
+// ===== Do not move or reorder anything above this point =====
 
 // Modals Functionality
 checkWelcomeChkBxes();
@@ -133,36 +182,6 @@ welcomeDialog.querySelector('#setFirstTimeInput')
   userSettingsDialog.querySelector('#openWelcomeModalBtn')
     .addEventListener('click', () => welcomeDialog.showModal());
 
-// Terminal Functionalities
-terminal.setOptions();
-terminal.body.element.addEventListener('click', terminal.focusInput.bind(terminal));
-terminal.openGuiBtn.addEventListener('click', openGUI);
-
-// GUI Functionalities
-gui.activateMenu();
-gui.openTerminalBtn.addEventListener('click', () => {
-  openTerminal();
-});
-gui.navItems.forEach((item) => {
-  item.addEventListener('click', function() {
-    const navTab = this.dataset.tabFor;
-    
-    gui.tabBtns.forEach(btn => {
-      if (navTab === btn.dataset.tabFor) {
-        document.querySelector('.description').scrollIntoView({behavior: 'smooth'});
-        gui.openTab(btn);
-      }
-    });
-  });
-});
-gui.tabBtns.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    gui.openTab(btn);
-  });
-});
-gui.populateTab('portfolio', portfolio);
-gui.populateTab('posts', posts);
-
 // Helpers
 function saveUserSettings(userSettings) {
   localStorage.setItem('userSettings', JSON.stringify(userSettings));
@@ -221,6 +240,12 @@ function openSettings(dialog) {
 function checkWelcomeChkBxes() {
   welcomeDialog.querySelector('#setFirstTimeInput').checked = userSettings.showWelcome;
   userSettingsDialog.querySelector("#welcomeModalChk").checked = userSettings.showWelcome;
+}
+
+function scrollToElement(element) {
+  const posOffset = -100;
+  const pos = element.getBoundingClientRect().top + window.scrollY + posOffset;
+  window.scrollTo({ top: pos, behavior: 'smooth' });
 }
 
 export { openGUI, openTerminal, saveUserSettings, getSavedSettings, updateUserSettings };

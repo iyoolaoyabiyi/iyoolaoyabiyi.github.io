@@ -1,5 +1,7 @@
 const PROFILE = {
   name: 'Iyola Oyabiyi O.',
+  username: 'iyoolaoyabiyi',
+  location: 'Ogun State, Nigeria',
   role: 'Software developer',
   description: 'I\'m Iyo: a self-taught programmer focused on web technologies and software systems. I\'m very passionate about building practical tools, user-friendly interfaces, and learning.',
   otherDescriptions: [
@@ -27,10 +29,10 @@ const PROFILE = {
   ],
   interests: [
     'Code', 
-    'carpentry',
+    'Carpentry',
     'DIY', 
-    'electronics', 
-    'poetry',
+    'Electronics', 
+    'Poetry',
     'Blending creativity with logic and precision'
   ],
   goals: [
