@@ -555,11 +555,14 @@ dialog .modal-btns {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  margin: 0 0 10px;
   padding: 5px 10px;
+  margin-bottom: 5px;
 }
 .gui-window .profile .accord .accord-toggle:hover, .gui-window .profile .accord .content-tabs .display-container .card .card-footer .accord-toggle.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .profile .accord .accord-toggle.btn:focus, .gui-window .profile .accord .accord-toggle button.accord-toggle:focus, .gui-window .profile .accord dialog p button.accord-toggle:focus, dialog p .gui-window .profile .accord button.accord-toggle:focus, .gui-window .profile .accord #userSettingsModal button.accord-toggle.btn:focus, #userSettingsModal .gui-window .profile .accord button.accord-toggle.btn:focus, .gui-window .profile .accord .floating-settings-btn button.accord-toggle:focus, .floating-settings-btn .gui-window .profile .accord button.accord-toggle:focus, .gui-window .profile .accord .terminal-window .terminal-container .terminal-header button.accord-toggle:focus, .terminal-window .terminal-container .terminal-header .gui-window .profile .accord button.accord-toggle:focus, .gui-window .profile .accord .gui-header .header-container .header-nav ul li button.accord-toggle:focus, .gui-window .gui-header .header-container .header-nav ul li .profile .accord button.accord-toggle:focus, .gui-window .profile .accord .gui-header .header-container .header-nav .nav-buttons .accord-toggle.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .profile .accord .accord-toggle.btn:focus {
   background-color: var(--grey);
+}
+.gui-window .profile .accord .accord-toggle h3 {
+  text-transform: capitalize;
 }
 .gui-window .profile .accord .accord-toggle button {
   cursor: pointer;
@@ -582,6 +585,11 @@ dialog .modal-btns {
 .gui-window .profile .accord .accord-toggle button:focus {
   outline: none;
 }
+.gui-window .profile .accord .accord-toggle.active {
+  border: 1px solid var(--foreground);
+  border-bottom: none;
+  margin-bottom: 0;
+}
 .gui-window .profile .accord .accord-toggle:hover button, .gui-window .profile .accord .content-tabs .display-container .card .card-footer .accord-toggle.btn:focus button, .gui-window .content-tabs .display-container .card .card-footer .profile .accord .accord-toggle.btn:focus button, .gui-window .profile .accord dialog p button.accord-toggle:focus button, dialog p .gui-window .profile .accord button.accord-toggle:focus button, .gui-window .profile .accord #userSettingsModal button.accord-toggle.btn:focus button, #userSettingsModal .gui-window .profile .accord button.accord-toggle.btn:focus button, .gui-window .profile .accord .floating-settings-btn button.accord-toggle:focus button, .floating-settings-btn .gui-window .profile .accord button.accord-toggle:focus button, .gui-window .profile .accord .terminal-window .terminal-container .terminal-header button.accord-toggle:focus button, .terminal-window .terminal-container .terminal-header .gui-window .profile .accord button.accord-toggle:focus button, .gui-window .profile .accord .gui-header .header-container .header-nav ul li button.accord-toggle:focus button, .gui-window .gui-header .header-container .header-nav ul li .profile .accord button.accord-toggle:focus button, .gui-window .profile .accord .gui-header .header-container .header-nav .nav-buttons .accord-toggle.btn:focus button, .gui-window .gui-header .header-container .header-nav .nav-buttons .profile .accord .accord-toggle.btn:focus button, .gui-window .profile .accord .accord-toggle button.accord-toggle:focus button {
   color: var(--foreground);
   background: transparent;
@@ -590,7 +598,8 @@ dialog .modal-btns {
 .gui-window .profile .accord .accord-content {
   padding: 10px;
   border: 1px solid var(--foreground);
-  border-radius: 10px;
+  border-top: none;
+  margin-bottom: 10px;
 }
 .gui-window .profile .accord .accord-content ul {
   margin: 5px 0;
@@ -729,10 +738,10 @@ dialog .modal-btns {
   .gui-window .gui-header .header-container .header-nav ul {
     margin: 0 2rem 0 0;
   }
-  .gui-window .about {
+  .gui-window .profile {
     padding-top: 6rem;
   }
-  .gui-window .about .intro .profile-pic-container {
+  .gui-window .profile .intro .profile-pic-container {
     margin-top: -60px;
   }
 }
@@ -743,8 +752,14 @@ dialog .modal-btns {
   .gui-window .gui-header .header-container {
     border-radius: 10px;
   }
-  .gui-window .about h2 {
+  .gui-window .profile h2 {
     padding: 0;
+  }
+  .gui-window .accord-toggle {
+    border-radius: 5px 5px 0 0;
+  }
+  .gui-window .accord-content {
+    border-radius: 0 0 5px 5px;
   }
 }
 .hidden {

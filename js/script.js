@@ -40,30 +40,34 @@ gui.navItems.forEach((item) => {
 gui.populateProfile();
 gui.populateTab('portfolio', portfolio);
 gui.populateTab('posts', posts);
-gui.tabBtns.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    gui.openTab(btn);
-  });
-});
 gui.accords.forEach(accord => {
   const toggle = accord.querySelector('.accord-toggle');
   const content = accord.querySelector('.accord-content');
   const button = accord.querySelector('.accord-toggle button');
-  toggle.addEventListener('click', () => {
+  toggle.addEventListener('click', function() {
     if (content.classList.contains('hidden')){
       gui.accords.forEach(accord => {
         const content = accord.querySelector('.accord-content');
+        const toggle = accord.querySelector('.accord-toggle');
         const button = accord.querySelector('.accord-toggle button')
         content.classList.add('hidden');
+        toggle.classList.remove('active');
         button.textContent = 'open';
       }) 
       content.classList.remove('hidden');
+      this.classList.add('active');
       button.textContent = 'close';
       scrollToElement(document.querySelector('.accord'));
     } else {
       content.classList.add('hidden');
+      this.classList.remove('active');
       button.textContent = 'open';
     }
+  });
+});
+gui.tabBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    gui.openTab(btn);
   });
 });
 

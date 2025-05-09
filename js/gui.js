@@ -39,7 +39,7 @@ const gui = {
     });
 
     window.addEventListener('scroll', () => {
-      if (window.innerWidth <= 576) {
+      if (window.innerWidth < 576) {
         if (window.scrollY > 40) {
           if (this.isMenuOpen) {
             icon.parentElement.style.display = 'block';

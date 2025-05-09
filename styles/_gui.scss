@@ -190,15 +190,23 @@ $header-radius: 10px;
         justify-content: space-between;
         align-items: center;
         cursor: pointer;
-        margin: 0 0 10px;
         padding: 5px $padding-width;
+        margin-bottom: 5px;
         &:hover {
           background-color: var(--grey);
+        }
+        h3 {
+          text-transform: capitalize;
         }
         button {
           @include mixins.btn(var(--foreground), var(--background), var(--tint));
           text-transform: capitalize;
         }
+      }
+      .accord-toggle.active {
+        border: 1px solid var(--foreground);
+        border-bottom: none;
+        margin-bottom: 0;
       }
       .accord-toggle:hover {
         button {
@@ -210,7 +218,8 @@ $header-radius: 10px;
       .accord-content {
         padding: $padding-width;
         border: 1px solid var(--foreground);
-        border-radius: $header-radius;
+        border-top: none;
+        margin-bottom: 10px;
         ul {
           margin: 5px 0;
         }
@@ -344,7 +353,7 @@ $header-radius: 10px;
         }
       }
     }
-    .about {
+    .profile {
       padding-top: 6rem;
       .intro {
         .profile-pic-container {
@@ -363,10 +372,16 @@ $header-radius: 10px;
         border-radius: $header-radius;
       }
     }
-    .about {
+    .profile {
       h2 {
         padding: 0;
       }
+    }
+    .accord-toggle {
+      border-radius: 5px 5px 0 0;
+    }
+    .accord-content {
+      border-radius: 0 0 5px 5px;
     }
   }
 }
