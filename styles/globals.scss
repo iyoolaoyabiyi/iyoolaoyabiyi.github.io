@@ -162,9 +162,12 @@ dialog {
   text-align: right;
   button {
     @include mixins.btn(var(--foreground), var(--background), var(--tint));
+    box-shadow: 0 0 16px var(--tint);
+    transition: box-shadow 0.2s ease-in-out;
     animation: 3s ease-in-out infinite notice-me;
     &:hover {
       background: var(--background);
+      box-shadow: 0 12px 24px var(--tint);
     }
     &:active {
       background: var(--background);

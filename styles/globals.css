@@ -202,6 +202,8 @@ dialog .modal-btns {
   background-color: var(--foreground);
   color: var(--background);
   border-radius: 5px;
+  box-shadow: 0 0 16px var(--tint);
+  transition: box-shadow 0.2s ease-in-out;
   animation: 3s ease-in-out infinite notice-me;
 }
 .floating-settings-btn button:hover, .floating-settings-btn .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .profile .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle .floating-settings-btn button:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .floating-settings-btn button:focus, .floating-settings-btn .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .floating-settings-btn button:focus, .floating-settings-btn button:focus, .floating-settings-btn #userSettingsModal button.btn:focus, #userSettingsModal .floating-settings-btn button.btn:focus {
@@ -218,6 +220,7 @@ dialog .modal-btns {
 }
 .floating-settings-btn button:hover, .floating-settings-btn .gui-window .content-tabs .display-container .card .card-footer button.btn:focus, .gui-window .content-tabs .display-container .card .card-footer .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .profile .accord .accord-toggle button:focus, .gui-window .profile .accord .accord-toggle .floating-settings-btn button:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav .nav-buttons button.btn:focus, .gui-window .gui-header .header-container .header-nav .nav-buttons .floating-settings-btn button.btn:focus, .floating-settings-btn .gui-window .gui-header .header-container .header-nav ul li button:focus, .gui-window .gui-header .header-container .header-nav ul li .floating-settings-btn button:focus, .floating-settings-btn .terminal-window .terminal-container .terminal-header button:focus, .terminal-window .terminal-container .terminal-header .floating-settings-btn button:focus, .floating-settings-btn #userSettingsModal button.btn:focus, #userSettingsModal .floating-settings-btn button.btn:focus, .floating-settings-btn button:focus {
   background: var(--background);
+  box-shadow: 0 12px 24px var(--tint);
 }
 .floating-settings-btn button:active {
   background: var(--background);
