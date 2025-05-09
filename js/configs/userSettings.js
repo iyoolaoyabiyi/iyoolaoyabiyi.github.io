@@ -3,7 +3,8 @@ const defaultUserSettings = {
   showWelcome: true,
   theme: 'dark',
   window: 'terminal',
-  commandHistory: []
+  commandHistory: [],
+  version: '0.0.1'
 }
 
 export default defaultUserSettings;

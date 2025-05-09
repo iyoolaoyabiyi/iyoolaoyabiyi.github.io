@@ -11,7 +11,16 @@ const settingsBtns = document.querySelectorAll('.settings-btn');
 
 // Startup Functionalities
 // Settings and Configs
-const userSettings = getSavedSettings();
+const settingsKey = 'userSettings';
+let userSettings = getSavedSettings();
+
+if (!userSettings.version) {
+  deleteUserSettings();
+}
+else if (userSettings.version !== defaultUserSettings.version)
+  deleteUserSettings();
+
+userSettings = getSavedSettings();
 
 // Terminal Functionalities
 terminal.addCommandLine();
@@ -188,7 +197,7 @@ welcomeDialog.querySelector('#setFirstTimeInput')
 
 // Helpers
 function saveUserSettings(userSettings) {
-  localStorage.setItem('userSettings', JSON.stringify(userSettings));
+  localStorage.setItem(settingsKey, JSON.stringify(userSettings));
 }
 
 function updateUserSettings(key, value) {
@@ -197,13 +206,17 @@ function updateUserSettings(key, value) {
 }
 
 function getSavedSettings() {
-  let userSettings = localStorage.getItem('userSettings');
+  let userSettings = localStorage.getItem(settingsKey);
   if (userSettings) userSettings = JSON.parse(userSettings);
   else {
     userSettings = defaultUserSettings;
-    localStorage.setItem('userSettings', JSON.stringify(userSettings));
+    localStorage.setItem(settingsKey, JSON.stringify(userSettings));
   }
   return userSettings;
+}
+
+function deleteUserSettings() {
+  localStorage.clear();
 }
 
 function setTheme(theme) {
