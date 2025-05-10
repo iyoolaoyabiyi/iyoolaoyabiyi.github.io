@@ -91,7 +91,6 @@ settingsBtns.forEach((btn) => {
 // These two conditional blocks must remain in this exact sequence
 // Step 1: Show welcome dialog if enabled in user settings; otherwise focus terminal input
 if (userSettings.showWelcome) welcomeDialog.showModal();
-// else  terminal.focusInput();
 // Step 2: Open the appropriate window type (GUI or Terminal) based on user settings
 if (userSettings.window === 'gui') openGUI();
 else openTerminal();
@@ -144,6 +143,8 @@ userSettingsDialog.querySelector('#setCustomNameInput')
     const userNameSetup = userSettingsDialog.querySelector('#userNameSetup');
     userNameSetup.style.display = this.checked ? 'flex' : 'none';
 });
+
+userSettingsDialog.querySelector("#customNameInput").value = userSettings.username;
 
 userSettingsDialog.querySelector('#saveSettingsBtn')
   .addEventListener('click', function() {
