@@ -265,4 +265,15 @@ function scrollToElement(element) {
   window.scrollTo({ top: pos, behavior: 'smooth' });
 }
 
-export { openGUI, openTerminal, saveUserSettings, getSavedSettings, updateUserSettings };
+function createElem(elem, n) {
+  const elemList = [];
+    if (!n || n === 1) {
+      return document.createElement(elem);
+    }
+    for (let i = 0; i < n; i++) {
+      elemList.push(document.createElement(elem));
+    }
+    return elemList;
+}
+
+export { openGUI, openTerminal, saveUserSettings, getSavedSettings, updateUserSettings, createElem };

@@ -84,6 +84,17 @@
         .folder-text {
           color: $light-tint;
         }
+        .help-intro {
+          margin-bottom: 10px;
+          p {
+            margin: 0;
+          }
+        }
+        .terminal-help {
+          p {
+            margin-left: 10px;
+          }
+        }
       }
       .input {
         flex: 1;

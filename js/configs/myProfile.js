@@ -12,7 +12,7 @@ const PROFILE = {
   techStack: {
     languages: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'SQL', 'PHP', 'Bash'],
     libraries: ['node.js', 'jQuery', 'React', 'Tailwind CSS', 'Bootstrap', 'shadcn/ui', 'Framer Motion'],
-    CMS: [
+    cms: [
       'WordPress (site setup and design, layout structuring theme customization, plugin configuration)', 
       'Wix (site design, layout structuring)'
     ],
