@@ -425,6 +425,7 @@ function techsFunc(args) {
         case 'cms':
         case 'tools':
           listItems(list);
+          output.append(ul);
           break;
         default:
           output.append('Invalid tech list: ', listName);
