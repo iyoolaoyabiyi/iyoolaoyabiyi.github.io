@@ -235,7 +235,9 @@ dialog .modal-btns {
 .terminal-window {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 1rem;
+  min-height: 90dvh;
 }
 .terminal-window .terminal-container {
   width: clamp(200px, 100%, 600px);
