@@ -1,6 +1,26 @@
 # Iyo's Portfolio Website
 
-This portfolio breaks away from the typical “scrolling” personal website. Instead, it offers a **playful, interactive terminal experience** where visitors explore a mini terminal-like environment to learn about my work, background, and blog.
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fiyoolaoyabiyi.github.io)](https://iyoolaoyabiyi.github.io)
+![GitHub last commit](https://img.shields.io/github/last-commit/iyoolaoyabiyi/iyoolaoyabiyi.github.io)
+![GitHub](https://img.shields.io/github/license/iyoolaoyabiyi/iyoolaoyabiyi.github.io)
+![Version](https://img.shields.io/badge/version-0.0.1-blue)
+
+> A playful and interactive portfolio site that mimics a terminal environment — with a GUI fallback — to explore my work, skills, and thoughts.
+
+---
+
+**Welcome to my terminal-inspired personal website!**  
+Unlike traditional scrolling portfolios, this site invites users to _explore_, _navigate_, and _type_ their way around via a simulated shell.
+
+---
+
+## 🔗 Quick Access
+
+- **Live Demo**: [iyoolaoyabiyi.github.io](https://iyoolaoyabiyi.github.io)
+
+---
+
+This portfolio breaks away from the typical “scrolling” personal website. Instead, it offers a **playful, interactive terminal experience** where visitors explore a mini terminal-like environment to learn about my work and background.
 
 It's not just a website; it's a concept that speaks to **creativity, technical fluency, and personality**.
 
@@ -11,7 +31,7 @@ Visitors essentially "play" with a simulated command-line interface to:
 - Navigate a virtual filesystem
 - Access data like `portfolio`, `contact`, and more
 
-It's delightful for tech-savvy users, **memorable for recruiters**, and surprisingly fun for casual visitors.
+It's delightful for tech-savvy users, hopefully **memorable for recruiters**, and surprisingly fun for casual visitors.
 
 For those who don’t have time or get confused by typed commands, a helpful `help` command and **GUI switch** make sure everyone can quickly find the info they need.
 
@@ -29,15 +49,22 @@ For those who don’t have time or get confused by typed commands, a helpful `he
 
 ## Commands
 
-| Command   | Description                                  |
-|-----------|----------------------------------------------|
-| `echo`    | Displays a line of text                      |
-| `list`    | Lists current directory contents             |
-| `goto`    | Changes directory                            |
-| `open`    | Displays contents of a file                  |
-| `clear`   | Clears terminal screen                       |
-| `exit`    | Simulates exiting the terminal               |
-| `help`    | Displays available commands and descriptions |
+
+| Command | Description | Usage |
+| --- | --- | --- |
+| `calculate`, `calc` | Evaluates an arithmetic expression | `calculate EXPRESSION` |
+| `clear` | Clears terminal screen | `clear` |
+| `echo`, `write` | Displays a line of text | `echo [TEXT]` |
+| `exit`, `quit` | Simulates exiting the terminal | `exit` |
+| `goto`, `cd` | Changes directory | `goto DIRECTORY` |
+| `help` | Displays available commands and descriptions or help for a command | `help [COMMAND]` |
+| `list`, `ls` | Lists current directory contents | `list [DIRECTORY]` |
+| `open`, `cat` | Displays contents of a file | `open FILE` |
+| `tech-stack` | Displays tools, languages, or frameworks Iyo uses | `tech-stack [--list] [LIST]` |
+| `username` | Gets or sets the current username | `username [NEW USERNAME]` |
+| `visit` | Opens a provided URL in a new browser tab | `visit URL` |
+| `whoami` | Shows a short description or full profile | `whoami [--full]` |
+
 
 And more
 
@@ -59,7 +86,8 @@ And more
 
 ## Screenshots
 
-_TODO: Add GIFs or screenshots of both terminal and GUI views._
+![Terminal View](./assets/images/terminal-view.png)
+![GUI View](./assets/images/gui-view.png)
 
 ---
 

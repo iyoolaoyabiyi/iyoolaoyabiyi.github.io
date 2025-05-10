@@ -61,16 +61,16 @@ gui.accords.forEach(accord => {
         const button = accord.querySelector('.accord-toggle button')
         content.classList.add('hidden');
         toggle.classList.remove('active');
-        button.textContent = 'open';
+        button.textContent = 'expand';
       }) 
       content.classList.remove('hidden');
       this.classList.add('active');
-      button.textContent = 'close';
+      button.textContent = 'collapse';
       scrollToElement(document.querySelector('.accord'));
     } else {
       content.classList.add('hidden');
       this.classList.remove('active');
-      button.textContent = 'open';
+      button.textContent = 'expand';
     }
   });
 });

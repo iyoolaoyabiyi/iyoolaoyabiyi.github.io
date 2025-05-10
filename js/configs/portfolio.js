@@ -20,7 +20,6 @@ const portfolio = [
     name: 'Immediate Execution Calculator',
     description: 'A simple calculator application that performs basic arithmetic operations.',
     img: 'portfolio/calculator.png',
-    sourceLink: '',
     demoLink: 'https://iyoolaoyabiyi.github.io/immediate-execution-calculator'
   },
   {
@@ -29,7 +28,6 @@ const portfolio = [
     description: 'This is a simple JavaScript project aimed at learning how to count all the items in an array, including those within nested arrays.',
     img: '',
     sourceLink: 'https://github.com/iyoolaoyabiyi/recursiveArrayItemsCounter',
-    demoLink: ''
   }
 ];
 
