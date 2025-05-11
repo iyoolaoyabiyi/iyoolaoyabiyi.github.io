@@ -114,7 +114,7 @@ const terminal = {
     const output = document.createElement('p');
     for (let i = 0; i < commands.length; i++) {
       const commandObj = commands[i];
-      if (commandObj.name.includes(command)) {
+      if (commandObj.doc.aliases.includes(command) || commandObj.doc.name === command) {
         return commandObj.execute(args);
       }
     }
