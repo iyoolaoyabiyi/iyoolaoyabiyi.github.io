@@ -16,7 +16,6 @@ class COMMAND {
     this.doc = doc;
     this.executeFunction = executeFunction;
   }
-
   execute(args) {
     return this.executeFunction(args);
   }
