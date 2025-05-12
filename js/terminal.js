@@ -101,7 +101,8 @@ const terminal = {
       const responseLine = document.getElementById('responseLine');
       responseLine.querySelector('.input').focus();
     } else {
-      this.commandLine.querySelector('.input').focus();
+      const commandLineInput = this.commandLine.querySelector('.input');
+      commandLineInput.focus();
     }
   },
   executeCommand(command, args) {
@@ -119,6 +120,7 @@ const terminal = {
     let commandLineInput = this.commandLine.querySelector('.input');
     const { commandHistory } = getSavedSettings();
     if (e.key === 'ArrowUp') {
+      e.preventDefault()
       if (commandHistory.length > 0) {
         if (this.history.index === null) {
           this.history.unsentCommand = commandLineInput.textContent.trim();
@@ -129,6 +131,13 @@ const terminal = {
         if (this.history.index >= 0) {
           if (this.history.index !== 0) this.history.index--;
           commandLineInput.textContent = commandHistory[this.history.index];
+          // Move caret to end
+          const range = document.createRange();
+          const sel = window.getSelection();
+          range.selectNodeContents(commandLineInput);
+          range.collapse(false); // false = move to end
+          sel.removeAllRanges();
+          sel.addRange(range);
         };
       }
       return;
