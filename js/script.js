@@ -24,7 +24,7 @@ userSettings = getSavedSettings();
 
 // Terminal Functionalities
 terminal.addCommandLine();
-terminal.setOptions();
+terminal.updatePromptEls();
 terminal.body.element.addEventListener('click', terminal.focusInput.bind(terminal));
 terminal.openGuiBtn.addEventListener('click', openGUI);
 
@@ -156,7 +156,7 @@ userSettingsDialog.querySelector('#saveSettingsBtn')
         let username = usernameInput.value;
         userSettings.username = username;
         saveUserSettings(userSettings);
-        terminal.setOptions();
+        terminal.updatePromptEls();
       } else {
         const errEl = userSettingsDialog.querySelector('#err');
         errEl.innerHTML = "You need to enter a username with 12 maximum characters";

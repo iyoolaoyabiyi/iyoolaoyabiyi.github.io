@@ -27,7 +27,7 @@ function gotoFunc(args) {
   if (error) return error;
   if (dirObj.type !== 'directory') return `${clearedPath} is not a directory`;
   terminal.currentPath = clearedPath;
-  terminal.setOptions();
+  terminal.updatePromptEls();
   return `Changed directory to ${terminal.currentPath}`;
 }
 

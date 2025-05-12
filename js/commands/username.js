@@ -25,7 +25,7 @@ function usernameFunc(args) {
   if (args[0].length < 3 || args.length >= 12) 
     return `Username must be at least 3 characters and not more than 12 characters long`;
   updateUserSettings('username', username);
-  terminal.setOptions();
+  terminal.updatePromptEls();
   return `Username changed to ${username}`;
 }
 

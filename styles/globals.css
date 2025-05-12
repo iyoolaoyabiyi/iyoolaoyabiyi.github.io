@@ -258,6 +258,10 @@ dialog .modal-btns {
 .terminal-window .terminal-container .terminal-header .header-prompt {
   width: 70%;
 }
+.terminal-window .terminal-container .terminal-header .header-prompt .prompt {
+  display: flex;
+  gap: 0;
+}
 .terminal-window .terminal-container .terminal-header .header-btns {
   width: 30%;
   text-align: right;
@@ -309,22 +313,15 @@ dialog .modal-btns {
   color: #eeffff;
   margin-bottom: 10px;
 }
-.terminal-window .terminal-container .terminal-body .line, .terminal-window .terminal-container .terminal-body .response {
-  display: flex;
-  align-items: center;
-}
-.terminal-window .terminal-container .terminal-body .line {
-  flex-wrap: wrap;
-}
-.terminal-window .terminal-container .terminal-body .line .prompt {
-  flex-flow: wrap;
-}
 .terminal-window .terminal-container .terminal-body .response {
   color: #eeffff;
   gap: 5px;
 }
 .terminal-window .terminal-container .terminal-body .response p {
   margin-bottom: 5px;
+}
+.terminal-window .terminal-container .terminal-body .response .input {
+  margin-left: 5px;
 }
 .terminal-window .terminal-container .terminal-body .response ul {
   margin: 0;
@@ -347,21 +344,18 @@ dialog .modal-btns {
   margin-left: 10px;
 }
 .terminal-window .terminal-container .terminal-body .input {
-  flex: 1;
   color: #eeffff;
   background: transparent;
   border: none;
   outline: none;
   font-family: inherit;
   font-size: 1em;
-  min-width: 50px;
+  min-width: 5px;
 }
 .terminal-window .terminal-container .terminal-body [data-type=path] {
   color: #eeffff;
 }
 .terminal-window .terminal-container .prompt {
-  display: flex;
-  gap: 0;
   color: var(--terminal-color);
   margin-right: 0.5rem;
 }

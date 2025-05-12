@@ -189,24 +189,19 @@
   <!-- Templates -->
   <!-- Command line template -->
   <template id="commandLineTemplate">
-    <div class="line" id="commandLine">
-      <p class="prompt">
-        <span data-type="username"></span>
-        @
-        <span data-type="hostname"></span>
-        :
-        <span data-type="path">~</span>
-        $
-      </p>
-      <input class="input" type="text" name="commandLineInput" autocomplete="off" autocapitalize="off" aria-autocomplete="none" />
-    </div>
+    <p class="line" id="commandLine">
+      <span class="prompt">
+        <span data-type="username"></span>@<span data-type="hostname"></span>:<span data-type="path">~</span>$
+      </span>
+      <span class="input" contenteditable="plaintext-only"></span>
+    </p>
   </template>
   <!-- Response line template -->
    <template id="responseLineTemplate">
-    <div class="response text-color" id="responseLine">
-      <div class="responseDisplay"></div>
-      <input type="text" class="input" name="responseLineInput" autocomplete="off" autocapitalize="off" aria-autocomplete="none" />
-    </div>
+    <p class="response text-color" id="responseLine">
+      <span class="responseDisplay"></span>
+       <span class="input" contenteditable="plaintext-only"></span>
+    </p>
    </template>
    <!-- Terminal Help Template -->
     <template id="terminalHelpTemplate">

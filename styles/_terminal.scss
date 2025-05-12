@@ -22,6 +22,10 @@
       justify-content: space-between;
       .header-prompt {
         width: 70%;
+        .prompt {
+          display: flex;
+          gap: 0;
+        }
       }
       .header-btns {
         width: 30%;
@@ -59,21 +63,14 @@
         color: $light-color;
         margin-bottom: 10px;
       }
-      .line, .response {
-        display: flex;
-        align-items: center;
-      }
-      .line {
-        flex-wrap: wrap;
-        .prompt {
-          flex-flow: wrap;
-        }
-      }
       .response {
         color: $light-color;
         gap: 5px;
-        p{
+        p {
           margin-bottom: 5px;
+        }
+        .input {
+          margin-left: 5px;
         }
         ul {
           margin: 0;
@@ -99,22 +96,19 @@
         }
       }
       .input {
-        flex: 1;
         color: $light-color;
         background: transparent;
         border: none;
         outline: none;
         font-family: inherit;
         font-size: 1em;
-        min-width: 50px;
+        min-width: 5px;
       }
       [data-type="path"] {
         color: $light-color;
       }
     }
     .prompt {
-      display: flex;
-      gap: 0;
       color: var(--terminal-color);
       margin-right: 0.5rem;
     }

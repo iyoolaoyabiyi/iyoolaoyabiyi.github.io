@@ -1,6 +1,5 @@
 import commands from './commands.js';
 import { getSavedSettings, updateUserSettings } from './script.js';
-
 // Terminal Object
 const terminal = {
   // Options
@@ -14,69 +13,6 @@ const terminal = {
   // DOM
   window: document.getElementById('terminalWindow'),
   openGuiBtn: document.getElementById('openGuiBtn'),
-  _commandLine: document.getElementById('commandLine'),
-  get commandLine() {
-    return this._commandLine;
-  },
-  set commandLine(commandLine) {
-    this._commandLine = commandLine;
-  },
-  addCommandLine() {
-    let commandLineInput;
-    const responseInput = document.querySelector('#responseLine .input');
-    const commandLineTemplate = document.querySelector('#commandLineTemplate');
-    const commandLineClone = commandLineTemplate.content.cloneNode(true);
-    const commandLine = commandLineClone.querySelector('.line');
-    const usernameEl = commandLineClone.querySelector('[data-type="username"]');
-    const hostnameEl = commandLineClone.querySelector('[data-type="hostname"]');
-    const pathEl = commandLineClone.querySelector('[data-type="path"]');
-
-    const userSettings = getSavedSettings();
-
-    if (responseInput) {
-      if (!responseInput.disabled) responseInput.disabled = true;
-    }
-    
-    usernameEl.textContent = userSettings.username;
-    hostnameEl.textContent = this.hostname;
-    pathEl.textContent = this.currentPath;
-
-    if (this.commandLine) {
-      commandLineInput = this.commandLine.querySelector('.input');
-      // Deactivate current commandLine
-      commandLineInput.disabled = true;
-      commandLineInput.removeAttribute('autofocus');
-      commandLineInput.removeEventListener('keydown', this.processPrompt);
-      this.commandLine.id = '';
-    }
-    // Append new commandLine
-    this.commandLine = commandLine;
-    commandLineInput = this.commandLine.querySelector('.input');
-    commandLineInput.disabled = false;
-    this.body.inputInterface.append(this.commandLine);
-    commandLineInput.focus();
-    commandLineInput.addEventListener('keydown', this.processPrompt.bind(terminal));
-  },
-  addResponse(response, isPrompt = false) {
-    const terminalResponseLine = document.querySelector('#responseLine');
-    let terminalResponseInput = null;
-    const responseLineTemplate = document.querySelector('#responseLineTemplate');
-    const responseLineClone = responseLineTemplate.content.cloneNode(true);
-    const responseLine = responseLineClone.querySelector('.response');
-    const responseEl = responseLine.querySelector('.responseDisplay');
-    const responseInput = responseLine.querySelector('.input');
-    if (terminalResponseLine) {
-      terminalResponseLine.id = '';
-      terminalResponseInput = terminalResponseLine.querySelector('.input');
-    }
-    if (terminalResponseInput)
-      terminalResponseInput.disabled = true;
-    if (!isPrompt) responseInput.remove();
-    responseEl.append(response);
-    this.body.inputInterface.appendChild(responseLine);
-    if (isPrompt) responseInput.focus();
-    this.body.inputInterface.scrollTop = this.body.inputInterface.scrollHeight; 
-  },
   body: {
     get element() {
       return document.getElementById('terminal');
@@ -85,8 +21,66 @@ const terminal = {
       return document.getElementById('inputInterface');
     }
   },
+  _commandLine: document.getElementById('commandLine'),
+  get commandLine() {
+    return this._commandLine;
+  },
+  set commandLine(commandLine) {
+    this._commandLine = commandLine;
+  },
   // Methods
-  setOptions() {
+  addCommandLine() {
+    const responseInput = document.querySelector('#responseLine .input');
+    const commandLineTemplate = document.querySelector('#commandLineTemplate');
+    const commandLineClone = commandLineTemplate.content.cloneNode(true);
+    const commandLineInput =  commandLineClone.querySelector('.input');
+    const userSettings = getSavedSettings();
+
+    const processPrompt = e => {
+      this.processPrompt(e);
+    }
+
+    commandLineClone.querySelector('[data-type="username"]').textContent = userSettings.username;
+    commandLineClone.querySelector('[data-type="hostname"]').textContent = this.hostname;
+    commandLineClone.querySelector('[data-type="path"]').textContent = this.currentPath;
+
+    if (responseInput) {
+      const isEditable = responseInput.isContentEditable;
+      if (isEditable) responseInput.contentEditable = false;
+      document.querySelector('#responseLine').id = '';
+    }
+    // Deactivate current commandLine
+    if (this.commandLine) {
+      const commandLineInput = this.commandLine.querySelector('.input');
+      commandLineInput.removeEventListener('keydown', processPrompt);
+      commandLineInput.contentEditable = false;
+      this.commandLine.id = '';
+    }
+    // Append new commandLine
+    commandLineInput.addEventListener('keydown', processPrompt);
+    this.body.inputInterface.append(commandLineClone);
+    this.commandLine = document.querySelector('#commandLine');
+    this.focusInput();
+  },
+  addResponse(response, isPrompt = false) {
+    const terminalResponseLine = document.querySelector('#responseLine');
+    const responseLineTemplate = document.querySelector('#responseLineTemplate');
+    const responseLineClone = responseLineTemplate.content.cloneNode(true);
+    const responseLine = responseLineClone.querySelector('.response');
+    const responseEl = responseLine.querySelector('.responseDisplay');
+    const responseInput = responseLine.querySelector('.input');
+    if (terminalResponseLine) {
+      terminalResponseLine.id = '';
+      const terminalResponseInput = terminalResponseLine.querySelector('.input');
+      if (terminalResponseInput)
+        terminalResponseInput.removeAttribute('contenteditable');
+    }
+    if (!isPrompt) responseInput.remove();
+    responseEl.append(response);
+    this.body.inputInterface.appendChild(responseLine);
+    if (isPrompt) this.focusInput();
+  },
+  updatePromptEls() {
     const userSettings = getSavedSettings();
     document.querySelectorAll('[data-type="username"]').forEach(el => {
       el.textContent = userSettings.username;
@@ -127,33 +121,32 @@ const terminal = {
     if (e.key === 'ArrowUp') {
       if (commandHistory.length > 0) {
         if (this.history.index === null) {
-          this.history.unsentCommand = commandLineInput.value.trim();
+          this.history.unsentCommand = commandLineInput.textContent.trim();
           this.history.index = commandHistory.length;
         }
         if (this.history.index == commandHistory.length) 
-          this.history.unsentCommand = commandLineInput.value.trim();
+          this.history.unsentCommand = commandLineInput.textContent.trim();
         if (this.history.index >= 0) {
           if (this.history.index !== 0) this.history.index--;
-          commandLineInput.value = commandHistory[this.history.index];
+          commandLineInput.textContent = commandHistory[this.history.index];
         };
       }
-      e.preventDefault();
       return;
     } else if (e.key === 'ArrowDown') {
       if (this.history.index !== null) {
         if (this.history.index < commandHistory.length) {
           if (this.history.index !== commandHistory.length) this.history.index++;
-          commandLineInput.value = commandHistory[this.history.index];
+          commandLineInput.textContent = commandHistory[this.history.index];
         }
         if (this.history.index === commandHistory.length) {
-          commandLineInput.value = this.history.unsentCommand;
+          commandLineInput.textContent = this.history.unsentCommand;
         }
       }
-      e.preventDefault();
       return;
     }
     if (e.key === 'Enter') {
-      const prompt = commandLineInput.value.trim();
+      e.preventDefault();
+      const prompt = commandLineInput.textContent.trim();
       if (prompt !== '') {
         if (commandHistory.includes(prompt))
           commandHistory.splice(commandHistory.indexOf(prompt), 1);
@@ -165,7 +158,7 @@ const terminal = {
         let response = this.executeCommand(command, args);
         if (response) this.addResponse(response);
       }
-      if (!terminal.needResponse) {
+      if (!this.needResponse) {
         this.addCommandLine();
       }
     }

@@ -23,14 +23,15 @@ function exitFunc() {
   responseInput = document.querySelector('#responseLine .input');
   responseInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
-      const response = responseInput.value;
+      e.preventDefault();
+      const response = responseInput.textContent.trim();
       terminal.needResponse = false;
       switch (response.toLowerCase()) {
         case 'yes':
         case 'y':
           terminal.body.inputInterface.innerHTML = '';
           terminal.resetOptions();
-          terminal.setOptions();
+          terminal.updatePromptEls();
           openGUI();
           break;
       }
