@@ -63,6 +63,9 @@
         color: $light-color;
         margin-bottom: 10px;
       }
+      .line {
+        word-break: break-word;
+      }
       .response {
         color: $light-color;
         gap: 5px;

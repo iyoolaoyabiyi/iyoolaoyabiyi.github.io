@@ -40,7 +40,7 @@ p, h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
-p {
+p, div {
   font-size: 14px;
 }
 
@@ -312,6 +312,9 @@ dialog .modal-btns {
 .terminal-window .terminal-container .terminal-body #terminalIntro {
   color: #eeffff;
   margin-bottom: 10px;
+}
+.terminal-window .terminal-container .terminal-body .line {
+  word-break: break-word;
 }
 .terminal-window .terminal-container .terminal-body .response {
   color: #eeffff;
