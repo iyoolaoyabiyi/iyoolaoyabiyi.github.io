@@ -60,6 +60,7 @@ const terminal = {
     commandLineInput.addEventListener('keydown', processPrompt);
     this.body.inputInterface.append(commandLineClone);
     this.commandLine = document.querySelector('#commandLine');
+    this.body.inputInterface.scrollTop = this.body.inputInterface.scrollHeight; 
     this.focusInput();
   },
   addResponse(response, isPrompt = false) {
@@ -73,11 +74,12 @@ const terminal = {
       terminalResponseLine.id = '';
       const terminalResponseInput = terminalResponseLine.querySelector('.input');
       if (terminalResponseInput)
-        terminalResponseInput.removeAttribute('contenteditable');
+        terminalResponseInput.contentEditable = false;
     }
     if (!isPrompt) responseInput.remove();
     responseEl.append(response);
     this.body.inputInterface.appendChild(responseLine);
+    this.body.inputInterface.scrollTop = this.body.inputInterface.scrollHeight; 
     if (isPrompt) this.focusInput();
   },
   updatePromptEls() {
@@ -117,10 +119,11 @@ const terminal = {
     return output;
   },
   processPrompt(e) {
+    this.body.inputInterface.scrollTop = this.body.inputInterface.scrollHeight; 
     let commandLineInput = this.commandLine.querySelector('.input');
     const { commandHistory } = getSavedSettings();
     if (e.key === 'ArrowUp') {
-      e.preventDefault()
+      e.preventDefault();
       if (commandHistory.length > 0) {
         if (this.history.index === null) {
           this.history.unsentCommand = commandLineInput.textContent.trim();
@@ -157,15 +160,16 @@ const terminal = {
       e.preventDefault();
       const prompt = commandLineInput.textContent.trim();
       if (prompt !== '') {
+        // Update command history
         if (commandHistory.includes(prompt))
           commandHistory.splice(commandHistory.indexOf(prompt), 1);
         commandHistory.push(prompt);
         updateUserSettings('commandHistory', commandHistory);
         this.history.index = null;
-        // Check if command is valid
+        // Check if command is valid add response
         const [ command, ...args ] = prompt.split(' ');
-        let response = this.executeCommand(command, args);
-        if (response) this.addResponse(response);
+          let response = this.executeCommand(command, args);
+          if (response) this.addResponse(response);
       }
       if (!this.needResponse) {
         this.addCommandLine();

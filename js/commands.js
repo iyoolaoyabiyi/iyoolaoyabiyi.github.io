@@ -10,6 +10,7 @@ import techStack from './commands/tech-stack.js';
 import username from './commands/username.js';
 import visit from './commands/visit.js';
 import whoami from './commands/whoami.js';
+import sudo from './commands/sudo.js';
 
 const commands = [
   calculate,
@@ -23,7 +24,8 @@ const commands = [
   techStack,
   username,
   visit,
-  whoami
+  whoami,
+  sudo
 ];
 
 export default commands;

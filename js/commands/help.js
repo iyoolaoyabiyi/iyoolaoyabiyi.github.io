@@ -3,6 +3,8 @@ import commands from '../commands.js';
 import { createElem, createDescList, createParas } from '../helpers.js';
 import { getSavedSettings } from '../script.js';
 
+const easterEggs = ['sudo'];
+
 const helpDoc = new CommandDoc(
   "help",
   [],
@@ -45,16 +47,18 @@ function helpFunc(args) {
     });
     output.append(introDiv);
     commands.forEach(command => {
-      const para = createElem('p');
-      const span = createElem('span');
-      span.classList.add('command-text');
-      span.textContent = command.doc.name;
-      command.doc.aliases.forEach((name, i, names) => {
-        span.textContent += ` or ${name}`;
-      if (i !== (names.length - 1)) span.textContent += ' or ';
-      })
-      para.append(span, '- ', command.doc.description[0]);
-      output.appendChild(para);
+      if (!easterEggs.includes(command.doc.name)) {
+        const para = createElem('p');
+        const span = createElem('span');
+        span.classList.add('command-text');
+        span.textContent = command.doc.name;
+        command.doc.aliases.forEach((name, i, names) => {
+          span.textContent += ` or ${name}`;
+        if (i !== (names.length - 1)) span.textContent += ' or ';
+        })
+        para.append(span, '- ', command.doc.description[0]);
+        output.appendChild(para);
+      }
     });
   } else if (argsLnt === 1) {
     const command = args[0];
