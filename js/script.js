@@ -1,5 +1,6 @@
 import terminal from './terminal.js';
 import gui from './gui.js';
+import config from './configs/config.js';
 import defaultUserSettings from './configs/userSettings.js';
 import portfolio from "./configs/portfolio.js";
 import posts from "./configs/posts.js";
@@ -18,7 +19,7 @@ let userSettings = getSavedSettings();
 if (!userSettings.version) {
   deleteUserSettings();
 }
-else if (userSettings.version !== defaultUserSettings.version)
+else if (userSettings.version !== config.version)
   deleteUserSettings();
 
 userSettings = getSavedSettings();
