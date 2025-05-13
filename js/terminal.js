@@ -168,8 +168,8 @@ const terminal = {
         this.history.index = null;
         // Check if command is valid add response
         const [ command, ...args ] = prompt.split(' ');
-          let response = this.executeCommand(command, args);
-          if (response) this.addResponse(response);
+        let response = this.executeCommand(command, args);
+        if (response) this.addResponse(response);
       }
       if (!this.needResponse) {
         this.addCommandLine();
