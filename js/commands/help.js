@@ -1,6 +1,6 @@
 import COMMAND, { CommandDoc } from '../command.js';
 import commands from '../commands.js';
-import { createElem, createDescList, createElem } from '../helpers.js';
+import { createElem, createDescList } from '../helpers.js';
 import { getSavedSettings } from '../script.js';
 
 const easterEggs = ['sudo'];

@@ -9,17 +9,6 @@ export function createElem(elem, n) {
     return elemList;
 }
 
-function createElem(elem, n) {
-  const elemList = [];
-    if (!n || n === 1) {
-      return document.createElement(elem);
-    }
-    for (let i = 0; i < n; i++) {
-      elemList.push(document.createElement(elem));
-    }
-    return elemList;
-}
-
 export function scrollToElement(element) {
   const posOffset = -100;
   const pos = element.getBoundingClientRect().top + window.scrollY + posOffset;
