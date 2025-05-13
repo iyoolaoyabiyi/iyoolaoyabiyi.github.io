@@ -1,5 +1,6 @@
 import commands from './commands.js';
 import { getSavedSettings, updateUserSettings } from './script.js';
+import { moveCursorToEnd, insertTextAtCursor } from './helpers.js';
 // Terminal Object
 const terminal = {
   // Options
@@ -36,10 +37,6 @@ const terminal = {
     const commandLineInput =  commandLineClone.querySelector('.input');
     const userSettings = getSavedSettings();
 
-    const processPrompt = e => {
-      this.processPrompt(e);
-    }
-
     commandLineClone.querySelector('[data-type="username"]').textContent = userSettings.username;
     commandLineClone.querySelector('[data-type="hostname"]').textContent = this.hostname;
     commandLineClone.querySelector('[data-type="path"]').textContent = this.currentPath;
@@ -52,15 +49,18 @@ const terminal = {
     // Deactivate current commandLine
     if (this.commandLine) {
       const commandLineInput = this.commandLine.querySelector('.input');
-      commandLineInput.removeEventListener('keydown', processPrompt);
       commandLineInput.contentEditable = false;
       this.commandLine.id = '';
     }
     // Append new commandLine
-    commandLineInput.addEventListener('keydown', processPrompt);
+    commandLineInput.addEventListener('keydown', this.processPrompt.bind(this));
+    commandLineInput.addEventListener('paste', function(e) {
+      e.preventDefault();
+      const content = e.clipboardData.getData("text/plain");
+      insertTextAtCursor(content);
+    });
     this.body.inputInterface.append(commandLineClone);
     this.commandLine = document.querySelector('#commandLine');
-    this.body.inputInterface.scrollTop = this.body.inputInterface.scrollHeight; 
     this.focusInput();
   },
   addResponse(response, isPrompt = false) {
@@ -79,8 +79,8 @@ const terminal = {
     if (!isPrompt) responseInput.remove();
     responseEl.append(response);
     this.body.inputInterface.appendChild(responseLine);
-    this.body.inputInterface.scrollTop = this.body.inputInterface.scrollHeight; 
     if (isPrompt) this.focusInput();
+    this.body.inputInterface.scrollTop = this.body.inputInterface.scrollHeight;
   },
   updatePromptEls() {
     const userSettings = getSavedSettings();
@@ -119,7 +119,6 @@ const terminal = {
     return output;
   },
   processPrompt(e) {
-    this.body.inputInterface.scrollTop = this.body.inputInterface.scrollHeight; 
     let commandLineInput = this.commandLine.querySelector('.input');
     const { commandHistory } = getSavedSettings();
     if (e.key === 'ArrowUp') {
@@ -134,13 +133,7 @@ const terminal = {
         if (this.history.index >= 0) {
           if (this.history.index !== 0) this.history.index--;
           commandLineInput.textContent = commandHistory[this.history.index];
-          // Move caret to end
-          const range = document.createRange();
-          const sel = window.getSelection();
-          range.selectNodeContents(commandLineInput);
-          range.collapse(false); // false = move to end
-          sel.removeAllRanges();
-          sel.addRange(range);
+          moveCursorToEnd(commandLineInput);
         };
       }
       return;
@@ -152,6 +145,7 @@ const terminal = {
         }
         if (this.history.index === commandHistory.length) {
           commandLineInput.textContent = this.history.unsentCommand;
+          moveCursorToEnd(commandLineInput)
         }
       }
       return;

@@ -9,15 +9,21 @@ export function createElem(elem, n) {
     return elemList;
 }
 
-export function createParas(n) {
-  const paraList = [];
-  if (!n || n === 1) {
-    return createElem('p');
-  }
-  for (let i = 0; i < n; i++) {
-    paraList.push(createElem('p'));
-  }
-  return paraList;
+function createElem(elem, n) {
+  const elemList = [];
+    if (!n || n === 1) {
+      return document.createElement(elem);
+    }
+    for (let i = 0; i < n; i++) {
+      elemList.push(document.createElement(elem));
+    }
+    return elemList;
+}
+
+export function scrollToElement(element) {
+  const posOffset = -100;
+  const pos = element.getBoundingClientRect().top + window.scrollY + posOffset;
+  window.scrollTo({ top: pos, behavior: 'smooth' });
 }
 
 export function createDescList(listArr) {
@@ -75,4 +81,22 @@ export function getDirObj(dirInfo) {
     }
   }
   return { dirObj: dirObj, clearedPath: clearedPath };
+}
+
+// Move caret to end
+export function moveCursorToEnd(inputElement) {
+  const range = document.createRange();
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  range.selectNodeContents(inputElement);
+  range.collapse(false); // false = move to end
+  sel.addRange(range);
+}
+
+export function insertTextAtCursor(text) {
+  const selection = window.getSelection();
+  if (!selection.rangeCount) return;
+  selection.deleteFromDocument(); // remove current selection
+  selection.getRangeAt(0).insertNode(document.createTextNode(text));
+  selection.collapseToEnd();
 }

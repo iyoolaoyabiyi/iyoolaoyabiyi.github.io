@@ -1,6 +1,6 @@
 import COMMAND, { CommandDoc } from '../command.js';
 import commands from '../commands.js';
-import { createElem, createDescList, createParas } from '../helpers.js';
+import { createElem, createDescList, createElem } from '../helpers.js';
 import { getSavedSettings } from '../script.js';
 
 const easterEggs = ['sudo'];
@@ -23,7 +23,7 @@ const helpDoc = new CommandDoc(
 function helpFunc(args) {
   let output = createElem('div');
   const introDiv = createElem('div');
-  const paras = createParas(3);
+  const paras = createElem('p', 3);
   const userSettings = getSavedSettings();
   const argsLnt = args.length;
 

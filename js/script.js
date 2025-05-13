@@ -3,6 +3,7 @@ import gui from './gui.js';
 import defaultUserSettings from './configs/userSettings.js';
 import portfolio from "./configs/portfolio.js";
 import posts from "./configs/posts.js";
+import { createElem, scrollToElement } from './helpers.js';
 
 // DOM
 const welcomeDialog = document.getElementById('welcomeModal');
@@ -258,23 +259,6 @@ function openSettings(dialog) {
 function checkWelcomeChkBxes() {
   welcomeDialog.querySelector('#setFirstTimeInput').checked = userSettings.showWelcome;
   userSettingsDialog.querySelector("#welcomeModalChk").checked = userSettings.showWelcome;
-}
-
-function scrollToElement(element) {
-  const posOffset = -100;
-  const pos = element.getBoundingClientRect().top + window.scrollY + posOffset;
-  window.scrollTo({ top: pos, behavior: 'smooth' });
-}
-
-function createElem(elem, n) {
-  const elemList = [];
-    if (!n || n === 1) {
-      return document.createElement(elem);
-    }
-    for (let i = 0; i < n; i++) {
-      elemList.push(document.createElement(elem));
-    }
-    return elemList;
 }
 
 export { openGUI, openTerminal, saveUserSettings, getSavedSettings, updateUserSettings, createElem };
